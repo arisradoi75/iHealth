@@ -26,7 +26,11 @@ public class Patient {
     @Column(unique = true)
     private String cnp;
 
-    private String address;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @Embedded
+    private Address address;
 
     @Column(unique = true)
     private String phone;
