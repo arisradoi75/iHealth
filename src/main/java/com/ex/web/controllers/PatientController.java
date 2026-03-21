@@ -1,8 +1,8 @@
 package com.ex.web.controllers;
 
 import com.ex.core.entities.Patient;
-import com.ex.web.dto.PatientRequestDto;
-import com.ex.web.dto.PatientResponseDTO;
+import com.ex.web.dto.request.PatientRequestDTO;
+import com.ex.web.dto.response.PatientResponseDTO;
 import com.ex.web.services.PatientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class PatientController {
 
     @PostMapping("/profile")
     @PreAuthorize("hasAuthority('PATIENT')")
-    public ResponseEntity<Void> createPatientProfile(@RequestBody PatientRequestDto request) {
+    public ResponseEntity<Void> createPatientProfile(@RequestBody PatientRequestDTO request) {
         // Preia email-ul utilizatorului logat din contextul de securitate
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         patientService.createProfile(request, userEmail);
@@ -42,7 +42,7 @@ public class PatientController {
     @PreAuthorize("hasAuthority('MEDIC')")
     public ResponseEntity<Patient> createDemographics(
             @PathVariable Long id,
-            @Valid @RequestBody PatientRequestDto request
+            @Valid @RequestBody PatientRequestDTO request
     ) {
         return ok(patientService.saveDemographics(id, request));
     }

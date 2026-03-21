@@ -4,8 +4,8 @@ import com.ex.core.entities.Patient;
 import com.ex.core.repositories.PatientRepository;
 import com.ex.web.auth.entities.User;
 import com.ex.web.auth.repositories.UserRepository;
-import com.ex.web.dto.PatientRequestDto;
-import com.ex.web.dto.PatientResponseDTO;
+import com.ex.web.dto.request.PatientRequestDTO;
+import com.ex.web.dto.response.PatientResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -101,12 +101,9 @@ public class PatientService {
         }
     }
 
-    private boolean isPhoneValid(String phoneNumber) {
-        return phoneNumber.matches("^(\\+40|0)[0-9]{9}$");
-    }
 
     @Transactional
-    public void createProfile(PatientRequestDto request, String userEmail) {
+    public void createProfile(PatientRequestDTO request, String userEmail) {
 
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
@@ -118,14 +115,15 @@ public class PatientService {
 
 
         Patient patientProfile = Patient.builder()
-                .name(request.getName()) // Adăugat
+                .name(request.getName())
                 .bornDate(request.getBornDate())
                 .cnp(request.getCnp())
+                .gender(request.getGender())
                 .address(request.getAddress())
                 .phone(request.getPhone())
-                .email(request.getEmail()) // Adăugat
-                .profesion(request.getProfesion()) // Adăugat
-                .job(request.getJob()) // Adăugat
+                .email(request.getEmail())
+                .profesion(request.getProfesion())
+                .job(request.getJob())
                 .user(user)
                 .build();
 
@@ -136,7 +134,7 @@ public class PatientService {
         return patientRepository.findById(id);
     }
 
-    public Patient saveDemographics(Long id, PatientRequestDto dto) {
+    public Patient saveDemographics(Long id, PatientRequestDTO dto) {
         Patient patient = patientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Patient not found"));
 

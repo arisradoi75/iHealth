@@ -1,15 +1,12 @@
-package com.ex.web.dto;
+package com.ex.web.dto.request;
 
 import com.ex.core.entities.Address;
-import com.ex.core.entities.Gender;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import com.ex.core.entities.enums.Gender;
 import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class PatientRequestDto {
+public class PatientRequestDTO {
     private String name;
     private LocalDate bornDate;
     private String cnp;

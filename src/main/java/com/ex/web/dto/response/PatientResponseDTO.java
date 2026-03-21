@@ -1,7 +1,7 @@
-package com.ex.web.dto;
+package com.ex.web.dto.response;
 
 import com.ex.core.entities.Address;
-import com.ex.core.entities.Gender;
+import com.ex.core.entities.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
