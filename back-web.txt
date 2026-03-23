@@ -1,0 +1,1548 @@
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/IHealthApplication.java
+// =================================================================================
+package com.ex;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class IHealthApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(IHealthApplication.class, args);
+    }
+
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/entities/Medic.java
+// =================================================================================
+package com.ex.core.entities;
+
+import com.ex.web.auth.entities.User;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Table(name = "medic")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
+@Entity
+public class Medic {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nume;
+    private String specializare;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    // TODO: add MedicalRecordRepository
+    // TODO: add MedicalRecordService with validations (patient exists, no duplicate record)
+    // TODO: add endpoints in PatientController (POST, GET, PATCH) for medical record
+    // TODO: add MedicalRecordRequestDTO and MedicalRecordResponseDTO
+    // TODO: restrict medical record access - only MEDIC can create/update, PATIENT can only read
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/entities/Address.java
+// =================================================================================
+package com.ex.core.entities;
+
+import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Embeddable
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class Address {
+    private String country;
+    private String county;
+    private String city;
+    private String street;
+    private String zipCode;
+    private String number;
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/entities/Patient.java
+// =================================================================================
+package com.ex.core.entities;
+
+import com.ex.core.entities.enums.Gender;
+import com.ex.web.auth.entities.User;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Entity
+@Table(name = "patient")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
+public class Patient {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private LocalDate bornDate;
+
+    @Column(unique = true)
+    private String cnp;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @Embedded
+    private Address address;
+
+    @Column(unique = true)
+    private String phone;
+
+    private String email;
+    private String profesion;
+    private String job;
+
+    // Am păstrat aceste câmpuri, deoarece corespund cerințelor
+    private String generalMedicalHistory;
+    private String knownAllergies;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    // Am păstrat doar relația relevantă
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<MedicalEvent> medicalEvents;
+
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/entities/AlertRule.java
+// =================================================================================
+package com.ex.core.entities;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "alert_rule")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class AlertRule {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    /*
+    aici se vor introduce variabilele care vor fii comune cu cele primite de la embededd
+    deci pe o perioada de timp vom lasa gol acest spatiu si urmeaza sa completam cu ce avem nevoie
+    *
+    *
+    *
+     */
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "patient_id", nullable = false)
+    private Patient patient;
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/entities/MedicalEvent.java
+// =================================================================================
+package com.ex.core.entities;
+
+import com.ex.core.entities.enums.EventType;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "medical_event") // Am păstrat numele tabelului, poate fi schimbat în medical_record dacă dorești
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class MedicalEvent {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private LocalDate eventData;
+
+    @Enumerated(EnumType.STRING)
+    private EventType eventType;
+
+    private String details;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "patient_id", nullable = false)
+    private Patient patient;
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/entities/Recommendation.java
+// =================================================================================
+package com.ex.core.entities;
+import com.ex.core.entities.enums.RecommendationType;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "recommendation")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Recommendation {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    private RecommendationType recommendationType;
+
+    @Column(nullable = false)
+    private String details;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "patient_id", nullable = false)
+    private Patient patient;
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/entities/enums/Gender.java
+// =================================================================================
+package com.ex.core.entities.enums;
+
+public enum Gender {
+    MALE,
+    FEMALE
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/entities/enums/EventType.java
+// =================================================================================
+package com.ex.core.entities.enums;
+
+public enum EventType {
+    CONSULTATION,
+    ANALYSIS_RESULT,
+    TELEMETRY_DATA,     // Date primite de la senzori
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/entities/enums/AlertCondition.java
+// =================================================================================
+package com.ex.core.entities.enums;
+
+public enum AlertCondition {
+    GREATER_THAN,
+    LESS_THAN,
+    EQUALS
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/entities/enums/RecommendationType.java
+// =================================================================================
+package com.ex.core.entities.enums;
+
+public enum RecommendationType {
+    bicicleta,
+    inot,
+    plimbare,
+    fructe,
+    legume,
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/repositories/AlertRepository.java
+// =================================================================================
+package com.ex.core.repositories;
+
+import com.ex.core.entities.AlertRule;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AlertRepository extends JpaRepository<AlertRule, Long> {
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/repositories/MedicRepository.java
+// =================================================================================
+package com.ex.core.repositories;
+
+import com.ex.core.entities.Medic;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface MedicRepository extends JpaRepository<Medic, Long> {
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/repositories/PatientRepository.java
+// =================================================================================
+package com.ex.core.repositories;
+
+import com.ex.core.entities.Patient;
+import com.ex.web.auth.entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.ResponseEntity;
+
+import java.util.Optional;
+
+public interface PatientRepository extends JpaRepository<Patient, Long> {
+    Optional<Patient> findByUser(User user);
+    Optional<Patient> findById(Long id);
+
+    boolean existsPatientByCnp(String cnp);
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/repositories/MedicalEventRepository.java
+// =================================================================================
+package com.ex.core.repositories;
+
+import com.ex.core.entities.MedicalEvent;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MedicalEventRepository extends JpaRepository<MedicalEvent, Long> {
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/core/repositories/RecommendationRepository.java
+// =================================================================================
+package com.ex.core.repositories;
+
+import com.ex.core.entities.Recommendation;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RecommendationRepository extends JpaRepository<Recommendation, Long> {
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/dto/request/AlertRequestDTO.java
+// =================================================================================
+package com.ex.web.dto.request;
+
+import lombok.Data;
+
+@Data
+public class AlertRequestDTO {
+    /*
+    trebuie completat dupa ce este realizat embedded
+     */
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/dto/request/PatientRequestDTO.java
+// =================================================================================
+package com.ex.web.dto.request;
+
+import com.ex.core.entities.Address;
+import com.ex.core.entities.enums.Gender;
+import lombok.Data;
+import java.time.LocalDate;
+
+@Data
+public class PatientRequestDTO {
+    private String name;
+    private LocalDate bornDate;
+    private String cnp;
+    private Address address;
+    private Gender gender;
+    private String phone;
+    private String email;
+    private String profesion;
+    private String job;
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/dto/request/MedicalEventRequestDTO.java
+// =================================================================================
+package com.ex.web.dto.request;
+
+import com.ex.core.entities.enums.EventType;
+
+import java.time.LocalDate;
+
+public class MedicalEventRequestDTO {
+
+    private LocalDate eventDate;
+    private EventType eventType;
+    private String details;
+
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/dto/request/RecommendationRequestDTO.java
+// =================================================================================
+package com.ex.web.dto.request;
+
+import com.ex.core.entities.enums.RecommendationType;
+import lombok.Data;
+
+@Data
+public class RecommendationRequestDTO {
+
+    private RecommendationType recommendationType;
+    private String details;
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/dto/response/AlertResponseDTO.java
+// =================================================================================
+package com.ex.web.dto.response;
+
+import lombok.Data;
+
+@Data
+public class AlertResponseDTO {
+    /*
+    trebuie completat dupa ce este realizat embedded
+     */
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/dto/response/PatientResponseDTO.java
+// =================================================================================
+package com.ex.web.dto.response;
+
+import com.ex.core.entities.Address;
+import com.ex.core.entities.enums.Gender;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class PatientResponseDTO {
+    private String name;
+    private LocalDate bornDate;
+    private String cnp;
+    private Gender gender;
+    private Address address;
+    private String phone;
+    private String email;
+    private String occupation;
+    private String workplace;
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/dto/response/MedicalEventResponseDTO.java
+// =================================================================================
+package com.ex.web.dto.response;
+
+import com.ex.core.entities.enums.EventType;
+
+import java.time.LocalDate;
+
+public class MedicalEventResponseDTO {
+
+    private LocalDate eventDate;
+    private EventType eventType;
+    private String details;
+
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/dto/response/RecommendationResponseDTO.java
+// =================================================================================
+package com.ex.web.dto.response;
+
+import com.ex.core.entities.enums.RecommendationType;
+import lombok.Data;
+
+@Data
+public class RecommendationResponseDTO {
+
+    private RecommendationType recommendationType;
+    private String details;
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/utils/DataLoader.java
+// =================================================================================
+package com.ex.web.auth.utils;
+
+import com.ex.web.auth.entities.TypeUser;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
+public class DataLoader implements CommandLineRunner {
+
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public void run(String... args) throws Exception {
+        // Verifică dacă există deja un utilizator ADMIN
+        if (userRepository.findByType(TypeUser.ADMIN).isEmpty()) {
+            System.out.println("Creating ADMIN account...");
+
+            var admin = User.builder()
+                    .name("admin")
+                    .username("admin")
+                    .email("admin@gmail.com")
+                    .password(passwordEncoder.encode("admin1234"))
+                    .type(TypeUser.ADMIN)
+                    .build();
+
+            userRepository.save(admin);
+            System.out.println("ADMIN account created successfully!");
+        } else {
+            System.out.println("ADMIN account already exists.");
+        }
+    }
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/utils/AuthResponse.java
+// =================================================================================
+package com.ex.web.auth.utils;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class AuthResponse {
+    private String accessToken;
+    private String refreshToken;
+    private String name;
+    private String email;
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/utils/LoginRequest.java
+// =================================================================================
+package com.ex.web.auth.utils;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class LoginRequest {
+    private String email;
+    private String password;
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/utils/RegisterRequest.java
+// =================================================================================
+package com.ex.web.auth.utils;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class RegisterRequest {
+    private String name;
+    private String username;
+    private String email;
+    private String password;
+
+    // Medic-specific fields
+    private String specializare;
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/utils/CreateDoctorRequest.java
+// =================================================================================
+package com.ex.web.auth.utils;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class CreateDoctorRequest {
+    private String name;
+    private String username;
+    private String email;
+    private String password;
+    private String specializare; // Am adăugat acest câmp
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/utils/RefreshTokenRequest.java
+// =================================================================================
+package com.ex.web.auth.utils;
+
+import lombok.Data;
+
+@Data
+public class RefreshTokenRequest {
+    private String refreshToken;
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/config/CorsConfig.java
+// =================================================================================
+package com.ex.web.auth.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import java.util.Arrays;
+import java.util.Collections;
+
+@Configuration
+public class CorsConfig {
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOriginPatterns(Collections.singletonList("http://localhost:*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/config/ApplicationConfig.java
+// =================================================================================
+package com.ex.web.auth.config;
+
+import com.ex.web.auth.repositories.UserRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import java.util.Collections;
+
+@Configuration
+public class ApplicationConfig {
+    private final UserRepository userRepository;
+
+    public ApplicationConfig(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return username -> userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder);
+        return authProvider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationProvider authenticationProvider) {
+        return new ProviderManager(Collections.singletonList(authenticationProvider));
+    }
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/config/SecurityConfiguration.java
+// =================================================================================
+package com.ex.web.auth.config;
+
+import com.ex.web.auth.services.AuthFilterService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
+@RequiredArgsConstructor
+public class SecurityConfiguration {
+    private final AuthFilterService authFilterService;
+    private final AuthenticationProvider authenticationProvider;
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
+                .authorizeHttpRequests(req -> req
+                        // Explicitly permit all public registration and auth endpoints
+                        .requestMatchers(
+                                "/api/v1/auth/register/patient", // Permitem înregistrarea pacientului
+                                "/api/v1/auth/register/doctor",  // Permitem crearea doctorului (securizat în controller)
+                                "/api/v1/auth/login",
+                                "/api/v1/auth/refresh"
+                        ).permitAll()
+                        .requestMatchers("/ws-robot/**").permitAll()
+                        .requestMatchers("/api/robot/telemetry").permitAll()
+                        .requestMatchers("/api/robot/alert").permitAll()
+                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
+                        // All other requests must be authenticated
+                        .anyRequest().authenticated())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/entities/User.java
+// =================================================================================
+package com.ex.web.auth.entities;
+
+import com.ex.core.entities.Medic;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Collection;
+import java.util.List;
+
+@Entity
+@Table(name = "users")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Builder
+public class User implements UserDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // Changed to Long for consistency
+    private String name;
+    @Column(unique = true)
+    private String username;
+    @Column(unique = true)
+    @Email(message = "exemple123@exemple.com")
+    private String email;
+    private String password;
+    @OneToOne(mappedBy = "user")
+    private RefreshToken refreshToken;
+    @Enumerated(EnumType.STRING)
+    private TypeUser type;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Medic medic;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(type.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/entities/TypeUser.java
+// =================================================================================
+package com.ex.web.auth.entities;
+
+public enum TypeUser {
+    ADMIN,
+    DOCTOR,
+    PATIENT
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/entities/RefreshToken.java
+// =================================================================================
+package com.ex.web.auth.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import java.time.Instant;
+
+    @Entity
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    public class RefreshToken {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer tokenId;
+
+        @JsonIgnoreProperties("user")
+        @Column(nullable = false, length = 500)
+        private String refreshToken;
+
+
+        @Column(nullable = false)
+        private Instant expirationTime;
+
+        @JsonIgnore
+        @OneToOne
+        private User user;
+    }
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/services/JwtService.java
+// =================================================================================
+package com.ex.web.auth.services;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+import java.security.Key;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
+@Service
+public class JwtService {
+    private static final String SECRET_KEY = "BF7FD11ACE545745B7BA1AF98B6F156D127BC7BB544BAB6A4FD74E4FC7";
+
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
+
+    private Claims extractAllClaims(String token) {
+        return Jwts.parserBuilder().setSigningKey(getSignInKey()).build().parseClaimsJws(token).getBody();
+    }
+
+    private Key getSignInKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    public String generateToken(UserDetails userDetails) {
+        return generateToken(new HashMap<>(), userDetails);
+    }
+
+    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+        extraClaims = new HashMap<>(extraClaims);
+        extraClaims.put("role", userDetails.getAuthorities());
+        return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername()).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + 25 * 100000)).signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
+    }
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        final String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    private boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
+
+    private Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/services/AuthService.java
+// =================================================================================
+package com.ex.web.auth.services;
+
+import com.ex.core.entities.Medic;
+import com.ex.core.repositories.MedicRepository;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.TypeUser;
+import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.auth.utils.AuthResponse;
+import com.ex.web.auth.utils.CreateDoctorRequest;
+import com.ex.web.auth.utils.LoginRequest;
+import com.ex.web.auth.utils.RegisterRequest;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+public class AuthService {
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final MedicRepository medicRepository; // Injectat
+    private final JwtService jwtService;
+    private final RefreshTokenService refreshTokenService;
+    private final AuthenticationManager authenticationManager;
+
+    /**
+     * ADMIN creează conturi de DOCTOR
+     * Email TREBUIE să conțină @medic.com
+     */
+    @Transactional
+    public AuthResponse createDoctorAccount(CreateDoctorRequest doctorRequest) {
+        // Verifică dacă utilizatorul curent este ADMIN
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
+
+        if (!isAdmin) {
+            throw new AccessDeniedException("Only ADMIN can create doctor accounts!");
+        }
+
+        String email = doctorRequest.getEmail();
+
+        // Validează că email-ul conține @medic.com
+        if (!email.endsWith("@medic.com")) {
+            throw new IllegalArgumentException("Doctor email must end with @medic.com");
+        }
+
+        // Verifică dacă email-ul este deja folosit
+        if (userRepository.findByEmail(email).isPresent()) {
+            throw new IllegalArgumentException("Email already in use!");
+        }
+
+        // Pasul A: Crează și salvează User
+        var user = User.builder()
+                .name(doctorRequest.getName())
+                .email(email)
+                .username(doctorRequest.getUsername())
+                .password(passwordEncoder.encode(doctorRequest.getPassword()))
+                .type(TypeUser.DOCTOR)
+                .build();
+        User savedUser = userRepository.save(user);
+
+        // Pasul B: Crează și salvează Medic
+        var medic = Medic.builder()
+                .nume(savedUser.getName())
+                .specializare(doctorRequest.getSpecializare())
+                .user(savedUser) // Legătura către User
+                .build();
+        medicRepository.save(medic);
+
+        return generateAuthResponse(savedUser);
+    }
+
+    /**
+     * PACIENT se înregistrează singur
+     * Email TREBUIE să conțină @patient.com
+     */
+    @Transactional
+    public AuthResponse registerPatient(RegisterRequest patientRequest) {
+        String email = patientRequest.getEmail();
+
+        // Validează că email-ul conține @patient.com
+        if (!email.endsWith("@patient.com")) {
+            throw new IllegalArgumentException("Patient email must end with @patient.com");
+        }
+
+        // Verifică dacă email-ul este deja folosit
+        if (userRepository.findByEmail(email).isPresent()) {
+            throw new IllegalArgumentException("Email already in use!");
+        }
+
+        // Crează cont de pacient
+        var patient = User.builder()
+                .name(patientRequest.getName())
+                .email(email)
+                .username(patientRequest.getUsername())
+                .password(passwordEncoder.encode(patientRequest.getPassword()))
+                .type(TypeUser.PATIENT)
+                .build();
+
+        User savedPatient = userRepository.save(patient);
+        return generateAuthResponse(savedPatient);
+    }
+
+    /**
+     * LOGIN pentru toți utilizatorii (ADMIN, DOCTOR, PATIENT)
+     */
+    public AuthResponse login(LoginRequest loginRequest) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
+        );
+
+        var user = userRepository.findByEmail(loginRequest.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+
+        return generateAuthResponse(user);
+    }
+
+    /**
+     * Generează JWT token și refresh token
+     */
+    private AuthResponse generateAuthResponse(User user) {
+        var accessToken = jwtService.generateToken(user);
+        var refreshToken = refreshTokenService.createRefreshToken(user.getEmail());
+        return AuthResponse.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken.getRefreshToken())
+                .name(user.getName())
+                .email(user.getEmail())
+                .build();
+    }
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/services/AuthFilterService.java
+// =================================================================================
+package com.ex.web.auth.services;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.lang.NonNull;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Service;
+import org.springframework.web.filter.OncePerRequestFilter;
+import java.io.IOException;
+
+@Service
+public class AuthFilterService extends OncePerRequestFilter {
+    private final JwtService jwtService;
+    private final UserDetailsService userDetailsService;
+
+    public AuthFilterService(JwtService jwtService, UserDetailsService userDetailsService) {
+        this.jwtService = jwtService;
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Override
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
+        final String authHeader = request.getHeader("Authorization");
+        String jwt;
+        String username;
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        jwt = authHeader.substring(7);
+        username = jwtService.extractUsername(jwt);
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            if (jwtService.isTokenValid(jwt, userDetails)) {
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            }
+        }
+        filterChain.doFilter(request, response);
+    }
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/services/RefreshTokenService.java
+// =================================================================================
+package com.ex.web.auth.services;
+
+import com.ex.web.auth.entities.RefreshToken;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.repositories.RefreshTokenRepository;
+import com.ex.web.auth.repositories.UserRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import java.time.Instant;
+import java.util.UUID;
+
+@Service
+public class RefreshTokenService {
+    private final UserRepository userRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
+
+    public RefreshTokenService(UserRepository userRepository, RefreshTokenRepository refreshTokenRepository) {
+        this.userRepository = userRepository;
+        this.refreshTokenRepository = refreshTokenRepository;
+    }
+
+    public RefreshToken createRefreshToken(String username) {
+        User user = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + username));
+        RefreshToken refreshToken = user.getRefreshToken();
+        if (refreshToken == null) {
+            long refreshTokenValidity = 30 * 100000;
+            refreshToken = RefreshToken.builder().refreshToken(UUID.randomUUID().toString()).expirationTime(Instant.now().plusMillis(refreshTokenValidity)).user(user).build();
+            refreshTokenRepository.save(refreshToken);
+        }
+        return refreshToken;
+    }
+
+    public RefreshToken verifyRefreshToken(String refreshToken) {
+        RefreshToken refToken = refreshTokenRepository.findByRefreshToken(refreshToken).orElseThrow(() -> new RuntimeException("Refresh token not found!"));
+        if (refToken.getExpirationTime().compareTo(Instant.now()) < 0) {
+            refreshTokenRepository.delete(refToken);
+            throw new RuntimeException("Refresh Token expired");
+        }
+        return refToken;
+    }
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/controller/AuthController.java
+// =================================================================================
+package com.ex.web.auth.controller;
+
+import com.ex.web.auth.entities.RefreshToken;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.services.AuthService;
+import com.ex.web.auth.services.JwtService;
+import com.ex.web.auth.services.RefreshTokenService;
+import com.ex.web.auth.utils.AuthResponse;
+import com.ex.web.auth.utils.CreateDoctorRequest;
+import com.ex.web.auth.utils.LoginRequest;
+import com.ex.web.auth.utils.RefreshTokenRequest;
+import com.ex.web.auth.utils.RegisterRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/v1/auth")
+public class AuthController {
+    private final AuthService authService;
+    private final RefreshTokenService refreshTokenService;
+    private final JwtService jwtService;
+
+    public AuthController(AuthService authService, RefreshTokenService refreshTokenService, JwtService jwtService) {
+        this.authService = authService;
+        this.refreshTokenService = refreshTokenService;
+        this.jwtService = jwtService;
+    }
+
+    /**
+     * PACIENT se înregistrează singur
+     * Public endpoint - oricine poate se înregistreze ca pacient
+     */
+    @PostMapping("/register/patient")
+    public ResponseEntity<AuthResponse> registerPatient(@RequestBody RegisterRequest patientRequest) {
+        AuthResponse response = authService.registerPatient(patientRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    /**
+     * ADMIN creează conturi de DOCTOR
+     * Protejat - doar ADMIN poate accesa
+     */
+    @PostMapping("/register/doctor")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<AuthResponse> createDoctorAccount(@RequestBody CreateDoctorRequest doctorRequest) {
+        AuthResponse response = authService.createDoctorAccount(doctorRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    /**
+     * LOGIN pentru toți utilizatorii (ADMIN, DOCTOR, PATIENT)
+     */
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
+        AuthResponse response = authService.login(loginRequest);
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * REFRESH TOKEN pentru toți utilizatorii autentificați
+     */
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthResponse> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
+        RefreshToken refreshToken = refreshTokenService.verifyRefreshToken(refreshTokenRequest.getRefreshToken());
+        User user = refreshToken.getUser();
+        String accessToken = jwtService.generateToken(user);
+        return ResponseEntity.ok(AuthResponse.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken.getRefreshToken())
+                .name(user.getName())
+                .email(user.getEmail())
+                .build());
+    }
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/repositories/UserRepository.java
+// =================================================================================
+package com.ex.web.auth.repositories;
+
+import com.ex.web.auth.entities.TypeUser;
+import com.ex.web.auth.entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Integer> {
+    Optional<User> findByEmail(String username);
+    Optional<User> findByType(TypeUser type);
+
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/auth/repositories/RefreshTokenRepository.java
+// =================================================================================
+package com.ex.web.auth.repositories;
+
+import com.ex.web.auth.entities.RefreshToken;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
+
+public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Integer> {
+    Optional<RefreshToken> findByRefreshToken(String refreshToken);
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/services/PatientService.java
+// =================================================================================
+package com.ex.web.services;
+
+import com.ex.core.entities.Patient;
+import com.ex.core.repositories.PatientRepository;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.dto.request.PatientRequestDTO;
+import com.ex.web.dto.response.PatientResponseDTO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.IntStream;
+
+@Service
+@RequiredArgsConstructor
+public class PatientService {
+
+    private final UserRepository userRepository;
+    private final PatientRepository patientRepository;
+
+    //Mapper din entity in DTO
+    public PatientResponseDTO mapToDto(Patient patient) {
+        PatientResponseDTO dto = new PatientResponseDTO();
+        dto.setName(patient.getName());
+        dto.setBornDate(patient.getBornDate());
+        dto.setCnp(patient.getCnp());
+        dto.setGender(patient.getGender());
+        dto.setAddress(patient.getAddress());
+        dto.setPhone(patient.getPhone());
+        dto.setEmail(patient.getEmail());
+        dto.setOccupation(patient.getProfesion());
+        dto.setWorkplace(patient.getJob());
+        return dto;
+    }
+
+    //2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9 sunt cifrele de control
+    private static final int[] CNP_WEIGHTS = {2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9};
+    private static final Set<Integer> VALID_FIRST_DIGITS = Set.of(1, 2, 3, 4, 5, 6, 7, 8);
+
+    private void validateCnp(String cnp) {
+        Optional.ofNullable(cnp)
+                .filter(c -> c.matches("^[0-9]{13}$"))
+                .filter(c -> isFirstDigitValid(c))
+                .filter(c -> isMonthValid(c))
+                .filter(c -> isDayValid(c))
+                .filter(c -> isCountyValid(c))
+                .filter(c -> isOrderNumberValid(c))
+                .filter(c -> isControlDigitValid(c))
+                .orElseThrow(() -> new IllegalArgumentException("CNP invalid"));
+    }
+
+    // Prima cifra - sex si secol
+    private boolean isFirstDigitValid(String cnp) {
+        int firstDigit = cnp.charAt(0) - '0';
+        return VALID_FIRST_DIGITS.contains(firstDigit);
+    }
+
+    // Cifrele 4-5 - luna nasterii
+    private boolean isMonthValid(String cnp) {
+        int month = Integer.parseInt(cnp.substring(3, 5));
+        return month >= 1 && month <= 12;
+    }
+
+    // Cifrele 6-7 - ziua nasterii
+    private boolean isDayValid(String cnp) {
+        int day = Integer.parseInt(cnp.substring(5, 7));
+        return day >= 1 && day <= 31;
+    }
+
+    // Cifrele 8-9 - codul judetului
+    private boolean isCountyValid(String cnp) {
+        int county = Integer.parseInt(cnp.substring(7, 9));
+        return county >= 1 && county <= 52;
+    }
+
+    // Cifrele 10-12 - numarul de ordine
+    private boolean isOrderNumberValid(String cnp) {
+        int orderNumber = Integer.parseInt(cnp.substring(9, 12));
+        return orderNumber >= 1 && orderNumber <= 999;
+    }
+
+    // Ultima cifra - cifra de control
+    private boolean isControlDigitValid(String cnp) {
+        int sum = IntStream.range(0, 12)
+                .map(i -> (cnp.charAt(i) - '0') * CNP_WEIGHTS[i])
+                .sum();
+
+        int remainder = sum % 11;
+        int controlDigit = (remainder == 10) ? 1 : remainder;
+
+        return controlDigit == (cnp.charAt(12) - '0');
+    }
+
+    private void validateCnpUniqueness(String cnp) {
+        if(patientRepository.existsPatientByCnp(cnp)) {
+            throw new IllegalArgumentException("CNP already exists");
+        }
+    }
+
+
+    @Transactional
+    public void createProfile(PatientRequestDTO request, String userEmail) {
+
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
+
+
+        if (patientRepository.findByUser(user).isPresent()) {
+            throw new IllegalStateException("Patient profile already exists for this user.");
+        }
+
+
+        Patient patientProfile = Patient.builder()
+                .name(request.getName())
+                .bornDate(request.getBornDate())
+                .cnp(request.getCnp())
+                .gender(request.getGender())
+                .address(request.getAddress())
+                .phone(request.getPhone())
+                .email(request.getEmail())
+                .profesion(request.getProfesion())
+                .job(request.getJob())
+                .user(user)
+                .build();
+
+        patientRepository.save(patientProfile);
+    }
+
+    public Optional<Patient> getDemographics(Long id) {
+        return patientRepository.findById(id);
+    }
+
+    public Patient saveDemographics(Long id, PatientRequestDTO dto) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+
+        patient.setName(dto.getName());
+        patient.setBornDate(dto.getBornDate());
+        patient.setCnp(dto.getCnp());
+        patient.setAddress(dto.getAddress());
+        patient.setGender(dto.getGender());
+        patient.setPhone(dto.getPhone());
+        patient.setEmail(dto.getEmail());
+        patient.setProfesion(dto.getProfesion());
+        patient.setJob(dto.getJob());
+
+        return patientRepository.save(patient);
+
+    }
+
+    public void removeDemographics(Long id) {
+        patientRepository.deleteById(id);
+    }
+
+
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/services/MedicalRecordService.java
+// =================================================================================
+package com.ex.web.services;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class MedicalRecordService {
+
+}
+
+// =================================================================================
+// FILE: /Users/arisradoi/Desktop/iHealth/iHealth/src/main/java/com/ex/web/controllers/PatientController.java
+// =================================================================================
+package com.ex.web.controllers;
+
+import com.ex.core.entities.Patient;
+import com.ex.web.dto.request.PatientRequestDTO;
+import com.ex.web.dto.response.PatientResponseDTO;
+import com.ex.web.services.PatientService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
+
+import static org.springframework.http.ResponseEntity.ok;
+
+@RestController
+@RequestMapping("/api/patients")
+@RequiredArgsConstructor
+public class PatientController {
+
+    private final PatientService patientService;
+
+    @PostMapping("/profile")
+    @PreAuthorize("hasAuthority('PATIENT')")
+    public ResponseEntity<Void> createPatientProfile(@RequestBody PatientRequestDTO request) {
+        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        patientService.createProfile(request, userEmail);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/{id}/demographics")
+    @PreAuthorize("hasAnyAuthority('MEDIC', 'PATIENT')")
+    public ResponseEntity<PatientResponseDTO> getDemographics(@PathVariable Long id) {
+        return patientService.getDemographics(id)
+                .map(patient -> ok(patientService.mapToDto(patient)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("/create/demographics")
+    @PreAuthorize("hasAuthority('MEDIC')")
+    public ResponseEntity<Patient> createDemographics(
+            @PathVariable Long id,
+            @Valid @RequestBody PatientRequestDTO request
+    ) {
+        return ok(patientService.saveDemographics(id, request));
+    }
+
+    @DeleteMapping("/{id}/remove")
+    @PreAuthorize("hasAuthority('MEDIC')")
+    public void deleteDemographics(@PathVariable Long id) {
+        patientService.removeDemographics(id);
+    }
+
+}

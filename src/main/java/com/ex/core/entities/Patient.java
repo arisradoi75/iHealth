@@ -41,7 +41,6 @@ public class Patient {
     private String profesion;
     private String job;
 
-    // Am păstrat aceste câmpuri, deoarece corespund cerințelor
     private String generalMedicalHistory;
     private String knownAllergies;
 
@@ -49,7 +48,7 @@ public class Patient {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    // Am păstrat doar relația relevantă
+
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<MedicalEvent> medicalEvents;
 

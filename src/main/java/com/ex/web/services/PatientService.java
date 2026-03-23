@@ -4,6 +4,7 @@ import com.ex.core.entities.Patient;
 import com.ex.core.repositories.PatientRepository;
 import com.ex.web.auth.entities.User;
 import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.dto.request.MedicalSummaryRequestDTO;
 import com.ex.web.dto.request.PatientRequestDTO;
 import com.ex.web.dto.response.PatientResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,8 @@ public class PatientService {
         dto.setEmail(patient.getEmail());
         dto.setOccupation(patient.getProfesion());
         dto.setWorkplace(patient.getJob());
+        dto.setGeneralMedicalHistory(patient.getGeneralMedicalHistory());
+        dto.setKnownAllergies(patient.getKnownAllergies());
         return dto;
     }
 
@@ -132,6 +135,18 @@ public class PatientService {
 
     public Optional<Patient> getDemographics(Long id) {
         return patientRepository.findById(id);
+    }
+
+    @Transactional
+    public PatientResponseDTO updateMedicalSummary(Long patientId, MedicalSummaryRequestDTO request) {
+        Patient patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+
+        patient.setGeneralMedicalHistory(request.getGeneralMedicalHistory());
+        patient.setKnownAllergies(request.getKnownAllergies());
+
+        Patient updatedPatient = patientRepository.save(patient);
+        return mapToDto(updatedPatient);
     }
 
     public Patient saveDemographics(Long id, PatientRequestDTO dto) {

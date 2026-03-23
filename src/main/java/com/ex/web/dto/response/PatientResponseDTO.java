@@ -21,4 +21,6 @@ public class PatientResponseDTO {
     private String email;
     private String occupation;
     private String workplace;
+    private String generalMedicalHistory; // Adăugat
+    private String knownAllergies;      // Adăugat
 }

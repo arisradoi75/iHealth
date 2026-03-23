@@ -1,6 +1,7 @@
 package com.ex.web.controllers;
 
 import com.ex.core.entities.Patient;
+import com.ex.web.dto.request.MedicalSummaryRequestDTO;
 import com.ex.web.dto.request.PatientRequestDTO;
 import com.ex.web.dto.response.PatientResponseDTO;
 import com.ex.web.services.PatientService;
@@ -24,18 +25,27 @@ public class PatientController {
     @PostMapping("/profile")
     @PreAuthorize("hasAuthority('PATIENT')")
     public ResponseEntity<Void> createPatientProfile(@RequestBody PatientRequestDTO request) {
-        // Preia email-ul utilizatorului logat din contextul de securitate
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         patientService.createProfile(request, userEmail);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/{id}/demographics")
-    @PreAuthorize("hasAnyAuthority('MEDIC', 'PATIENT')")
+    @PreAuthorize("hasAnyAuthority('DOCTOR', 'PATIENT')")
     public ResponseEntity<PatientResponseDTO> getDemographics(@PathVariable Long id) {
+        // TODO: Add security logic here to ensure patient can only see their own data
         return patientService.getDemographics(id)
                 .map(patient -> ok(patientService.mapToDto(patient)))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("/{id}/medical-summary")
+    @PreAuthorize("hasAuthority('DOCTOR')")
+    public ResponseEntity<PatientResponseDTO> updateMedicalSummary(
+            @PathVariable Long id,
+            @RequestBody MedicalSummaryRequestDTO request) {
+        PatientResponseDTO updatedPatient = patientService.updateMedicalSummary(id, request);
+        return ResponseEntity.ok(updatedPatient);
     }
 
     @PatchMapping("/create/demographics")
@@ -52,8 +62,4 @@ public class PatientController {
     public void deleteDemographics(@PathVariable Long id) {
         patientService.removeDemographics(id);
     }
-
-
-
-
 }
