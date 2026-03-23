@@ -1,11 +1,14 @@
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import styles from './Auth.module.css';
+
+
 
 export function Login() {
     const [formData, setFormData] = useState({
-        email: "user@example.com",
-        password: "password"
+        email: "",
+        password: ""
     });
 
     const [error, setError] = useState("");
@@ -20,65 +23,81 @@ export function Login() {
             }));
     }
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        
-        if(formData.email === "user@example.com" && formData.password === "password") {
-            alert("Login successful!");
-            
-            const userData = {
-        id: "m1",
-        nume: "Dr. Ionescu",
-        role: "medic", 
-        };
+   const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        const response = await fetch("http://localhost:8080/api/v1/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                email: formData.email, 
+                password: formData.password 
+            })
+        });
 
+        if (!response.ok) throw new Error("Email sau parolă greșită!");
 
-        setUser(userData);
-
-        localStorage.setItem("user", JSON.stringify(userData));
-        
+        const data = await response.json();
+        setUser(data);
+        localStorage.setItem("user", JSON.stringify(data));
         navigate("/dashboard");
-        } else {
-            setError("Invalid email or password");
-        }
 
-    
+    } catch (error) {
+        setError(error.message);
     }
+};
 
-    return (
-    <div className="login-container">
-      <h2>Clinica Sănătatea Noastră</h2>
-      <p>Autentificare sistem IoT</p>
+   return (
+  <div className={styles.page}>
+    <div className={styles.card}>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
+      <div className={styles.header}>
+        <h2 className={styles.titleH2}>iHealth</h2>
+        <p className={styles.titleP}>Autentificare</p>
+      </div>
+
+      <form className={styles.form} onSubmit={handleSubmit}>
+
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>Email</label>
           <input
+            className={styles.input}
             type="email"
-            name="email" // Trebuie să coincidă cu cheia din formData
+            name="email"
             value={formData.email}
             onChange={handleChange}
+            placeholder="Email"
             required
           />
         </div>
 
-        <div>
-          <label>Parolă:</label>
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>Parolă</label>
           <input
+            className={styles.input}
             type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
+            placeholder="Password"
             required
           />
         </div>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className={styles.error}>{error}</p>}
 
-        <button type="submit">Intră în cont</button>
+        <button className={styles.button} type="submit">
+          Authentication
+        </button>
+
+        <button className={styles.button} type="button" onClick={() => navigate("/register")}>
+          Register
+        </button>
+
       </form>
     </div>
-  );
+  </div>
+);
 }
 
 
