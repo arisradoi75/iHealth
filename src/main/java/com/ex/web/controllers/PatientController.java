@@ -31,12 +31,10 @@ public class PatientController {
     }
 
     @GetMapping("/{id}/demographics")
-    @PreAuthorize("hasAnyAuthority('DOCTOR', 'PATIENT')")
+    @PreAuthorize("hasAnyAuthority('DOCTOR', 'PATIENT')") // Am corectat 'MEDIC' în 'DOCTOR'
     public ResponseEntity<PatientResponseDTO> getDemographics(@PathVariable Long id) {
-        // TODO: Add security logic here to ensure patient can only see their own data
-        return patientService.getDemographics(id)
-                .map(patient -> ok(patientService.mapToDto(patient)))
-                .orElse(ResponseEntity.notFound().build());
+        PatientResponseDTO patientData = patientService.getPatientDemographics(id);
+        return ResponseEntity.ok(patientData);
     }
 
     @PatchMapping("/{id}/medical-summary")
@@ -48,17 +46,18 @@ public class PatientController {
         return ResponseEntity.ok(updatedPatient);
     }
 
-    @PatchMapping("/create/demographics")
-    @PreAuthorize("hasAuthority('MEDIC')")
-    public ResponseEntity<Patient> createDemographics(
+    @PatchMapping("/{id}/demographics") // Am schimbat ruta pentru a fi mai clară
+    @PreAuthorize("hasAuthority('DOCTOR')")
+    public ResponseEntity<PatientResponseDTO> updateDemographics(
             @PathVariable Long id,
             @Valid @RequestBody PatientRequestDTO request
     ) {
-        return ok(patientService.saveDemographics(id, request));
+        PatientResponseDTO updatedPatient = patientService.saveDemographics(id, request);
+        return ok(updatedPatient);
     }
 
     @DeleteMapping("/{id}/remove")
-    @PreAuthorize("hasAuthority('MEDIC')")
+    @PreAuthorize("hasAuthority('DOCTOR')")
     public void deleteDemographics(@PathVariable Long id) {
         patientService.removeDemographics(id);
     }

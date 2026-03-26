@@ -8,6 +8,9 @@ import com.ex.web.dto.request.MedicalSummaryRequestDTO;
 import com.ex.web.dto.request.PatientRequestDTO;
 import com.ex.web.dto.response.PatientResponseDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +25,35 @@ public class PatientService {
 
     private final UserRepository userRepository;
     private final PatientRepository patientRepository;
+
+    public PatientResponseDTO getPatientDemographics(Long patientId) {
+        // Obține utilizatorul curent logat
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        // Aplică logica de securitate
+        boolean isDoctor = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("DOCTOR"));
+
+        boolean isPatientViewingOwnData = false;
+        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("PATIENT"))) {
+            isPatientViewingOwnData = patientRepository.findByUser(currentUser)
+                    .map(patient -> patient.getId().equals(patientId))
+                    .orElse(false);
+        }
+
+        // Dacă nu este doctor și nici pacientul care își vede propriile date, refuză accesul
+        if (!isDoctor && !isPatientViewingOwnData) {
+            throw new AccessDeniedException("You do not have permission to view this data.");
+        }
+
+        // Dacă securitatea a trecut, returnează datele
+        return patientRepository.findById(patientId)
+                .map(this::mapToDto)
+                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+    }
+
 
     //Mapper din entity in DTO
     public PatientResponseDTO mapToDto(Patient patient) {
@@ -40,6 +72,67 @@ public class PatientService {
         return dto;
     }
 
+    // ... (restul metodelor de validare CNP)
+
+    @Transactional
+    public void createProfile(PatientRequestDTO request, String userEmail) {
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
+
+        if (patientRepository.findByUser(user).isPresent()) {
+            throw new IllegalStateException("Patient profile already exists for this user.");
+        }
+
+        Patient patientProfile = Patient.builder()
+                .name(request.getName())
+                .bornDate(request.getBornDate())
+                .cnp(request.getCnp())
+                .gender(request.getGender())
+                .address(request.getAddress())
+                .phone(request.getPhone())
+                .email(request.getEmail())
+                .profesion(request.getProfesion())
+                .job(request.getJob())
+                .user(user)
+                .build();
+        patientRepository.save(patientProfile);
+    }
+
+    @Transactional
+    public PatientResponseDTO updateMedicalSummary(Long patientId, MedicalSummaryRequestDTO request) {
+        Patient patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+
+        patient.setGeneralMedicalHistory(request.getGeneralMedicalHistory());
+        patient.setKnownAllergies(request.getKnownAllergies());
+
+        Patient updatedPatient = patientRepository.save(patient);
+        return mapToDto(updatedPatient);
+    }
+
+    @Transactional
+    public PatientResponseDTO saveDemographics(Long id, PatientRequestDTO dto) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+
+        patient.setName(dto.getName());
+        patient.setBornDate(dto.getBornDate());
+        patient.setCnp(dto.getCnp());
+        patient.setAddress(dto.getAddress());
+        patient.setGender(dto.getGender());
+        patient.setPhone(dto.getPhone());
+        patient.setEmail(dto.getEmail());
+        patient.setProfesion(dto.getProfesion());
+        patient.setJob(dto.getJob());
+
+        Patient savedPatient = patientRepository.save(patient);
+        return mapToDto(savedPatient);
+    }
+
+    public void removeDemographics(Long id) {
+        patientRepository.deleteById(id);
+    }
+    
     //2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9 sunt cifrele de control
     private static final int[] CNP_WEIGHTS = {2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9};
     private static final Set<Integer> VALID_FIRST_DIGITS = Set.of(1, 2, 3, 4, 5, 6, 7, 8);
@@ -103,73 +196,4 @@ public class PatientService {
             throw new IllegalArgumentException("CNP already exists");
         }
     }
-
-
-    @Transactional
-    public void createProfile(PatientRequestDTO request, String userEmail) {
-
-        User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
-
-
-        if (patientRepository.findByUser(user).isPresent()) {
-            throw new IllegalStateException("Patient profile already exists for this user.");
-        }
-
-
-        Patient patientProfile = Patient.builder()
-                .name(request.getName())
-                .bornDate(request.getBornDate())
-                .cnp(request.getCnp())
-                .gender(request.getGender())
-                .address(request.getAddress())
-                .phone(request.getPhone())
-                .email(request.getEmail())
-                .profesion(request.getProfesion())
-                .job(request.getJob())
-                .user(user)
-                .build();
-
-        patientRepository.save(patientProfile);
-    }
-
-    public Optional<Patient> getDemographics(Long id) {
-        return patientRepository.findById(id);
-    }
-
-    @Transactional
-    public PatientResponseDTO updateMedicalSummary(Long patientId, MedicalSummaryRequestDTO request) {
-        Patient patient = patientRepository.findById(patientId)
-                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
-
-        patient.setGeneralMedicalHistory(request.getGeneralMedicalHistory());
-        patient.setKnownAllergies(request.getKnownAllergies());
-
-        Patient updatedPatient = patientRepository.save(patient);
-        return mapToDto(updatedPatient);
-    }
-
-    public Patient saveDemographics(Long id, PatientRequestDTO dto) {
-        Patient patient = patientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Patient not found"));
-
-        patient.setName(dto.getName());
-        patient.setBornDate(dto.getBornDate());
-        patient.setCnp(dto.getCnp());
-        patient.setAddress(dto.getAddress());
-        patient.setGender(dto.getGender());
-        patient.setPhone(dto.getPhone());
-        patient.setEmail(dto.getEmail());
-        patient.setProfesion(dto.getProfesion());
-        patient.setJob(dto.getJob());
-
-        return patientRepository.save(patient);
-
-    }
-
-    public void removeDemographics(Long id) {
-        patientRepository.deleteById(id);
-    }
-
-
 }

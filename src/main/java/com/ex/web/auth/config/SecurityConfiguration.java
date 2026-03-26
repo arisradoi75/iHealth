@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class SecurityConfiguration {
     private final AuthFilterService authFilterService;
@@ -27,19 +27,12 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(req -> req
-                        // Explicitly permit all public registration and auth endpoints
                         .requestMatchers(
-                                "/api/v1/auth/register/patient", // Permitem înregistrarea pacientului
-                                "/api/v1/auth/register/doctor",  // Permitem crearea doctorului (securizat în controller)
                                 "/api/v1/auth/login",
-                                "/api/v1/auth/refresh"
+                                "/api/v1/auth/register/patient"
                         ).permitAll()
-                        .requestMatchers("/ws-robot/**").permitAll()
-                        .requestMatchers("/api/robot/telemetry").permitAll()
-                        .requestMatchers("/api/robot/alert").permitAll()
-                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
-                        // All other requests must be authenticated
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated()
+                )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class);
