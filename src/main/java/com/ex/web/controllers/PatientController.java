@@ -13,11 +13,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/api/patients")
 @RequiredArgsConstructor
+@CrossOrigin(value = "http://localhost:5173/")
 public class PatientController {
 
     private final PatientService patientService;
@@ -31,10 +34,21 @@ public class PatientController {
     }
 
     @GetMapping("/{id}/demographics")
-    @PreAuthorize("hasAnyAuthority('DOCTOR', 'PATIENT')") // Am corectat 'MEDIC' în 'DOCTOR'
+    @PreAuthorize("hasAnyAuthority('DOCTOR')")
     public ResponseEntity<PatientResponseDTO> getDemographics(@PathVariable Long id) {
-        PatientResponseDTO patientData = patientService.getPatientDemographics(id);
-        return ResponseEntity.ok(patientData);
+
+        return patientService.getDemographics(id)
+                .map(patient -> ok(patientService.mapToDto(patient)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/me")
+    @PreAuthorize("hasAuthority('PATIENT')")
+    public ResponseEntity<PatientResponseDTO> getMyProfile() {
+        String email = Objects.requireNonNull(SecurityContextHolder.getContext().getAuthentication()).getName();
+        return patientService.getDemographicsByEmail(email)
+                .map(patient -> ok(patientService.mapToDto(patient)))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PatchMapping("/{id}/medical-summary")
@@ -46,18 +60,17 @@ public class PatientController {
         return ResponseEntity.ok(updatedPatient);
     }
 
-    @PatchMapping("/{id}/demographics") // Am schimbat ruta pentru a fi mai clară
-    @PreAuthorize("hasAuthority('DOCTOR')")
-    public ResponseEntity<PatientResponseDTO> updateDemographics(
+    @PatchMapping("/create/demographics")
+    @PreAuthorize("hasAuthority('MEDIC')")
+    public ResponseEntity<Patient> createDemographics(
             @PathVariable Long id,
             @Valid @RequestBody PatientRequestDTO request
     ) {
-        PatientResponseDTO updatedPatient = patientService.saveDemographics(id, request);
-        return ok(updatedPatient);
+        return ok(patientService.saveDemographics(id, request));
     }
 
     @DeleteMapping("/{id}/remove")
-    @PreAuthorize("hasAuthority('DOCTOR')")
+    @PreAuthorize("hasAuthority('MEDIC')")
     public void deleteDemographics(@PathVariable Long id) {
         patientService.removeDemographics(id);
     }

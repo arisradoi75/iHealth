@@ -19,8 +19,8 @@ public class PatientResponseDTO {
     private Address address;
     private String phone;
     private String email;
-    private String occupation;
-    private String workplace;
+    private String profesion;
+    private String job;
     private String generalMedicalHistory; // Adăugat
     private String knownAllergies;      // Adăugat
 }
