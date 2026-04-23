@@ -34,4 +34,6 @@ public class MedicalEventController {
         List<MedicalEventResponseDTO> events = medicalEventService.getEventsForPatient(patientId);
         return ResponseEntity.ok(events);
     }
+
+
 }

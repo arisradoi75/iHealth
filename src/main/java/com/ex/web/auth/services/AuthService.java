@@ -1,7 +1,9 @@
 package com.ex.web.auth.services;
 
 import com.ex.core.entities.Medic;
+import com.ex.core.entities.Patient;
 import com.ex.core.repositories.MedicRepository;
+import com.ex.core.repositories.PatientRepository;
 import com.ex.web.auth.entities.User;
 import com.ex.web.auth.entities.TypeUser;
 import com.ex.web.auth.repositories.UserRepository;
@@ -9,6 +11,7 @@ import com.ex.web.auth.utils.AuthResponse;
 import com.ex.web.auth.utils.CreateDoctorRequest;
 import com.ex.web.auth.utils.LoginRequest;
 import com.ex.web.auth.utils.RegisterRequest;
+import com.ex.web.dto.response.CurrentUserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,12 +23,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    private final MedicRepository medicRepository; // Injectat
+    private final MedicRepository medicRepository;
+    private final PatientRepository patientRepository;
     private final JwtService jwtService;
     private final RefreshTokenService refreshTokenService;
     private final AuthenticationManager authenticationManager;
@@ -135,5 +141,23 @@ public class AuthService {
                 .name(user.getName())
                 .email(user.getEmail())
                 .build();
+    }
+
+    public CurrentUserResponse createCurrentUserResponse(User user) {
+        CurrentUserResponse.CurrentUserResponseBuilder responseBuilder = CurrentUserResponse.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
+                .role(user.getType().name());
+
+        if (user.getType() == TypeUser.PATIENT) {
+            Optional<Patient> patient = patientRepository.findByUser(user);
+            patient.ifPresent(p -> responseBuilder.patientId(p.getId()));
+        } else if (user.getType() == TypeUser.DOCTOR) {
+            Optional<Medic> medic = medicRepository.findByUser(user);
+            medic.ifPresent(m -> responseBuilder.medicId(m.getId()));
+        }
+
+        return responseBuilder.build();
     }
 }
