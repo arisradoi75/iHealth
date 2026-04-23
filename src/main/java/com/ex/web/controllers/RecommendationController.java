@@ -40,8 +40,7 @@ public class RecommendationController{
     }
 
     @PatchMapping("/{recommendationId}")
-    //@PreAuthorize("hasAuthority('DOCTOR')")
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasAuthority('DOCTOR')")
     public ResponseEntity<RecommendationResponseDTO> updateRecommendation(
             @PathVariable Long recommendationId ,
             @RequestBody RecommendationRequestDTO request){
