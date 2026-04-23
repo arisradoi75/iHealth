@@ -1,0 +1,20 @@
+
+
+.cardPlacement {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px; 
+  justify-items: center; 
+  max-width: 1500px;
+  align-items: center;
+  margin: 0 auto;
+  padding: 20px;
+}
+.title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 4rem;
+    color: #9d156b;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.5px;
+    text-align: center; 
+}

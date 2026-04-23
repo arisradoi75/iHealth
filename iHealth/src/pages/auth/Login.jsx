@@ -1,7 +1,8 @@
 import { useState } from "react";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import styles from './Auth.module.css';
+
 
 
 
@@ -24,9 +25,9 @@ export function Login() {
     }
 
    const handleSubmit = async (e) => {
-    e.preventDefault();
+          e.preventDefault();
     try {
-        const response = await fetch("http://localhost:8080/api/v1/auth/login", {
+        const response = await fetch(`http://localhost:8080/api/v1/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ 
@@ -34,7 +35,7 @@ export function Login() {
                 password: formData.password 
             })
         });
-
+        console.log(response);
         if (!response.ok) throw new Error("Email sau parolă greșită!");
 
         const data = await response.json();
@@ -45,6 +46,8 @@ export function Login() {
     } catch (error) {
         setError(error.message);
     }
+
+    
 };
 
    return (
@@ -57,6 +60,7 @@ export function Login() {
       </div>
 
       <form className={styles.form} onSubmit={handleSubmit}>
+
 
         <div className={styles.inputGroup}>
           <label className={styles.label}>Email</label>
@@ -86,7 +90,7 @@ export function Login() {
 
         {error && <p className={styles.error}>{error}</p>}
 
-        <button className={styles.button} type="submit">
+        <button className={styles.button} type="submit" onChange={() => navigate("/dashboard")}>
           Authentication
         </button>
 

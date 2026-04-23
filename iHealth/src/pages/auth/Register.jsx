@@ -70,7 +70,7 @@ export default function Register() {
         e.preventDefault();
 
         try {
-        const response = await fetch("http://localhost:8080/api/v1/auth/register/patient", {
+        const response = await fetch(`http://localhost:8080/api/v1/auth/register/patient`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ 
@@ -106,7 +106,7 @@ export default function Register() {
         try {
 
 
-            const response = await fetch("http://localhost:8080/api/patients/profile", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/patients/profile`, {
                 method: "POST",
                 headers: { 
                     "Content-Type": "application/json",

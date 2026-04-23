@@ -1,0 +1,37 @@
+/* Scoatem liniuța de link și ne asigurăm că umple spațiul corect */
+.cardLink {
+    text-decoration: none; 
+    display: block; 
+}
+
+/* AICI punem magia de Flexbox, pentru că el conține imaginea și textul */
+.card {
+    display: flex;
+    flex-direction: column; /* Pune imaginea SUS și textul JOS */
+    align-items: center;    /* Le centrează pe mijloc */
+    justify-content: center;
+    gap: 15px;              /* Spațiul dintre iconiță și text */
+    
+    background-color: transparent;
+    border: 1px solid #000000;
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    height: 100%;           /* Ajută cardurile să aibă aceeași înălțime */
+}
+
+/* Iconița (am lăsat-o un pic mai mică, 200px s-ar putea să fie cam uriașă pe ecran, poți modifica) */
+.cardIcon {
+    width: 150px;
+    height: 150px;
+    object-fit: contain; /* Păstrează proporțiile imaginii necropate */
+}
+
+/* Textul */
+.cardText {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: #000000;
+    margin: 0;
+    letter-spacing: -0.3px;
+    text-align: center; 
+}

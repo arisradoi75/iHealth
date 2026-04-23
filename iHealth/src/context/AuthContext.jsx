@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {AuthContext} from "./AuthContextFile.js"
+import { AuthContext } from "./AuthContextFile.js"
 
 export default function AuthProvider({ children }) {
         const [user, setUser] = useState(() => {
