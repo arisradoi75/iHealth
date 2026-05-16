@@ -1,23 +1,28 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth.js";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 
-export default function Recommendations() {
-    console.log("Am intrat în componenta Recommendations sper sa mearga in pula mea"); 
+export default function Recommendations() { 
     const { user } = useAuth();
     const navigate = useNavigate();
-
-
-
     const [recommendations, setRecommendations] = useState([]);
+
+    let patientId = null;
+
+    if(user.accessToken) {
+        const decodedToken = jwtDecode(user.accessToken);
+        patientId = decodedToken.userId;
+    }
+
     
     useEffect(() => {
 
         const fetchRecommendations = async () => {
             try {
 
-                const response = await fetch(`http://localhost:8080/api/patients/recommendations/my/recommendations`, {
+                const response = await fetch(`http://localhost:8080/api/patients/recommendations/for-patient/${patientId}`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${user.accessToken}`
@@ -42,7 +47,7 @@ export default function Recommendations() {
 
         fetchRecommendations();
         
-    }, [navigate, user]); 
+    }, [navigate, user, patientId]); 
 
 
     const goToDashboard = () => {

@@ -7,20 +7,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #1a0505;
-  background-image: radial-gradient(ellipse at 20% 50%, rgba(139, 20, 20, 0.25) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(246, 178, 221, 0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 60% 25%, rgba(246, 178, 222, 0.123) 0%, transparent 80%);
+  background-color: #0a2818;
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(30, 120, 80, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(42, 200, 130, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 25%, rgba(46, 204, 113, 0.1) 0%, transparent 80%);
 }
 
 .card {
-  background: #2a0a0a;
-  border: 1px solid rgba(246, 178, 221, 0.12);
+  background: #1a4d35;
+  border: 1px solid rgba(46, 204, 113, 0.12);
   border-radius: 20px;
   padding: 2.5rem 2rem;
   width: 100%;
   max-width: 400px;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 40px rgba(180, 20, 20, 0.1);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 40px rgba(46, 204, 113, 0.1);
   margin: 2rem auto;
 }
 
@@ -33,7 +33,7 @@
 .titleH2 {
   font-family: 'DM Serif Display', serif;
   font-size: 2.4rem;
-  color: #f6b2dd;
+  color: #ffffff;
   margin: 0 0 0.3rem 0;
   letter-spacing: -0.5px;
 }
@@ -41,7 +41,7 @@
 .titleP {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.85rem;
-  color: rgba(246, 178, 221, 0.4);
+  color: rgba(46, 204, 113, 0.4);
   margin: 0;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -60,25 +60,25 @@
   font-family: 'DM Sans', sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
-  color: rgba(246, 178, 221, 0.3);
+  color: rgba(46, 204, 113, 0.3);
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
-  border: 1px solid rgba(246, 178, 221, 0.1);
+  border: 1px solid rgba(46, 204, 113, 0.1);
 }
 
 .activeStep {
-  color: #f6b2dd;
-  border-color: rgba(246, 178, 221, 0.4);
-  background: rgba(246, 178, 221, 0.07);
+  color: #ffffff;
+  border-color: rgba(46, 204, 113, 0.4);
+  background: rgba(46, 204, 113, 0.07);
 }
 
 .doneStep {
-  color: rgba(246, 178, 221, 0.5);
-  border-color: rgba(246, 178, 221, 0.2);
+  color: rgba(46, 204, 113, 0.5);
+  border-color: rgba(46, 204, 113, 0.2);
 }
 
 .stepDivider {
-  color: rgba(246, 178, 221, 0.2);
+  color: rgba(46, 204, 113, 0.2);
   font-size: 0.85rem;
 }
 
@@ -105,31 +105,31 @@
   font-family: 'DM Sans', sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
-  color: rgba(246, 178, 221, 0.4);
+  color: rgba(46, 204, 113, 0.4);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin: 0.5rem 0 -0.25rem 0;
   padding-top: 0.5rem;
-  border-top: 1px solid rgba(246, 178, 221, 0.08);
+  border-top: 1px solid rgba(46, 204, 113, 0.08);
 }
 
 .label {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
-  color: rgba(246, 178, 221, 0.5);
+  color: rgba(46, 204, 113, 0.5);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .input {
-  background: rgba(246, 178, 221, 0.04);
-  border: 1px solid rgba(246, 178, 221, 0.15);
+  background: rgba(46, 204, 113, 0.04);
+  border: 1px solid rgba(46, 204, 113, 0.15);
   border-radius: 10px;
   padding: 0.75rem 1rem;
   font-family: 'DM Sans', sans-serif;
   font-size: 0.95rem;
-  color: #f6b2dd;
+  color: #ffffff;
   outline: none;
   transition: border-color 0.2s, background 0.2s;
   width: 100%;
@@ -137,12 +137,12 @@
 }
 
 .input::placeholder {
-  color: rgba(246, 178, 221, 0.2);
+  color: rgba(46, 204, 113, 0.2);
 }
 
 .input:focus {
-  border-color: #f6b2dd;
-  background: rgba(246, 178, 221, 0.07);
+  border-color: #2ecc71;
+  background: rgba(46, 204, 113, 0.07);
 }
 
 /* ---- Error ---- */
@@ -157,8 +157,8 @@
 .button {
   margin-top: 0.5rem;
   padding: 0.85rem;
-  background: linear-gradient(135deg, #f85797, #611515);
-  color: #fde8f3;
+  background: linear-gradient(135deg, #27ae60, #1e8449);
+  color: #f0f8f4;
   border: none;
   border-radius: 10px;
   font-family: 'DM Sans', sans-serif;
@@ -166,13 +166,12 @@
   font-weight: 700;
   cursor: pointer;
   letter-spacing: 0.03em;
-  transition: opacity 0.2s, transform 0.1s;
-  box-shadow: 0 4px 20px rgba(192, 22, 90, 0.35);
+  box-shadow: 0 4px 20px rgba(46, 204, 113, 0.35);
   flex: 1;
 }
 
 .button:hover {
-  opacity: 0.67;
+  opacity: 0.70;
 }
 
 .button:active {
@@ -187,9 +186,9 @@
 .buttonSecondary {
   margin-top: 0.5rem;
   padding: 0.85rem;
-  background: rgba(246, 178, 221, 0.06);
-  color: rgba(246, 178, 221, 0.6);
-  border: 1px solid rgba(246, 178, 221, 0.15);
+  background: rgba(46, 204, 113, 0.06);
+  color: rgba(46, 204, 113, 0.6);
+  border: 1px solid rgba(46, 204, 113, 0.15);
   border-radius: 10px;
   font-family: 'DM Sans', sans-serif;
   font-size: 0.95rem;
@@ -200,7 +199,7 @@
 }
 
 .buttonSecondary:hover {
-  background: rgba(246, 178, 221, 0.1);
+  background: rgba(46, 204, 113, 0.1);
 }
 
 
@@ -208,12 +207,12 @@
   font-family: 'DM Sans', sans-serif;
   text-align: center;
   font-size: 0.85rem;
-  color: rgba(246, 178, 221, 0.35);
+  color: rgba(46, 204, 113, 0.35);
   margin: 0;
 }
 
 .link span {
-  color: #f6b2dd;
+  color: #ffffff;
   font-weight: 500;
   cursor: pointer;
 }

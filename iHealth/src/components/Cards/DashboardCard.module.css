@@ -1,37 +1,66 @@
-/* Scoatem liniuța de link și ne asigurăm că umple spațiul corect */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
+
 .cardLink {
-    text-decoration: none; 
-    display: block; 
+  text-decoration: none;
+  display: block;
+  height: 100%;
 }
 
-/* AICI punem magia de Flexbox, pentru că el conține imaginea și textul */
 .card {
-    display: flex;
-    flex-direction: column; /* Pune imaginea SUS și textul JOS */
-    align-items: center;    /* Le centrează pe mijloc */
-    justify-content: center;
-    gap: 15px;              /* Spațiul dintre iconiță și text */
-    
-    background-color: transparent;
-    border: 1px solid #000000;
-    border-radius: 12px;
-    padding: 2.5rem 2rem;
-    height: 100%;           /* Ajută cardurile să aibă aceeași înălțime */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+
+  background: rgba(15, 80, 50, 0.75);
+  border: 1.5px solid rgba(46, 204, 113, 0.25);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  height: 100%;
+  cursor: pointer;
+  
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 20px rgba(46, 204, 113, 0.08);
 }
 
-/* Iconița (am lăsat-o un pic mai mică, 200px s-ar putea să fie cam uriașă pe ecran, poți modifica) */
+.card:hover {
+  background: rgba(25, 110, 70, 0.9);
+  border-color: rgba(46, 204, 113, 0.45);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), 0 0 30px rgba(46, 204, 113, 0.2);
+}
+
+.card:active {
+  transform: translateY(-4px);
+}
+
 .cardIcon {
-    width: 150px;
-    height: 150px;
-    object-fit: contain; /* Păstrează proporțiile imaginii necropate */
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  filter: brightness(1.1) contrast(1.05);
+  transition: all 0.3s ease;
 }
 
-/* Textul */
+.card:hover .cardIcon {
+  transform: scale(1.08) rotate(2deg);
+  filter: brightness(1.2) contrast(1.1);
+}
+
 .cardText {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1rem;
-    color: #000000;
-    margin: 0;
-    letter-spacing: -0.3px;
-    text-align: center; 
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.3px;
+  text-align: center;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.card:hover .cardText {
+  color: #2ecc71;
+  font-size: 1.35rem;
+  letter-spacing: 0px;
 }

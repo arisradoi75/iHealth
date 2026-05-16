@@ -41,7 +41,7 @@ function Dashboard() {
                     
 
 
-                    const response = await fetch(`http://localhost:8080/api/patients/me`, {
+                    const response = await fetch(`http://localhost:8080/api/v1/users/me`, {
                         headers: {
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${token}`
@@ -72,24 +72,27 @@ function Dashboard() {
     
 
     return (
-        <>
-        <div>
-            <h1 className={style.title}>iHealth - A way to manage your health</h1>
-        </div>
-
-       <div className={style.cardPlacement}>
-            <DashboardCard title="Profile" icon="/assets/iHealthProfileIcon.svg" destination="/shared/Profile" />
-            <DashboardCard title="Appointments" icon="/assets/schedule.png" destination="/dashboard/Appointments" />
-            <DashboardCard title = "Recommendations" icon="/assets/heart.png" destination="/patient/Recommendations"/>
-            <DashboardCard title = "Medical Records" icon="/assets/medical-records.png" destination="/dashboard/MedicalRecords"/>
-            <DashboardCard title = "Prescriptions" icon="/assets/prescription.png" destination="/dashboard/Prescriptions"/>
-            <DashboardCard title = "Health Data" icon="/assets/health-data.png" destination="/dashboard/HealthData"/>
-            <Outlet />
-            <div>
-                <button onClick={handleLogout} className="logoutButton">Logout</button>
+        <div className={style.container}>
+            <div className={style.header}>
+                <h1 className={style.title}>iHealth</h1>
+                <p className={style.subtitle}>Manage your health, your way</p>
             </div>
-       </div>
-       </> 
+
+            <div className={style.cardPlacement}>
+                <DashboardCard title="Profile" icon="/assets/profile1-svgrepo-com.svg" destination="/shared/Profile" />
+                <DashboardCard title="Appointments" icon="/assets/schedule.png" destination="/dashboard/Appointments" />
+                <DashboardCard title="Recommendations" icon="/assets/write-svgrepo-com.svg" destination="/patient/Recommendations" />
+                <DashboardCard title="Medical Records" icon="/assets/profile-user-svgrepo-com.svg" destination="/patient/MedicalRecords" />
+                <DashboardCard title="Prescriptions" icon="/assets/medical-prescription-svgrepo-com.svg" destination="/dashboard/Prescriptions" />
+                <DashboardCard title="Health Data" icon="/assets/samsung-health-monitor-svgrepo-com.svg" destination="/dashboard/HealthData" />
+            </div>
+
+            <div className={style.logoutButtonContainer}>
+                <button onClick={handleLogout} className={style.logoutButton}>Logout</button>
+            </div>
+
+            <Outlet />
+        </div>
     );
 }
         
