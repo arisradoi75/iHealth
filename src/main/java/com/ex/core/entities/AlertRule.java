@@ -1,5 +1,6 @@
 package com.ex.core.entities;
 
+import com.ex.core.entities.enums.AlertCondition;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,16 +19,17 @@ public class AlertRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /*
-    aici se vor introduce variabilele care vor fii comune cu cele primite de la embededd
-    deci pe o perioada de timp vom lasa gol acest spatiu si urmeaza sa completam cu ce avem nevoie
-    *
-    *
-    *
-     */
+    @Column(nullable = false)
+    private String sensorType;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private AlertCondition condition;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Column(nullable = false)
+    private Double value;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 }
