@@ -140,6 +140,7 @@ public class AuthService {
                 .refreshToken(refreshToken.getRefreshToken())
                 .name(user.getName())
                 .email(user.getEmail())
+                .userType(user.getType())
                 .build();
     }
 

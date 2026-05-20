@@ -14,11 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/patients/recommendations")
 @RequiredArgsConstructor
+@CrossOrigin(value = "http://localhost:5173/")
 public class RecommendationController{
 
     private final RecommendationService recommendationService;
 
-    @PostMapping("/for-patient/{patientId}")
+    @PostMapping("/for-patient/{patientId}/doctor")
     @PreAuthorize("hasAuthority('DOCTOR')")
     public ResponseEntity<Void> addRecommendation(@PathVariable Long patientId, @RequestBody RecommendationRequestDTO request){
         recommendationService.addRecommendation(patientId, request);
@@ -26,7 +27,7 @@ public class RecommendationController{
     }
 
     @GetMapping("/for-patient/{patientId}")
-    @PreAuthorize("hasAnyAuthority('DOCTOR', 'PATIENT')")
+    @PreAuthorize("hasAuthority('PATIENT')")
     public ResponseEntity<?> getRecommendations(@PathVariable Long patientId) {
         List<RecommendationResponseDTO> recommendations = recommendationService.getRecommendationsForPatient(patientId);
         return ResponseEntity.ok(recommendationService.getRecommendationsForPatient(patientId));

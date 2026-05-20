@@ -1,5 +1,6 @@
 package com.ex.web.auth.services;
 
+import com.ex.web.auth.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -42,6 +43,16 @@ public class JwtService {
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         extraClaims = new HashMap<>(extraClaims);
         extraClaims.put("role", userDetails.getAuthorities());
+
+        if (userDetails instanceof User) {
+            extraClaims.put("userId", ((User) userDetails).getId());
+        }
+
+        if(userDetails instanceof User) {
+            extraClaims.put("user_role", ((User) userDetails).getType());
+        }
+
+
         return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername()).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + 25 * 100000)).signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
     }
 

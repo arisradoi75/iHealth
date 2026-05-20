@@ -24,14 +24,20 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Changed to Long for consistency
     private String name;
+
     @Column(unique = true)
     private String username;
+
     @Column(unique = true)
     @Email(message = "exemple123@exemple.com")
+
     private String email;
+
     private String password;
+
     @OneToOne(mappedBy = "user")
     private RefreshToken refreshToken;
+
     @Enumerated(EnumType.STRING)
     private TypeUser type;
 
