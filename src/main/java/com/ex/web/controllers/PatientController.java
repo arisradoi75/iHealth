@@ -19,7 +19,6 @@ import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/api/patients")
-@CrossOrigin("http//localhost:5173")
 @RequiredArgsConstructor
 @CrossOrigin(value = "http://localhost:5173/")
 public class PatientController {

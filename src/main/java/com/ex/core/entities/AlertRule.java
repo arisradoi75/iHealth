@@ -23,7 +23,7 @@ public class AlertRule {
     private String sensorType;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "`condition`", nullable = false)
     private AlertCondition condition;
 
     @Column(nullable = false)
