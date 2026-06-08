@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth.js";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
@@ -11,7 +11,7 @@ function Dashboard() {
     const navigate = useNavigate();
 
     
-    const [patientData, setPatientData] = React.useState({
+    const [patientData, setPatientData] = useState({
         name: "",
         bornDate: "",
         cnp: "",

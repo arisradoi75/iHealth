@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 
+
 export default function Recommendations() { 
     const { user } = useAuth();
     const navigate = useNavigate();
     const [recommendations, setRecommendations] = useState([]);
+
 
     let patientId = null;
 
@@ -16,13 +18,14 @@ export default function Recommendations() {
         patientId = decodedToken.userId;
     }
 
+   
     
     useEffect(() => {
 
         const fetchRecommendations = async () => {
             try {
 
-                const response = await fetch(`http://localhost:8080/api/patients/recommendations/for-patient/${patientId}`, {
+                const response = await fetch(`http://localhost:8080/api/patients/recommendations/for-patient/${user.patientId}`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${user.accessToken}`
