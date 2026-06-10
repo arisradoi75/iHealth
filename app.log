@@ -1,0 +1,541 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------------------< com:ex >-------------------------------
+[INFO] Building iHealth 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.4:run (default-cli) > test-compile @ ex >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ex ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.10.1:compile (default-compile) @ ex ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 66 source files to /Users/arisradoi/Desktop/iHealth/iHealth/target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ex ---
+[INFO] skip non existing resourceDirectory /Users/arisradoi/Desktop/iHealth/iHealth/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.10.1:testCompile (default-testCompile) @ ex ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /Users/arisradoi/Desktop/iHealth/iHealth/target/test-classes
+[INFO] 
+[INFO] <<< spring-boot:3.2.4:run (default-cli) < test-compile @ ex <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.4:run (default-cli) @ ex ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.4)
+
+2026-05-21T10:53:28.069+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.ex.IHealthApplication                : Starting IHealthApplication using Java 21.0.9 with PID 51371 (/Users/arisradoi/Desktop/iHealth/iHealth/target/classes started by arisradoi in /Users/arisradoi/Desktop/iHealth/iHealth)
+2026-05-21T10:53:28.072+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.ex.IHealthApplication                : No active profile set, falling back to 1 default profile: "default"
+2026-05-21T10:53:28.176+03:00  INFO 51371 --- [iHealth] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-05-21T10:53:28.177+03:00  INFO 51371 --- [iHealth] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-05-21T10:53:29.469+03:00  INFO 51371 --- [iHealth] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-21T10:53:29.649+03:00  INFO 51371 --- [iHealth] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 171 ms. Found 10 JPA repository interfaces.
+2026-05-21T10:53:29.797+03:00  INFO 51371 --- [iHealth] [  restartedMain] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2026-05-21T10:53:29.803+03:00  INFO 51371 --- [iHealth] [  restartedMain] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2026-05-21T10:53:30.607+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-21T10:53:30.619+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-21T10:53:30.619+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-05-21T10:53:30.663+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-21T10:53:30.664+03:00  INFO 51371 --- [iHealth] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2485 ms
+2026-05-21T10:53:30.816+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-21T10:53:30.967+03:00  INFO 51371 --- [iHealth] [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-05-21T10:53:31.016+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-21T10:53:31.231+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-21T10:53:31.253+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-21T10:53:34.034+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4f31bbad
+2026-05-21T10:53:34.036+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-21T10:53:34.947+03:00  WARN 51371 --- [iHealth] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-21T10:53:36.228+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-21T10:53:42.611+03:00  INFO 51371 --- [iHealth] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-21T10:53:44.019+03:00  WARN 51371 --- [iHealth] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-21T10:53:44.511+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@63a4c09, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5926ce20, org.springframework.security.web.context.SecurityContextHolderFilter@71c91fb1, org.springframework.security.web.header.HeaderWriterFilter@50715e7f, org.springframework.web.filter.CorsFilter@752c0a11, org.springframework.security.web.authentication.logout.LogoutFilter@479b183f, com.ex.web.auth.services.AuthFilterService@14b48232, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@314d6d77, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2b8bb4d0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@69446014, org.springframework.security.web.session.SessionManagementFilter@387e7377, org.springframework.security.web.access.ExceptionTranslationFilter@729daf61, org.springframework.security.web.access.intercept.AuthorizationFilter@2a8ea9bf]
+2026-05-21T10:53:44.963+03:00  WARN 51371 --- [iHealth] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2026-05-21T10:53:45.110+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-05-21T10:53:45.111+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.channel.PublishSubscribeChannel    : Channel 'iHealth.errorChannel' has 1 subscriber(s).
+2026-05-21T10:53:45.111+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2026-05-21T10:53:45.111+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Adding {message-handler:handler.serviceActivator} as a subscriber to the 'mqttInputChannel' channel
+2026-05-21T10:53:45.111+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.integration.channel.DirectChannel    : Channel 'iHealth.mqttInputChannel' has 1 subscriber(s).
+2026-05-21T10:53:45.111+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : started bean 'handler.serviceActivator'
+2026-05-21T10:53:45.453+03:00  INFO 51371 --- [iHealth] [  restartedMain] .m.i.MqttPahoMessageDrivenChannelAdapter : started bean 'inbound'; defined in: 'class path resource [com/ex/sv/config/MqttConfig.class]'; from source: 'com.ex.sv.config.MqttConfig.inbound()'
+2026-05-21T10:53:45.500+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-05-21T10:53:45.526+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.ex.IHealthApplication                : Started IHealthApplication in 17.932 seconds (process running for 18.583)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.type,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.type=?
+Hibernate: 
+    select
+        m1_0.id,
+        m1_0.nume,
+        m1_0.specializare,
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        rt1_0.token_id,
+        rt1_0.expiration_time,
+        rt1_0.refresh_token,
+        u1_0.type,
+        u1_0.username 
+    from
+        medic m1_0 
+    left join
+        users u1_0 
+            on u1_0.id=m1_0.user_id 
+    left join
+        refresh_token rt1_0 
+            on u1_0.id=rt1_0.user_id 
+    where
+        m1_0.user_id=?
+Hibernate: 
+    select
+        rt1_0.token_id,
+        rt1_0.expiration_time,
+        rt1_0.refresh_token,
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.type,
+        u1_0.username 
+    from
+        refresh_token rt1_0 
+    left join
+        users u1_0 
+            on u1_0.id=rt1_0.user_id 
+    where
+        rt1_0.user_id=?
+ADMIN account already exists.
+2026-05-21T10:54:03.960+03:00 ERROR 51371 --- [iHealth] [hServer_Backend] .m.i.MqttPahoMessageDrivenChannelAdapter : Lost connection: Connection lost
+2026-05-21T10:55:22.485+03:00  INFO 51371 --- [iHealth] [   File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-05-21T10:55:22.532+03:00 ERROR 51371 --- [iHealth] [       Thread-1] .m.i.MqttPahoMessageDrivenChannelAdapter : Exception while unsubscribing
+
+org.eclipse.paho.client.mqttv3.MqttException: Client is not connected
+	at org.eclipse.paho.client.mqttv3.internal.ExceptionHelper.createMqttException(ExceptionHelper.java:31) ~[org.eclipse.paho.client.mqttv3-1.2.5.jar:na]
+	at org.eclipse.paho.client.mqttv3.internal.ClientComms.sendNoWait(ClientComms.java:205) ~[org.eclipse.paho.client.mqttv3-1.2.5.jar:na]
+	at org.eclipse.paho.client.mqttv3.MqttAsyncClient.unsubscribe(MqttAsyncClient.java:1244) ~[org.eclipse.paho.client.mqttv3-1.2.5.jar:na]
+	at org.eclipse.paho.client.mqttv3.MqttAsyncClient.unsubscribe(MqttAsyncClient.java:1195) ~[org.eclipse.paho.client.mqttv3-1.2.5.jar:na]
+	at org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter.doStop(MqttPahoMessageDrivenChannelAdapter.java:215) ~[spring-integration-mqtt-6.2.3.jar:6.2.3]
+	at org.springframework.integration.endpoint.AbstractEndpoint.doStop(AbstractEndpoint.java:211) ~[spring-integration-core-6.2.3.jar:6.2.3]
+	at org.springframework.integration.endpoint.AbstractEndpoint.stop(AbstractEndpoint.java:192) ~[spring-integration-core-6.2.3.jar:6.2.3]
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStop(DefaultLifecycleProcessor.java:348) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.stop(DefaultLifecycleProcessor.java:487) ~[spring-context-6.1.5.jar:6.1.5]
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
+	at org.springframework.context.support.DefaultLifecycleProcessor.stopBeans(DefaultLifecycleProcessor.java:317) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.context.support.DefaultLifecycleProcessor.onClose(DefaultLifecycleProcessor.java:218) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1139) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174) ~[spring-boot-3.2.4.jar:3.2.4]
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1093) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.boot.devtools.restart.Restarter.stop(Restarter.java:308) ~[spring-boot-devtools-3.2.4.jar:3.2.4]
+	at org.springframework.boot.devtools.restart.Restarter.lambda$restart$1(Restarter.java:250) ~[spring-boot-devtools-3.2.4.jar:3.2.4]
+	at org.springframework.boot.devtools.restart.Restarter$LeakSafeThread.run(Restarter.java:607) ~[spring-boot-devtools-3.2.4.jar:3.2.4]
+
+2026-05-21T10:55:52.564+03:00  INFO 51371 --- [iHealth] [       Thread-1] .m.i.MqttPahoMessageDrivenChannelAdapter : stopped bean 'inbound'; defined in: 'class path resource [com/ex/sv/config/MqttConfig.class]'; from source: 'com.ex.sv.config.MqttConfig.inbound()'
+2026-05-21T10:55:52.570+03:00  INFO 51371 --- [iHealth] [       Thread-1] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-05-21T10:55:52.572+03:00  INFO 51371 --- [iHealth] [       Thread-1] o.s.i.channel.PublishSubscribeChannel    : Channel 'iHealth.errorChannel' has 0 subscriber(s).
+2026-05-21T10:55:52.572+03:00  INFO 51371 --- [iHealth] [       Thread-1] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2026-05-21T10:55:52.573+03:00  INFO 51371 --- [iHealth] [       Thread-1] o.s.i.endpoint.EventDrivenConsumer       : Removing {message-handler:handler.serviceActivator} as a subscriber to the 'mqttInputChannel' channel
+2026-05-21T10:55:52.573+03:00  INFO 51371 --- [iHealth] [       Thread-1] o.s.integration.channel.DirectChannel    : Channel 'iHealth.mqttInputChannel' has 0 subscriber(s).
+2026-05-21T10:55:52.573+03:00  INFO 51371 --- [iHealth] [       Thread-1] o.s.i.endpoint.EventDrivenConsumer       : stopped bean 'handler.serviceActivator'
+2026-05-21T10:55:52.586+03:00  INFO 51371 --- [iHealth] [       Thread-1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-21T10:55:52.600+03:00  INFO 51371 --- [iHealth] [       Thread-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-21T10:55:54.745+03:00  INFO 51371 --- [iHealth] [       Thread-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.4)
+
+2026-05-21T10:55:55.114+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.ex.IHealthApplication                : Starting IHealthApplication using Java 21.0.9 with PID 51371 (/Users/arisradoi/Desktop/iHealth/iHealth/target/classes started by arisradoi in /Users/arisradoi/Desktop/iHealth/iHealth)
+2026-05-21T10:55:55.118+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.ex.IHealthApplication                : No active profile set, falling back to 1 default profile: "default"
+2026-05-21T10:55:55.526+03:00  INFO 51371 --- [iHealth] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-21T10:55:55.565+03:00  INFO 51371 --- [iHealth] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 10 JPA repository interfaces.
+2026-05-21T10:55:55.700+03:00  INFO 51371 --- [iHealth] [  restartedMain] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2026-05-21T10:55:55.701+03:00  INFO 51371 --- [iHealth] [  restartedMain] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2026-05-21T10:55:55.941+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-05-21T10:55:55.946+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-21T10:55:55.946+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-05-21T10:55:55.965+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-21T10:55:55.965+03:00  INFO 51371 --- [iHealth] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 832 ms
+2026-05-21T10:55:56.022+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-21T10:55:56.026+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-21T10:55:56.034+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-21T10:55:56.035+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-05-21T10:55:59.507+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3882a740
+2026-05-21T10:55:59.509+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-05-21T10:55:59.757+03:00  WARN 51371 --- [iHealth] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-21T10:56:00.133+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-21T10:56:07.778+03:00  INFO 51371 --- [iHealth] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-21T10:56:08.254+03:00  WARN 51371 --- [iHealth] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-21T10:56:08.410+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3b349709, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@14450b07, org.springframework.security.web.context.SecurityContextHolderFilter@11973262, org.springframework.security.web.header.HeaderWriterFilter@628c7c89, org.springframework.web.filter.CorsFilter@a640ee3, org.springframework.security.web.authentication.logout.LogoutFilter@16b72d2d, com.ex.web.auth.services.AuthFilterService@402fe699, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5cc79db2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5daeda97, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@37863e2f, org.springframework.security.web.session.SessionManagementFilter@324a3387, org.springframework.security.web.access.ExceptionTranslationFilter@109ba0d2, org.springframework.security.web.access.intercept.AuthorizationFilter@5dac0e7e]
+2026-05-21T10:56:08.562+03:00  WARN 51371 --- [iHealth] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2026-05-21T10:56:08.637+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-05-21T10:56:08.637+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.channel.PublishSubscribeChannel    : Channel 'iHealth.errorChannel' has 1 subscriber(s).
+2026-05-21T10:56:08.637+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2026-05-21T10:56:08.637+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Adding {message-handler:handler.serviceActivator} as a subscriber to the 'mqttInputChannel' channel
+2026-05-21T10:56:08.637+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.integration.channel.DirectChannel    : Channel 'iHealth.mqttInputChannel' has 1 subscriber(s).
+2026-05-21T10:56:08.637+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : started bean 'handler.serviceActivator'
+2026-05-21T10:56:08.954+03:00  INFO 51371 --- [iHealth] [  restartedMain] .m.i.MqttPahoMessageDrivenChannelAdapter : started bean 'inbound'; defined in: 'class path resource [com/ex/sv/config/MqttConfig.class]'; from source: 'com.ex.sv.config.MqttConfig.inbound()'
+2026-05-21T10:56:13.977+03:00  INFO 51371 --- [iHealth] [  restartedMain] .m.i.MqttPahoMessageDrivenChannelAdapter : stopped bean 'inbound'; defined in: 'class path resource [com/ex/sv/config/MqttConfig.class]'; from source: 'com.ex.sv.config.MqttConfig.inbound()'
+2026-05-21T10:56:13.977+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-05-21T10:56:13.978+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.channel.PublishSubscribeChannel    : Channel 'iHealth.errorChannel' has 0 subscriber(s).
+2026-05-21T10:56:13.979+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2026-05-21T10:56:13.980+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Removing {message-handler:handler.serviceActivator} as a subscriber to the 'mqttInputChannel' channel
+2026-05-21T10:56:13.980+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.integration.channel.DirectChannel    : Channel 'iHealth.mqttInputChannel' has 0 subscriber(s).
+2026-05-21T10:56:13.980+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : stopped bean 'handler.serviceActivator'
+2026-05-21T10:56:13.981+03:00  WARN 51371 --- [iHealth] [  restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-05-21T10:56:13.985+03:00  INFO 51371 --- [iHealth] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-21T10:56:13.986+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2026-05-21T10:56:16.041+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2026-05-21T10:56:16.052+03:00  INFO 51371 --- [iHealth] [  restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-05-21T10:56:16.070+03:00 ERROR 51371 --- [iHealth] [  restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.4)
+
+2026-05-21T10:56:35.767+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.ex.IHealthApplication                : Starting IHealthApplication using Java 21.0.9 with PID 51371 (/Users/arisradoi/Desktop/iHealth/iHealth/target/classes started by arisradoi in /Users/arisradoi/Desktop/iHealth/iHealth)
+2026-05-21T10:56:35.767+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.ex.IHealthApplication                : No active profile set, falling back to 1 default profile: "default"
+2026-05-21T10:56:36.085+03:00  INFO 51371 --- [iHealth] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-21T10:56:36.116+03:00  INFO 51371 --- [iHealth] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 10 JPA repository interfaces.
+2026-05-21T10:56:36.158+03:00  INFO 51371 --- [iHealth] [  restartedMain] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2026-05-21T10:56:36.158+03:00  INFO 51371 --- [iHealth] [  restartedMain] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2026-05-21T10:56:36.291+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-21T10:56:36.293+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-21T10:56:36.293+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-05-21T10:56:36.304+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2026-05-21T10:56:36.304+03:00  INFO 51371 --- [iHealth] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 532 ms
+2026-05-21T10:56:36.362+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-21T10:56:36.366+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-21T10:56:36.372+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-21T10:56:36.373+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2026-05-21T10:56:39.119+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@57886c10
+2026-05-21T10:56:39.119+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2026-05-21T10:56:39.781+03:00  WARN 51371 --- [iHealth] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-21T10:56:40.026+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-21T10:56:46.702+03:00  INFO 51371 --- [iHealth] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-21T10:56:47.716+03:00  WARN 51371 --- [iHealth] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-21T10:56:47.901+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@174a7ee0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7f7f25bb, org.springframework.security.web.context.SecurityContextHolderFilter@46a1d311, org.springframework.security.web.header.HeaderWriterFilter@1a5a4f28, org.springframework.web.filter.CorsFilter@669cab2a, org.springframework.security.web.authentication.logout.LogoutFilter@2df8b4b6, com.ex.web.auth.services.AuthFilterService@5784b14f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@59eb7ee2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@110059f8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@e4eddb1, org.springframework.security.web.session.SessionManagementFilter@25da24e9, org.springframework.security.web.access.ExceptionTranslationFilter@25175847, org.springframework.security.web.access.intercept.AuthorizationFilter@3cba9018]
+2026-05-21T10:56:48.063+03:00  WARN 51371 --- [iHealth] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2026-05-21T10:56:48.128+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-05-21T10:56:48.128+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.channel.PublishSubscribeChannel    : Channel 'iHealth.errorChannel' has 1 subscriber(s).
+2026-05-21T10:56:48.128+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2026-05-21T10:56:48.128+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Adding {message-handler:handler.serviceActivator} as a subscriber to the 'mqttInputChannel' channel
+2026-05-21T10:56:48.128+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.integration.channel.DirectChannel    : Channel 'iHealth.mqttInputChannel' has 1 subscriber(s).
+2026-05-21T10:56:48.128+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : started bean 'handler.serviceActivator'
+2026-05-21T10:56:48.449+03:00  INFO 51371 --- [iHealth] [  restartedMain] .m.i.MqttPahoMessageDrivenChannelAdapter : started bean 'inbound'; defined in: 'class path resource [com/ex/sv/config/MqttConfig.class]'; from source: 'com.ex.sv.config.MqttConfig.inbound()'
+2026-05-21T10:56:48.457+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-05-21T10:56:48.464+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.ex.IHealthApplication                : Started IHealthApplication in 12.763 seconds (process running for 201.521)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.type,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.type=?
+Hibernate: 
+    select
+        m1_0.id,
+        m1_0.nume,
+        m1_0.specializare,
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        rt1_0.token_id,
+        rt1_0.expiration_time,
+        rt1_0.refresh_token,
+        u1_0.type,
+        u1_0.username 
+    from
+        medic m1_0 
+    left join
+        users u1_0 
+            on u1_0.id=m1_0.user_id 
+    left join
+        refresh_token rt1_0 
+            on u1_0.id=rt1_0.user_id 
+    where
+        m1_0.user_id=?
+Hibernate: 
+    select
+        rt1_0.token_id,
+        rt1_0.expiration_time,
+        rt1_0.refresh_token,
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.type,
+        u1_0.username 
+    from
+        refresh_token rt1_0 
+    left join
+        users u1_0 
+            on u1_0.id=rt1_0.user_id 
+    where
+        rt1_0.user_id=?
+ADMIN account already exists.
+2026-05-21T10:56:49.345+03:00  INFO 51371 --- [iHealth] [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-05-21T10:56:52.865+03:00 ERROR 51371 --- [iHealth] [hServer_Backend] .m.i.MqttPahoMessageDrivenChannelAdapter : Lost connection: Connection lost
+2026-05-21T10:57:07.669+03:00  INFO 51371 --- [iHealth] [   File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-05-21T10:57:07.683+03:00 ERROR 51371 --- [iHealth] [      Thread-10] .m.i.MqttPahoMessageDrivenChannelAdapter : Exception while unsubscribing
+
+org.eclipse.paho.client.mqttv3.MqttException: Client is not connected
+	at org.eclipse.paho.client.mqttv3.internal.ExceptionHelper.createMqttException(ExceptionHelper.java:31) ~[org.eclipse.paho.client.mqttv3-1.2.5.jar:na]
+	at org.eclipse.paho.client.mqttv3.internal.ClientComms.sendNoWait(ClientComms.java:205) ~[org.eclipse.paho.client.mqttv3-1.2.5.jar:na]
+	at org.eclipse.paho.client.mqttv3.MqttAsyncClient.unsubscribe(MqttAsyncClient.java:1244) ~[org.eclipse.paho.client.mqttv3-1.2.5.jar:na]
+	at org.eclipse.paho.client.mqttv3.MqttAsyncClient.unsubscribe(MqttAsyncClient.java:1195) ~[org.eclipse.paho.client.mqttv3-1.2.5.jar:na]
+	at org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter.doStop(MqttPahoMessageDrivenChannelAdapter.java:215) ~[spring-integration-mqtt-6.2.3.jar:6.2.3]
+	at org.springframework.integration.endpoint.AbstractEndpoint.doStop(AbstractEndpoint.java:211) ~[spring-integration-core-6.2.3.jar:6.2.3]
+	at org.springframework.integration.endpoint.AbstractEndpoint.stop(AbstractEndpoint.java:192) ~[spring-integration-core-6.2.3.jar:6.2.3]
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStop(DefaultLifecycleProcessor.java:348) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.stop(DefaultLifecycleProcessor.java:487) ~[spring-context-6.1.5.jar:6.1.5]
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
+	at org.springframework.context.support.DefaultLifecycleProcessor.stopBeans(DefaultLifecycleProcessor.java:317) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.context.support.DefaultLifecycleProcessor.onClose(DefaultLifecycleProcessor.java:218) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1139) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174) ~[spring-boot-3.2.4.jar:3.2.4]
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1093) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.boot.devtools.restart.Restarter.stop(Restarter.java:308) ~[spring-boot-devtools-3.2.4.jar:3.2.4]
+	at org.springframework.boot.devtools.restart.Restarter.lambda$restart$1(Restarter.java:250) ~[spring-boot-devtools-3.2.4.jar:3.2.4]
+	at org.springframework.boot.devtools.restart.Restarter$LeakSafeThread.run(Restarter.java:607) ~[spring-boot-devtools-3.2.4.jar:3.2.4]
+
+2026-05-21T10:57:37.695+03:00  INFO 51371 --- [iHealth] [      Thread-10] .m.i.MqttPahoMessageDrivenChannelAdapter : stopped bean 'inbound'; defined in: 'class path resource [com/ex/sv/config/MqttConfig.class]'; from source: 'com.ex.sv.config.MqttConfig.inbound()'
+2026-05-21T10:57:37.703+03:00  INFO 51371 --- [iHealth] [      Thread-10] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-05-21T10:57:37.704+03:00  INFO 51371 --- [iHealth] [      Thread-10] o.s.i.channel.PublishSubscribeChannel    : Channel 'iHealth.errorChannel' has 0 subscriber(s).
+2026-05-21T10:57:37.704+03:00  INFO 51371 --- [iHealth] [      Thread-10] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2026-05-21T10:57:37.704+03:00  INFO 51371 --- [iHealth] [      Thread-10] o.s.i.endpoint.EventDrivenConsumer       : Removing {message-handler:handler.serviceActivator} as a subscriber to the 'mqttInputChannel' channel
+2026-05-21T10:57:37.705+03:00  INFO 51371 --- [iHealth] [      Thread-10] o.s.integration.channel.DirectChannel    : Channel 'iHealth.mqttInputChannel' has 0 subscriber(s).
+2026-05-21T10:57:37.705+03:00  INFO 51371 --- [iHealth] [      Thread-10] o.s.i.endpoint.EventDrivenConsumer       : stopped bean 'handler.serviceActivator'
+2026-05-21T10:57:37.715+03:00  INFO 51371 --- [iHealth] [      Thread-10] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-21T10:57:37.718+03:00  INFO 51371 --- [iHealth] [      Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2026-05-21T10:57:40.305+03:00  INFO 51371 --- [iHealth] [      Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.4)
+
+2026-05-21T10:57:40.814+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.ex.IHealthApplication                : Starting IHealthApplication using Java 21.0.9 with PID 51371 (/Users/arisradoi/Desktop/iHealth/iHealth/target/classes started by arisradoi in /Users/arisradoi/Desktop/iHealth/iHealth)
+2026-05-21T10:57:40.820+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.ex.IHealthApplication                : No active profile set, falling back to 1 default profile: "default"
+2026-05-21T10:57:41.203+03:00  INFO 51371 --- [iHealth] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-21T10:57:41.251+03:00  INFO 51371 --- [iHealth] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 46 ms. Found 10 JPA repository interfaces.
+2026-05-21T10:57:41.297+03:00  INFO 51371 --- [iHealth] [  restartedMain] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2026-05-21T10:57:41.298+03:00  INFO 51371 --- [iHealth] [  restartedMain] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2026-05-21T10:57:41.568+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-05-21T10:57:41.574+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-21T10:57:41.574+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-05-21T10:57:41.600+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2026-05-21T10:57:41.601+03:00  INFO 51371 --- [iHealth] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 758 ms
+2026-05-21T10:57:41.668+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-21T10:57:41.676+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-21T10:57:41.684+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-21T10:57:41.685+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2026-05-21T10:57:44.748+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3e49072e
+2026-05-21T10:57:44.750+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2026-05-21T10:57:44.956+03:00  WARN 51371 --- [iHealth] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-21T10:57:45.463+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-21T10:57:53.146+03:00  INFO 51371 --- [iHealth] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-21T10:57:53.623+03:00  WARN 51371 --- [iHealth] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-21T10:57:53.916+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@42c9fb93, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@12d661a4, org.springframework.security.web.context.SecurityContextHolderFilter@5220481f, org.springframework.security.web.header.HeaderWriterFilter@4c13ab10, org.springframework.web.filter.CorsFilter@5da5724b, org.springframework.security.web.authentication.logout.LogoutFilter@46e2d5a3, com.ex.web.auth.services.AuthFilterService@48f606f1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@589ec0cf, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@904bbe7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@41c0101, org.springframework.security.web.session.SessionManagementFilter@4d2a5c65, org.springframework.security.web.access.ExceptionTranslationFilter@2705a622, org.springframework.security.web.access.intercept.AuthorizationFilter@44a3a866]
+2026-05-21T10:57:54.466+03:00  WARN 51371 --- [iHealth] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2026-05-21T10:57:54.546+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-05-21T10:57:54.546+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.channel.PublishSubscribeChannel    : Channel 'iHealth.errorChannel' has 1 subscriber(s).
+2026-05-21T10:57:54.547+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2026-05-21T10:57:54.547+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Adding {message-handler:handler.serviceActivator} as a subscriber to the 'mqttInputChannel' channel
+2026-05-21T10:57:54.547+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.integration.channel.DirectChannel    : Channel 'iHealth.mqttInputChannel' has 1 subscriber(s).
+2026-05-21T10:57:54.547+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : started bean 'handler.serviceActivator'
+2026-05-21T10:57:54.872+03:00  INFO 51371 --- [iHealth] [  restartedMain] .m.i.MqttPahoMessageDrivenChannelAdapter : started bean 'inbound'; defined in: 'class path resource [com/ex/sv/config/MqttConfig.class]'; from source: 'com.ex.sv.config.MqttConfig.inbound()'
+2026-05-21T10:57:59.894+03:00  INFO 51371 --- [iHealth] [  restartedMain] .m.i.MqttPahoMessageDrivenChannelAdapter : stopped bean 'inbound'; defined in: 'class path resource [com/ex/sv/config/MqttConfig.class]'; from source: 'com.ex.sv.config.MqttConfig.inbound()'
+2026-05-21T10:57:59.895+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-05-21T10:57:59.895+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.channel.PublishSubscribeChannel    : Channel 'iHealth.errorChannel' has 0 subscriber(s).
+2026-05-21T10:57:59.895+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2026-05-21T10:57:59.895+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Removing {message-handler:handler.serviceActivator} as a subscriber to the 'mqttInputChannel' channel
+2026-05-21T10:57:59.895+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.integration.channel.DirectChannel    : Channel 'iHealth.mqttInputChannel' has 0 subscriber(s).
+2026-05-21T10:57:59.895+03:00  INFO 51371 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : stopped bean 'handler.serviceActivator'
+2026-05-21T10:57:59.895+03:00  WARN 51371 --- [iHealth] [  restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-05-21T10:57:59.900+03:00  INFO 51371 --- [iHealth] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-21T10:57:59.903+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2026-05-21T10:58:03.820+03:00  INFO 51371 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2026-05-21T10:58:03.862+03:00  INFO 51371 --- [iHealth] [  restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-05-21T10:58:03.872+03:00 ERROR 51371 --- [iHealth] [  restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+1T10:57:08.916+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-05-21T10:57:08.938+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2026-05-21T10:57:08.939+03:00  INFO 50907 --- [iHealth] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 802 ms
+2026-05-21T10:57:09.427+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-21T10:57:09.445+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-21T10:57:09.477+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-21T10:57:09.489+03:00  INFO 50907 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2026-05-21T10:57:12.301+03:00  INFO 50907 --- [iHealth] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection com.mysql.cj.jdbc.ConnectionImpl@9ac1ee3
+2026-05-21T10:57:12.307+03:00  INFO 50907 --- [iHealth] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2026-05-21T10:57:12.535+03:00  WARN 50907 --- [iHealth] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-21T10:57:13.147+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-21T10:57:19.961+03:00  INFO 50907 --- [iHealth] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-21T10:57:20.574+03:00  WARN 50907 --- [iHealth] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-21T10:57:20.711+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1f75b1c5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@55bbc91f, org.springframework.security.web.context.SecurityContextHolderFilter@2f4fdad8, org.springframework.security.web.header.HeaderWriterFilter@78ab163f, org.springframework.web.filter.CorsFilter@8b78bcd, org.springframework.security.web.authentication.logout.LogoutFilter@7de1cfd9, com.ex.web.auth.services.AuthFilterService@585fa41, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@104e4ee0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@30f4b838, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2d2fc3b7, org.springframework.security.web.session.SessionManagementFilter@3675568e, org.springframework.security.web.access.ExceptionTranslationFilter@35c14fee, org.springframework.security.web.access.intercept.AuthorizationFilter@6c193498]
+2026-05-21T10:57:21.331+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-05-21T10:57:21.422+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-05-21T10:57:21.424+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.s.i.channel.PublishSubscribeChannel    : Channel 'iHealth.errorChannel' has 1 subscriber(s).
+2026-05-21T10:57:21.424+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2026-05-21T10:57:21.424+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : Adding {message-handler:handler.serviceActivator} as a subscriber to the 'mqttInputChannel' channel
+2026-05-21T10:57:21.424+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.s.integration.channel.DirectChannel    : Channel 'iHealth.mqttInputChannel' has 1 subscriber(s).
+2026-05-21T10:57:21.424+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.s.i.endpoint.EventDrivenConsumer       : started bean 'handler.serviceActivator'
+2026-05-21T10:57:21.761+03:00  INFO 50907 --- [iHealth] [  restartedMain] .m.i.MqttPahoMessageDrivenChannelAdapter : started bean 'inbound'; defined in: 'class path resource [com/ex/sv/config/MqttConfig.class]'; from source: 'com.ex.sv.config.MqttConfig.inbound()'
+2026-05-21T10:57:21.788+03:00  INFO 50907 --- [iHealth] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path ''
+2026-05-21T10:57:21.801+03:00  INFO 50907 --- [iHealth] [  restartedMain] com.ex.IHealthApplication                : Started IHealthApplication in 13.889 seconds (process running for 326.944)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.type,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.type=?
+Hibernate: 
+    select
+        m1_0.id,
+        m1_0.nume,
+        m1_0.specializare,
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        rt1_0.token_id,
+        rt1_0.expiration_time,
+        rt1_0.refresh_token,
+        u1_0.type,
+        u1_0.username 
+    from
+        medic m1_0 
+    left join
+        users u1_0 
+            on u1_0.id=m1_0.user_id 
+    left join
+        refresh_token rt1_0 
+            on u1_0.id=rt1_0.user_id 
+    where
+        m1_0.user_id=?
+Hibernate: 
+    select
+        rt1_0.token_id,
+        rt1_0.expiration_time,
+        rt1_0.refresh_token,
+        u1_0.id,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.type,
+        u1_0.username 
+    from
+        refresh_token rt1_0 
+    left join
+        users u1_0 
+            on u1_0.id=rt1_0.user_id 
+    where
+        rt1_0.user_id=?
+ADMIN account already exists.
+2026-05-21T10:57:22.782+03:00  INFO 50907 --- [iHealth] [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-05-21T10:57:27.081+03:00 ERROR 50907 --- [iHealth] [hServer_Backend] .m.i.MqttPahoMessageDrivenChannelAdapter : Lost connection: Connection lost
+2026-05-21T10:59:40.238+03:00 ERROR 50907 --- [iHealth] [ionShutdownHook] .m.i.MqttPahoMessageDrivenChannelAdapter : Exception while unsubscribing
+
+org.eclipse.paho.client.mqttv3.MqttException: Client is not connected
+	at org.eclipse.paho.client.mqttv3.internal.ExceptionHelper.createMqttException(ExceptionHelper.java:31) ~[org.eclipse.paho.client.mqttv3-1.2.5.jar:na]
+	at org.eclipse.paho.client.mqttv3.internal.ClientComms.sendNoWait(ClientComms.java:205) ~[org.eclipse.paho.client.mqttv3-1.2.5.jar:na]
+	at org.eclipse.paho.client.mqttv3.MqttAsyncClient.unsubscribe(MqttAsyncClient.java:1244) ~[org.eclipse.paho.client.mqttv3-1.2.5.jar:na]
+	at org.eclipse.paho.client.mqttv3.MqttAsyncClient.unsubscribe(MqttAsyncClient.java:1195) ~[org.eclipse.paho.client.mqttv3-1.2.5.jar:na]
+	at org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter.doStop(MqttPahoMessageDrivenChannelAdapter.java:215) ~[spring-integration-mqtt-6.2.3.jar:6.2.3]
+	at org.springframework.integration.endpoint.AbstractEndpoint.doStop(AbstractEndpoint.java:211) ~[spring-integration-core-6.2.3.jar:6.2.3]
+	at org.springframework.integration.endpoint.AbstractEndpoint.stop(AbstractEndpoint.java:192) ~[spring-integration-core-6.2.3.jar:6.2.3]
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStop(DefaultLifecycleProcessor.java:348) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.stop(DefaultLifecycleProcessor.java:487) ~[spring-context-6.1.5.jar:6.1.5]
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
+	at org.springframework.context.support.DefaultLifecycleProcessor.stopBeans(DefaultLifecycleProcessor.java:317) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.context.support.DefaultLifecycleProcessor.onClose(DefaultLifecycleProcessor.java:218) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1139) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174) ~[spring-boot-3.2.4.jar:3.2.4]
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1093) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145) ~[spring-boot-3.2.4.jar:3.2.4]
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114) ~[spring-boot-3.2.4.jar:3.2.4]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-05-21T11:00:10.249+03:00  INFO 50907 --- [iHealth] [ionShutdownHook] .m.i.MqttPahoMessageDrivenChannelAdapter : stopped bean 'inbound'; defined in: 'class path resource [com/ex/sv/config/MqttConfig.class]'; from source: 'com.ex.sv.config.MqttConfig.inbound()'
+2026-05-21T11:00:10.250+03:00  INFO 50907 --- [iHealth] [ionShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-05-21T11:00:10.250+03:00  INFO 50907 --- [iHealth] [ionShutdownHook] o.s.i.channel.PublishSubscribeChannel    : Channel 'iHealth.errorChannel' has 0 subscriber(s).
+2026-05-21T11:00:10.250+03:00  INFO 50907 --- [iHealth] [ionShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2026-05-21T11:00:10.250+03:00  INFO 50907 --- [iHealth] [ionShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : Removing {message-handler:handler.serviceActivator} as a subscriber to the 'mqttInputChannel' channel
+2026-05-21T11:00:10.250+03:00  INFO 50907 --- [iHealth] [ionShutdownHook] o.s.integration.channel.DirectChannel    : Channel 'iHealth.mqttInputChannel' has 0 subscriber(s).
+2026-05-21T11:00:10.250+03:00  INFO 50907 --- [iHealth] [ionShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : stopped bean 'handler.serviceActivator'
+2026-05-21T11:00:10.255+03:00  INFO 50907 --- [iHealth] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-21T11:00:10.259+03:00  INFO 50907 --- [iHealth] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2026-05-21T11:00:13.752+03:00  INFO 50907 --- [iHealth] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.

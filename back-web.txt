@@ -1,0 +1,4890 @@
+
+===== FILE: ./pom.xml =====
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version>
+        <version>3.2.4</version>
+        <relativePath/> </parent>
+        <relativePath/> </parent>
+    <groupId>com</groupId>
+    <groupId>com</groupId>
+    <artifactId>ex</artifactId>
+    <artifactId>ex</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>iHealth</name>
+    <name>iHealth</name>
+    <description>iHealth</description>
+    <description>iHealth</description>
+    <url/>
+    <url/>
+    <licenses>
+    <licenses>
+        <license/>
+        <license/>
+    </licenses>
+    </licenses>
+    <developers>
+    <developers>
+        <developer/>
+        <developer/>
+    </developers>
+    </developers>
+    <scm>
+    <scm>
+        <connection/>
+        <connection/>
+        <developerConnection/>
+        <developerConnection/>
+        <tag/>
+        <tag/>
+        <url/>
+        <url/>
+    </scm>
+    </scm>
+    <properties>
+    <properties>
+        <java.version>17</java.version>
+        <java.version>17</java.version>
+    </properties>
+    </properties>
+
+
+    <dependencies>
+    <dependencies>
+        <dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        </dependency>
+        <dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        </dependency>
+        <dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        </dependency>
+        <dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        </dependency>
+        <dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <scope>runtime</scope>
+            <optional>true</optional>
+            <optional>true</optional>
+        </dependency>
+        </dependency>
+        <dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <optional>true</optional>
+        </dependency>
+        </dependency>
+
+
+        <dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+            <scope>runtime</scope>
+        </dependency>
+        </dependency>
+
+
+        <dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+            <version>0.11.5</version>
+        </dependency>
+        </dependency>
+        <dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+            <scope>runtime</scope>
+        </dependency>
+        </dependency>
+        <dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+            <scope>runtime</scope>
+        </dependency>
+        </dependency>
+
+
+        <dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-integration</artifactId>
+            <artifactId>spring-boot-starter-integration</artifactId>
+        </dependency>
+        </dependency>
+        <dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-mqtt</artifactId>
+            <artifactId>spring-integration-mqtt</artifactId>
+        </dependency>
+        </dependency>
+
+
+        <dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        </dependency>
+        <dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.3.0</version>
+            <version>2.3.0</version>
+        </dependency>
+        </dependency>
+
+
+        <dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <scope>test</scope>
+        </dependency>
+        </dependency>
+        <dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+            <scope>test</scope>
+        </dependency>
+        </dependency>
+    </dependencies>
+    </dependencies>
+
+
+    <build>
+    <build>
+        <plugins>
+        <plugins>
+            <plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                <configuration>
+                    <annotationProcessorPaths>
+                    <annotationProcessorPaths>
+                        <path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <artifactId>lombok</artifactId>
+                        </path>
+                        </path>
+                    </annotationProcessorPaths>
+                    </annotationProcessorPaths>
+                </configuration>
+                </configuration>
+            </plugin>
+            </plugin>
+            <plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                <configuration>
+                    <excludes>
+                    <excludes>
+                        <exclude>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                        </exclude>
+                    </excludes>
+                    </excludes>
+                </configuration>
+                </configuration>
+            </plugin>
+            </plugin>
+        </plugins>
+        </plugins>
+    </build>
+    </build>
+</project></project>
+
+===== FILE: ./src/main/java/com/ex/IHealthApplication.java =====
+
+package com.ex;
+package com.ex;
+
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+
+@SpringBootApplication
+@SpringBootApplication
+public class IHealthApplication {
+public class IHealthApplication {
+
+
+         public static void main(String[] args) {
+         public static void main(String[] args) {
+        SpringApplication.run(IHealthApplication.class, args);
+        SpringApplication.run(IHealthApplication.class, args);
+    }
+    }
+
+
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/entities/Address.java =====
+
+package com.ex.core.entities;
+package com.ex.core.entities;
+
+
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+@Embeddable
+@Embeddable
+@AllArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@NoArgsConstructor
+@Data
+@Data
+public class Address {
+public class Address {
+    private String country;
+    private String country;
+    private String county;
+    private String county;
+    private String city;
+    private String city;
+    private String street;
+    private String street;
+    private String zipCode;
+    private String zipCode;
+    private String number;
+    private String number;
+}}
+
+===== FILE: ./src/main/java/com/ex/core/entities/AlertHistory.java =====
+
+package com.ex.core.entities;
+package com.ex.core.entities;
+
+
+import jakarta.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+import java.time.LocalDateTime;
+import java.time.LocalDateTime;
+
+
+@Entity
+@Entity
+@Table(name = "alert_history")
+@Table(name = "alert_history")
+@Data
+@Data
+@Builder
+@Builder
+@NoArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@AllArgsConstructor
+public class AlertHistory {
+public class AlertHistory {
+
+
+    @Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long id;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "patient_id", nullable = false)
+    private Patient patient;
+    private Patient patient;
+
+
+    @Column(nullable = false)
+    @Column(nullable = false)
+    private String details;
+    private String details;
+
+
+    @Column(nullable = false)
+    @Column(nullable = false)
+    private LocalDateTime triggeredAt;
+    private LocalDateTime triggeredAt;
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/entities/AlertRule.java =====
+
+package com.ex.core.entities;
+package com.ex.core.entities;
+
+
+import com.ex.core.entities.enums.AlertCondition;
+import com.ex.core.entities.enums.AlertCondition;
+import jakarta.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+@Entity
+@Entity
+@Table(name = "alert_rule")
+@Table(name = "alert_rule")
+@Data
+@Data
+@NoArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@AllArgsConstructor
+@Builder
+@Builder
+public class AlertRule {
+public class AlertRule {
+
+
+    @Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long id;
+
+
+    @Column(nullable = false)
+    @Column(nullable = false)
+    private String sensorType;
+    private String sensorType;
+
+
+    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "`condition`", nullable = false)
+    @Column(name = "`condition`", nullable = false)
+    private AlertCondition condition;
+    private AlertCondition condition;
+
+
+    @Column(nullable = false)
+    @Column(nullable = false)
+    private Double value;
+    private Double value;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "patient_id", nullable = false)
+    private Patient patient;
+    private Patient patient;
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/entities/Medic.java =====
+
+package com.ex.core.entities;
+package com.ex.core.entities;
+
+
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import jakarta.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+@Table(name = "medic")
+@Table(name = "medic")
+@NoArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@AllArgsConstructor
+@Builder
+@Builder
+@Data
+@Data
+@Entity
+@Entity
+public class Medic {
+public class Medic {
+
+
+    @Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long id;
+
+
+    private String nume;
+    private String nume;
+    private String specializare;
+    private String specializare;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+    private User user;
+
+
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/entities/MedicalEvent.java =====
+
+package com.ex.core.entities;
+package com.ex.core.entities;
+
+
+import com.ex.core.entities.enums.EventType;
+import com.ex.core.entities.enums.EventType;
+import jakarta.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+import java.time.LocalDate;
+import java.time.LocalDate;
+
+
+@Entity
+@Entity
+@Table(name = "medical_event") // Am păstrat numele tabelului, poate fi schimbat în medical_record dacă dorești
+@Table(name = "medical_event") // Am păstrat numele tabelului, poate fi schimbat în medical_record dacă dorești
+@Data
+@Data
+@NoArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@AllArgsConstructor
+@Builder
+@Builder
+public class MedicalEvent {
+public class MedicalEvent {
+
+
+    @Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long id;
+
+
+    private LocalDate eventData;
+    private LocalDate eventData;
+
+
+    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    private EventType eventType;
+    private EventType eventType;
+
+
+    private String details;
+    private String details;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "patient_id", nullable = false)
+    private Patient patient;
+    private Patient patient;
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/entities/Patient.java =====
+
+package com.ex.core.entities;
+package com.ex.core.entities;
+
+
+import com.ex.core.entities.enums.Gender;
+import com.ex.core.entities.enums.Gender;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import jakarta.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+import java.time.LocalDate;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.List;
+
+
+@Entity
+@Entity
+@Table(name = "patient")
+@Table(name = "patient")
+@NoArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@AllArgsConstructor
+@Builder
+@Builder
+@Data
+@Data
+public class Patient {
+public class Patient {
+    @Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long id;
+
+
+    private String name;
+    private String name;
+    private LocalDate bornDate;
+    private LocalDate bornDate;
+
+
+    @Column(unique = true)
+    @Column(unique = true)
+    private String cnp;
+    private String cnp;
+
+
+    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+    private Gender gender;
+
+
+    @Embedded
+    @Embedded
+    private Address address;
+    private Address address;
+
+
+    @Column(unique = true)
+    @Column(unique = true)
+    private String phone;
+    private String phone;
+
+
+    private String email;
+    private String email;
+    private String profesion;
+    private String profesion;
+    private String job;
+    private String job;
+
+
+    private String generalMedicalHistory;
+    private String generalMedicalHistory;
+    private String knownAllergies;
+    private String knownAllergies;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+    private User user;
+
+
+
+
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<MedicalEvent> medicalEvents;
+    private List<MedicalEvent> medicalEvents;
+
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AlertRule> alertRules;
+    private List<AlertRule> alertRules;
+
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AlertHistory> alertHistories;
+    private List<AlertHistory> alertHistories;
+
+
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/entities/Recommendation.java =====
+
+package com.ex.core.entities;
+package com.ex.core.entities;
+import com.ex.core.entities.enums.RecommendationType;
+import com.ex.core.entities.enums.RecommendationType;
+import jakarta.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+import java.time.LocalDate;
+import java.time.LocalDate;
+
+
+@Entity
+@Entity
+@Table(name = "recommendation")
+@Table(name = "recommendation")
+@Data
+@Data
+@NoArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@AllArgsConstructor
+@Builder
+@Builder
+public class Recommendation {
+public class Recommendation {
+
+
+    @Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long id;
+
+
+    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    private RecommendationType recommendationType;
+    private RecommendationType recommendationType;
+
+
+    @Column(nullable = false)
+    @Column(nullable = false)
+    private String details;
+    private String details;
+
+
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "patient_id", nullable = false)
+    private Patient patient;
+    private Patient patient;
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/entities/TelemetryMeasurement.java =====
+
+package com.ex.core.entities;
+package com.ex.core.entities;
+
+
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import jakarta.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+import java.time.LocalDateTime;
+import java.time.LocalDateTime;
+
+
+@Entity
+@Entity
+@Table(name = "telemetry_measurements")
+@Table(name = "telemetry_measurements")
+@Data
+@Data
+@Builder
+@Builder
+@NoArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@AllArgsConstructor
+public class TelemetryMeasurement {
+public class TelemetryMeasurement {
+
+
+    @Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long id;
+
+
+    @ManyToOne
+    @ManyToOne
+    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "patient_id", nullable = false)
+    private Patient patient;
+    private Patient patient;
+
+
+    @Column(nullable = false)
+    @Column(nullable = false)
+    private String sensorType;
+    private String sensorType;
+
+
+    private Double value;
+    private Double value;
+
+
+    @Lob
+    @Lob
+    private String ecgData;
+    private String ecgData;
+
+
+    @Column(nullable = false)
+    @Column(nullable = false)
+    private LocalDateTime timestamp;
+    private LocalDateTime timestamp;
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/entities/enums/AlertCondition.java =====
+
+package com.ex.core.entities.enums;
+package com.ex.core.entities.enums;
+
+
+public enum AlertCondition {
+public enum AlertCondition {
+    GREATER_THAN,
+    GREATER_THAN,
+    LESS_THAN,
+    LESS_THAN,
+    EQUALS
+    EQUALS
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/entities/enums/EventType.java =====
+
+package com.ex.core.entities.enums;
+package com.ex.core.entities.enums;
+
+
+public enum EventType {
+public enum EventType {
+    CONSULTATION,
+    CONSULTATION,
+    ANALYSIS_RESULT,
+    ANALYSIS_RESULT,
+    TELEMETRY_DATA,     // Date primite de la senzori
+    TELEMETRY_DATA,     // Date primite de la senzori
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/entities/enums/Gender.java =====
+
+package com.ex.core.entities.enums;
+package com.ex.core.entities.enums;
+
+
+public enum Gender {
+public enum Gender {
+    MALE,
+    MALE,
+    FEMALE
+    FEMALE
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/entities/enums/RecommendationType.java =====
+
+package com.ex.core.entities.enums;
+package com.ex.core.entities.enums;
+
+
+public enum RecommendationType {
+public enum RecommendationType {
+    bicicleta,
+    bicicleta,
+    inot,
+    inot,
+    plimbare,
+    plimbare,
+    fructe,
+    fructe,
+    legume,
+    legume,
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/repositories/AlertHistoryRepository.java =====
+
+package com.ex.core.repositories;
+package com.ex.core.repositories;
+
+
+import com.ex.core.entities.AlertHistory;
+import com.ex.core.entities.AlertHistory;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Repository;
+
+
+@Repository
+@Repository
+public interface AlertHistoryRepository extends JpaRepository<AlertHistory, Long> {
+public interface AlertHistoryRepository extends JpaRepository<AlertHistory, Long> {
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/repositories/AlertRepository.java =====
+
+package com.ex.core.repositories;
+package com.ex.core.repositories;
+
+
+import com.ex.core.entities.AlertRule;
+import com.ex.core.entities.AlertRule;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+public interface AlertRepository extends JpaRepository<AlertRule, Long> {
+public interface AlertRepository extends JpaRepository<AlertRule, Long> {
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/repositories/AlertRuleRepository.java =====
+
+package com.ex.core.repositories;
+package com.ex.core.repositories;
+
+
+import com.ex.core.entities.AlertRule;
+import com.ex.core.entities.AlertRule;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Repository;
+
+
+import java.util.List;
+import java.util.List;
+
+
+@Repository
+@Repository
+public interface AlertRuleRepository extends JpaRepository<AlertRule, Long> {
+public interface AlertRuleRepository extends JpaRepository<AlertRule, Long> {
+    List<AlertRule> findByPatientIdAndSensorType(Long patientId, String sensorType);
+    List<AlertRule> findByPatientIdAndSensorType(Long patientId, String sensorType);
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/repositories/MedicRepository.java =====
+
+package com.ex.core.repositories;
+package com.ex.core.repositories;
+
+
+import com.ex.core.entities.Medic;
+import com.ex.core.entities.Medic;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Repository;
+
+
+import java.util.Optional;
+import java.util.Optional;
+
+
+@Repository
+@Repository
+public interface MedicRepository extends JpaRepository<Medic, Long> {
+public interface MedicRepository extends JpaRepository<Medic, Long> {
+    Optional<Medic> findByUser(User user);
+    Optional<Medic> findByUser(User user);
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/repositories/MedicalEventRepository.java =====
+
+package com.ex.core.repositories;
+package com.ex.core.repositories;
+
+
+import com.ex.core.entities.MedicalEvent;
+import com.ex.core.entities.MedicalEvent;
+import com.ex.core.entities.Patient;
+import com.ex.core.entities.Patient;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+import java.util.List;
+import java.util.List;
+
+
+public interface MedicalEventRepository extends JpaRepository<MedicalEvent, Long> {
+public interface MedicalEventRepository extends JpaRepository<MedicalEvent, Long> {
+    // Găsește toate evenimentele pentru un anumit pacient
+    // Găsește toate evenimentele pentru un anumit pacient
+    List<MedicalEvent> findByPatient(Patient patient);
+    List<MedicalEvent> findByPatient(Patient patient);
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/repositories/PatientRepository.java =====
+
+package com.ex.core.repositories;
+package com.ex.core.repositories;
+
+
+import com.ex.core.entities.Patient;
+import com.ex.core.entities.Patient;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity;
+
+
+import javax.swing.text.html.Option;
+import javax.swing.text.html.Option;
+import java.util.Optional;
+import java.util.Optional;
+
+
+public interface PatientRepository extends JpaRepository<Patient, Long> {
+public interface PatientRepository extends JpaRepository<Patient, Long> {
+    Optional<Patient> findByUser(User user);
+    Optional<Patient> findByUser(User user);
+    Optional<Patient> findById(Long id);
+    Optional<Patient> findById(Long id);
+    Optional<Patient> findByUserEmail(String email);
+    Optional<Patient> findByUserEmail(String email);
+
+
+    boolean existsPatientByCnp(String cnp);
+    boolean existsPatientByCnp(String cnp);
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/repositories/RecommendationRepository.java =====
+
+package com.ex.core.repositories;
+package com.ex.core.repositories;
+
+
+import com.ex.core.entities.Patient;
+import com.ex.core.entities.Patient;
+import com.ex.core.entities.Recommendation;
+import com.ex.core.entities.Recommendation;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+import java.util.List;
+import java.util.List;
+
+
+public interface RecommendationRepository extends JpaRepository<Recommendation, Long> {
+public interface RecommendationRepository extends JpaRepository<Recommendation, Long> {
+    List<Recommendation> findByPatient(Patient patient);
+    List<Recommendation> findByPatient(Patient patient);
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/core/repositories/TelemetryMeasurementRepository.java =====
+
+package com.ex.core.repositories;
+package com.ex.core.repositories;
+
+
+import com.ex.core.entities.TelemetryMeasurement;
+import com.ex.core.entities.TelemetryMeasurement;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Repository;
+
+
+import java.util.List;
+import java.util.List;
+
+
+@Repository
+@Repository
+public interface TelemetryMeasurementRepository extends JpaRepository<TelemetryMeasurement, Long> {
+public interface TelemetryMeasurementRepository extends JpaRepository<TelemetryMeasurement, Long> {
+    List<TelemetryMeasurement> findTop100ByPatient_User_IdOrderByTimestampDesc(Long userId);
+    List<TelemetryMeasurement> findTop100ByPatient_User_IdOrderByTimestampDesc(Long userId);
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/sv/config/MqttConfig.java =====
+
+package com.ex.sv.config;
+package com.ex.sv.config;
+
+
+import com.ex.sv.dto.telemetry.TelemetryData;
+import com.ex.sv.dto.telemetry.TelemetryData;
+import com.ex.sv.service.TelemetryService;
+import com.ex.sv.service.TelemetryService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.integration.annotation.ServiceActivator;
+import org.springframework.integration.annotation.ServiceActivator;
+import org.springframework.integration.channel.DirectChannel;
+import org.springframework.integration.channel.DirectChannel;
+import org.springframework.integration.core.MessageProducer;
+import org.springframework.integration.core.MessageProducer;
+import org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory;
+import org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory;
+import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
+import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
+import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
+import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
+import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
+import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageHandler;
+import org.springframework.messaging.MessageHandler;
+import org.springframework.messaging.MessagingException;
+import org.springframework.messaging.MessagingException;
+
+
+@Configuration
+@Configuration
+public class MqttConfig {
+public class MqttConfig {
+
+
+    private final TelemetryService telemetryService;
+    private final TelemetryService telemetryService;
+
+
+    public MqttConfig(TelemetryService telemetryService) {
+    public MqttConfig(TelemetryService telemetryService) {
+        this.telemetryService = telemetryService;
+        this.telemetryService = telemetryService;
+    }
+    }
+
+
+    @Bean
+    @Bean
+    public MqttPahoClientFactory mqttClientFactory() {
+    public MqttPahoClientFactory mqttClientFactory() {
+        DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
+        DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
+        MqttConnectOptions options = new MqttConnectOptions();
+        MqttConnectOptions options = new MqttConnectOptions();
+        options.setServerURIs(new String[] { "tcp://172.20.10.3:1883" });
+        options.setServerURIs(new String[] { "tcp://172.20.10.3:1883" });
+        factory.setConnectionOptions(options);
+        factory.setConnectionOptions(options);
+        return factory;
+        return factory;
+    }
+    }
+
+
+    @Bean
+    @Bean
+    public MessageChannel mqttInputChannel() {
+    public MessageChannel mqttInputChannel() {
+        return new DirectChannel();
+        return new DirectChannel();
+    }
+    }
+
+
+    @Bean
+    @Bean
+    public MessageProducer inbound() {
+    public MessageProducer inbound() {
+        MqttPahoMessageDrivenChannelAdapter adapter =
+        MqttPahoMessageDrivenChannelAdapter adapter =
+                new MqttPahoMessageDrivenChannelAdapter("tcp://172.20.10.3:1883", "iHealthClient",
+                new MqttPahoMessageDrivenChannelAdapter("tcp://172.20.10.3:1883", "iHealthClient",
+                        "ihealth/v1/telemetrie");
+                        "ihealth/v1/telemetrie");
+        adapter.setCompletionTimeout(5000);
+        adapter.setCompletionTimeout(5000);
+        adapter.setConverter(new DefaultPahoMessageConverter());
+        adapter.setConverter(new DefaultPahoMessageConverter());
+        adapter.setQos(1);
+        adapter.setQos(1);
+        adapter.setOutputChannel(mqttInputChannel());
+        adapter.setOutputChannel(mqttInputChannel());
+        return adapter;
+        return adapter;
+    }
+    }
+
+
+    @Bean
+    @Bean
+    @ServiceActivator(inputChannel = "mqttInputChannel")
+    @ServiceActivator(inputChannel = "mqttInputChannel")
+    public MessageHandler handler() {
+    public MessageHandler handler() {
+        return new MessageHandler() {
+        return new MessageHandler() {
+            private final ObjectMapper objectMapper = new ObjectMapper();
+            private final ObjectMapper objectMapper = new ObjectMapper();
+
+
+            @Override
+            @Override
+            public void handleMessage(Message<?> message) throws MessagingException {
+            public void handleMessage(Message<?> message) throws MessagingException {
+                try {
+                try {
+                    TelemetryData telemetryData = objectMapper.readValue((String) message.getPayload(), TelemetryData.class);
+                    TelemetryData telemetryData = objectMapper.readValue((String) message.getPayload(), TelemetryData.class);
+                    telemetryService.processTelemetryData(telemetryData);
+                    telemetryService.processTelemetryData(telemetryData);
+                } catch (Exception e) {
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    e.printStackTrace();
+                }
+                }
+            }
+            }
+        };
+        };
+    }
+    }
+}}
+
+===== FILE: ./src/main/java/com/ex/sv/dto/TelemetryPayloadDTO.java =====
+
+package com.ex.sv.dto;
+package com.ex.sv.dto;
+
+
+import lombok.Data;
+import lombok.Data;
+
+
+import java.util.List;
+import java.util.List;
+
+
+@Data
+@Data
+public class TelemetryPayloadDTO {
+public class TelemetryPayloadDTO {
+    private Long patientId;
+    private Long patientId;
+    private String sensorType;
+    private String sensorType;
+    private Double value;
+    private Double value;
+    private List<Double> ecgValues;
+    private List<Double> ecgValues;
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/sv/dto/telemetry/SensorData.java =====
+
+package com.ex.sv.dto.telemetry;
+package com.ex.sv.dto.telemetry;
+
+
+import lombok.Data;
+import lombok.Data;
+
+
+@Data
+@Data
+public class SensorData {
+public class SensorData {
+
+
+    private double temp;
+    private double temp;
+    private double pres;
+    private double pres;
+    private double bpm;
+    private double bpm;
+    private double spo2;
+    private double spo2;
+    private int ecg;
+    private int ecg;
+}}
+
+===== FILE: ./src/main/java/com/ex/sv/dto/telemetry/TelemetryData.java =====
+
+package com.ex.sv.dto.telemetry;
+package com.ex.sv.dto.telemetry;
+
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import lombok.Data;
+
+
+@Data
+@Data
+public class TelemetryData {
+public class TelemetryData {
+
+
+    @JsonProperty("p_id")
+    @JsonProperty("p_id")
+    private String patientId;
+    private String patientId;
+
+
+    private SensorData data;
+    private SensorData data;
+}}
+
+===== FILE: ./src/main/java/com/ex/sv/service/TelemetryService.java =====
+
+package com.ex.sv.service;
+package com.ex.sv.service;
+
+
+import com.ex.core.entities.Patient;
+import com.ex.core.entities.Patient;
+import com.ex.core.entities.TelemetryMeasurement;
+import com.ex.core.entities.TelemetryMeasurement;
+import com.ex.core.repositories.PatientRepository;
+import com.ex.core.repositories.PatientRepository;
+import com.ex.core.repositories.TelemetryMeasurementRepository;
+import com.ex.core.repositories.TelemetryMeasurementRepository;
+import com.ex.sv.dto.telemetry.SensorData;
+import com.ex.sv.dto.telemetry.SensorData;
+import com.ex.sv.dto.telemetry.TelemetryData;
+import com.ex.sv.dto.telemetry.TelemetryData;
+import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+
+
+import java.time.LocalDateTime;
+import java.time.LocalDateTime;
+
+
+@Service
+@Service
+@RequiredArgsConstructor
+@RequiredArgsConstructor
+public class TelemetryService {
+public class TelemetryService {
+
+
+    private final PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
+    private final TelemetryMeasurementRepository telemetryMeasurementRepository;
+    private final TelemetryMeasurementRepository telemetryMeasurementRepository;
+
+
+    @Transactional
+    @Transactional
+    public void processTelemetryData(TelemetryData telemetryData) {
+    public void processTelemetryData(TelemetryData telemetryData) {
+        // Extragem ID-ul numeric din string-ul "PT_102"
+        // Extragem ID-ul numeric din string-ul "PT_102"
+        Long patientId = Long.parseLong(telemetryData.getPatientId().split("_")[1]);
+        Long patientId = Long.parseLong(telemetryData.getPatientId().split("_")[1]);
+
+
+        Patient patient = patientRepository.findById(patientId)
+        Patient patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+
+
+        SensorData sensorData = telemetryData.getData();
+        SensorData sensorData = telemetryData.getData();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
+
+
+        // Salvăm fiecare măsurătoare individual
+        // Salvăm fiecare măsurătoare individual
+        saveMeasurement(patient, "temp", sensorData.getTemp(), now);
+        saveMeasurement(patient, "temp", sensorData.getTemp(), now);
+        saveMeasurement(patient, "pres", sensorData.getPres(), now);
+        saveMeasurement(patient, "pres", sensorData.getPres(), now);
+        saveMeasurement(patient, "bpm", sensorData.getBpm(), now);
+        saveMeasurement(patient, "bpm", sensorData.getBpm(), now);
+        saveMeasurement(patient, "spo2", sensorData.getSpo2(), now);
+        saveMeasurement(patient, "spo2", sensorData.getSpo2(), now);
+        saveMeasurement(patient, "ecg", (double) sensorData.getEcg(), now);
+        saveMeasurement(patient, "ecg", (double) sensorData.getEcg(), now);
+
+
+        System.out.println("Successfully saved telemetry data for patient: " + patient.getId());
+        System.out.println("Successfully saved telemetry data for patient: " + patient.getId());
+    }
+    }
+
+
+    private void saveMeasurement(Patient patient, String sensorType, Double value, LocalDateTime timestamp) {
+    private void saveMeasurement(Patient patient, String sensorType, Double value, LocalDateTime timestamp) {
+        TelemetryMeasurement measurement = new TelemetryMeasurement();
+        TelemetryMeasurement measurement = new TelemetryMeasurement();
+        measurement.setPatient(patient);
+        measurement.setPatient(patient);
+        measurement.setSensorType(sensorType);
+        measurement.setSensorType(sensorType);
+        measurement.setValue(value);
+        measurement.setValue(value);
+        measurement.setTimestamp(timestamp);
+        measurement.setTimestamp(timestamp);
+        telemetryMeasurementRepository.save(measurement);
+        telemetryMeasurementRepository.save(measurement);
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/sv/services/MqttListenerService.java =====
+
+
+
+===== FILE: ./src/main/java/com/ex/sv/services/MqttPublisherService.java =====
+
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/config/ApplicationConfig.java =====
+
+package com.ex.web.auth.config;
+package com.ex.web.auth.config;
+
+
+import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.auth.repositories.UserRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import java.util.Collections;
+import java.util.Collections;
+
+
+@Configuration
+@Configuration
+public class ApplicationConfig {
+public class ApplicationConfig {
+    private final UserRepository userRepository;
+    private final UserRepository userRepository;
+
+
+    public ApplicationConfig(UserRepository userRepository) {
+    public ApplicationConfig(UserRepository userRepository) {
+        this.userRepository = userRepository;
+        this.userRepository = userRepository;
+    }
+    }
+
+
+    @Bean
+    @Bean
+    public UserDetailsService userDetailsService() {
+    public UserDetailsService userDetailsService() {
+        return username -> userRepository.findByEmail(username)
+        return username -> userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
+    }
+    }
+
+
+    @Bean
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();
+    }
+    }
+
+
+    @Bean
+    @Bean
+    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder);
+        authProvider.setPasswordEncoder(passwordEncoder);
+        return authProvider;
+        return authProvider;
+    }
+    }
+
+
+    @Bean
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationProvider authenticationProvider) {
+    public AuthenticationManager authenticationManager(AuthenticationProvider authenticationProvider) {
+        return new ProviderManager(Collections.singletonList(authenticationProvider));
+        return new ProviderManager(Collections.singletonList(authenticationProvider));
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/config/CorsConfig.java =====
+
+package com.ex.web.auth.config;
+package com.ex.web.auth.config;
+
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import java.util.Arrays;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Collections;
+
+
+@Configuration
+@Configuration
+public class CorsConfig {
+public class CorsConfig {
+    @Bean
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOriginPatterns(Collections.singletonList("http://localhost:*"));
+        configuration.setAllowedOriginPatterns(Collections.singletonList("http://localhost:*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")); // Am adăugat PATCH
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")); // Am adăugat PATCH
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+        return source;
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/config/SecurityConfiguration.java =====
+
+package com.ex.web.auth.config;
+package com.ex.web.auth.config;
+
+
+import com.ex.web.auth.services.AuthFilterService;
+import com.ex.web.auth.services.AuthFilterService;
+import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+
+@Configuration
+@Configuration
+@EnableWebSecurity
+@EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity(prePostEnabled = true)
+@RequiredArgsConstructor
+@RequiredArgsConstructor
+public class SecurityConfiguration {
+public class SecurityConfiguration {
+    private final AuthFilterService authFilterService;
+    private final AuthFilterService authFilterService;
+    private final AuthenticationProvider authenticationProvider;
+    private final AuthenticationProvider authenticationProvider;
+
+
+    @Bean
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable)
+        http.csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
+                .cors(Customizer.withDefaults())
+                .authorizeHttpRequests(req -> req
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers(
+                        .requestMatchers(
+                                "/api/v1/auth/login",
+                                "/api/v1/auth/login",
+                                "/api/v1/auth/register/patient"
+                                "/api/v1/auth/register/patient"
+                        ).permitAll()
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                        .anyRequest().authenticated()
+                )
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+        return http.build();
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/controller/AuthController.java =====
+
+package com.ex.web.auth.controller;
+package com.ex.web.auth.controller;
+
+
+import com.ex.web.auth.entities.RefreshToken;
+import com.ex.web.auth.entities.RefreshToken;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.services.AuthService;
+import com.ex.web.auth.services.AuthService;
+import com.ex.web.auth.services.JwtService;
+import com.ex.web.auth.services.JwtService;
+import com.ex.web.auth.services.RefreshTokenService;
+import com.ex.web.auth.services.RefreshTokenService;
+import com.ex.web.auth.utils.AuthResponse;
+import com.ex.web.auth.utils.AuthResponse;
+import com.ex.web.auth.utils.CreateDoctorRequest;
+import com.ex.web.auth.utils.CreateDoctorRequest;
+import com.ex.web.auth.utils.LoginRequest;
+import com.ex.web.auth.utils.LoginRequest;
+import com.ex.web.auth.utils.RefreshTokenRequest;
+import com.ex.web.auth.utils.RefreshTokenRequest;
+import com.ex.web.auth.utils.RegisterRequest;
+import com.ex.web.auth.utils.RegisterRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
+
+
+@RestController
+@RestController
+@CrossOrigin(value = "http://localhost:5173/")
+@CrossOrigin(value = "http://localhost:5173/")
+@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/v1/auth")
+public class AuthController {
+public class AuthController {
+    private final AuthService authService;
+    private final AuthService authService;
+    private final RefreshTokenService refreshTokenService;
+    private final RefreshTokenService refreshTokenService;
+    private final JwtService jwtService;
+    private final JwtService jwtService;
+
+
+    public AuthController(AuthService authService, RefreshTokenService refreshTokenService, JwtService jwtService) {
+    public AuthController(AuthService authService, RefreshTokenService refreshTokenService, JwtService jwtService) {
+        this.authService = authService;
+        this.authService = authService;
+        this.refreshTokenService = refreshTokenService;
+        this.refreshTokenService = refreshTokenService;
+        this.jwtService = jwtService;
+        this.jwtService = jwtService;
+    }
+    }
+
+
+    /**
+    /**
+     * PACIENT se înregistrează singur
+     * PACIENT se înregistrează singur
+     * Public endpoint - oricine poate se înregistreze ca pacient
+     * Public endpoint - oricine poate se înregistreze ca pacient
+     */
+     */
+    @PostMapping("/register/patient")
+    @PostMapping("/register/patient")
+    public ResponseEntity<AuthResponse> registerPatient(@RequestBody RegisterRequest patientRequest) {
+    public ResponseEntity<AuthResponse> registerPatient(@RequestBody RegisterRequest patientRequest) {
+        AuthResponse response = authService.registerPatient(patientRequest);
+        AuthResponse response = authService.registerPatient(patientRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+    }
+
+
+    /**
+    /**
+     * ADMIN creează conturi de DOCTOR
+     * ADMIN creează conturi de DOCTOR
+     * Protejat - doar ADMIN poate accesa
+     * Protejat - doar ADMIN poate accesa
+     */
+     */
+    @PostMapping("/register/doctor")
+    @PostMapping("/register/doctor")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<AuthResponse> createDoctorAccount(@RequestBody CreateDoctorRequest doctorRequest) {
+    public ResponseEntity<AuthResponse> createDoctorAccount(@RequestBody CreateDoctorRequest doctorRequest) {
+        AuthResponse response = authService.createDoctorAccount(doctorRequest);
+        AuthResponse response = authService.createDoctorAccount(doctorRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+    }
+
+
+    /**
+    /**
+     * LOGIN pentru toți utilizatorii (ADMIN, DOCTOR, PATIENT)
+     * LOGIN pentru toți utilizatorii (ADMIN, DOCTOR, PATIENT)
+     */
+     */
+    @PostMapping("/login")
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
+        AuthResponse response = authService.login(loginRequest);
+        AuthResponse response = authService.login(loginRequest);
+        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(response);
+    }
+    }
+
+
+    /**
+    /**
+     * REFRESH TOKEN pentru toți utilizatorii autentificați
+     * REFRESH TOKEN pentru toți utilizatorii autentificați
+     */
+     */
+    @PostMapping("/refresh")
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthResponse> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
+    public ResponseEntity<AuthResponse> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
+        RefreshToken refreshToken = refreshTokenService.verifyRefreshToken(refreshTokenRequest.getRefreshToken());
+        RefreshToken refreshToken = refreshTokenService.verifyRefreshToken(refreshTokenRequest.getRefreshToken());
+        User user = refreshToken.getUser();
+        User user = refreshToken.getUser();
+        String accessToken = jwtService.generateToken(user);
+        String accessToken = jwtService.generateToken(user);
+        return ResponseEntity.ok(AuthResponse.builder()
+        return ResponseEntity.ok(AuthResponse.builder()
+                .accessToken(accessToken)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken.getRefreshToken())
+                .refreshToken(refreshToken.getRefreshToken())
+                .name(user.getName())
+                .name(user.getName())
+                .email(user.getEmail())
+                .email(user.getEmail())
+                .build());
+                .build());
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/entities/RefreshToken.java =====
+
+package com.ex.web.auth.entities;
+package com.ex.web.auth.entities;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+import java.time.Instant;
+import java.time.Instant;
+
+
+    @Entity
+    @Entity
+    @Builder
+    @Builder
+    @NoArgsConstructor
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Getter
+    public class RefreshToken {
+    public class RefreshToken {
+        @Id
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer tokenId;
+        private Integer tokenId;
+
+
+        @JsonIgnoreProperties("user")
+        @JsonIgnoreProperties("user")
+        @Column(nullable = false, length = 500)
+        @Column(nullable = false, length = 500)
+        private String refreshToken;
+        private String refreshToken;
+
+
+
+
+        @Column(nullable = false)
+        @Column(nullable = false)
+        private Instant expirationTime;
+        private Instant expirationTime;
+
+
+        @JsonIgnore
+        @JsonIgnore
+        @OneToOne
+        @OneToOne
+        private User user;
+        private User user;
+    }
+    }
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/entities/TypeUser.java =====
+
+package com.ex.web.auth.entities;
+package com.ex.web.auth.entities;
+
+
+public enum TypeUser {
+public enum TypeUser {
+    ADMIN,
+    ADMIN,
+    DOCTOR,
+    DOCTOR,
+    PATIENT
+    PATIENT
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/entities/User.java =====
+
+package com.ex.web.auth.entities;
+package com.ex.web.auth.entities;
+
+
+import com.ex.core.entities.Medic;
+import com.ex.core.entities.Medic;
+import jakarta.persistence.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Email;
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Collection;
+import java.util.Collection;
+import java.util.List;
+import java.util.List;
+
+
+@Entity
+@Entity
+@Table(name = "users")
+@Table(name = "users")
+@AllArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@NoArgsConstructor
+@Getter
+@Getter
+@Builder
+@Builder
+public class User implements UserDetails {
+public class User implements UserDetails {
+    @Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // Changed to Long for consistency
+    private Long id; // Changed to Long for consistency
+    private String name;
+    private String name;
+
+
+    @Column(unique = true)
+    @Column(unique = true)
+    private String username;
+    private String username;
+
+
+    @Column(unique = true)
+    @Column(unique = true)
+    @Email(message = "exemple123@exemple.com")
+    @Email(message = "exemple123@exemple.com")
+
+
+    private String email;
+    private String email;
+
+
+    private String password;
+    private String password;
+
+
+    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user")
+    private RefreshToken refreshToken;
+    private RefreshToken refreshToken;
+
+
+    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    private TypeUser type;
+    private TypeUser type;
+
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Medic medic;
+    private Medic medic;
+
+
+    @Override
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(type.name()));
+        return List.of(new SimpleGrantedAuthority(type.name()));
+    }
+    }
+
+
+    @Override
+    @Override
+    public String getPassword() {
+    public String getPassword() {
+        return password;
+        return password;
+    }
+    }
+
+
+    @Override
+    @Override
+    public String getUsername() {
+    public String getUsername() {
+        return email;
+        return email;
+    }
+    }
+
+
+    @Override
+    @Override
+    public boolean isAccountNonExpired() {
+    public boolean isAccountNonExpired() {
+        return true;
+        return true;
+    }
+    }
+
+
+    @Override
+    @Override
+    public boolean isAccountNonLocked() {
+    public boolean isAccountNonLocked() {
+        return true;
+        return true;
+    }
+    }
+
+
+    @Override
+    @Override
+    public boolean isCredentialsNonExpired() {
+    public boolean isCredentialsNonExpired() {
+        return true;
+        return true;
+    }
+    }
+
+
+    @Override
+    @Override
+    public boolean isEnabled() {
+    public boolean isEnabled() {
+        return true;
+        return true;
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/repositories/RefreshTokenRepository.java =====
+
+package com.ex.web.auth.repositories;
+package com.ex.web.auth.repositories;
+
+
+import com.ex.web.auth.entities.RefreshToken;
+import com.ex.web.auth.entities.RefreshToken;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
+import java.util.Optional;
+
+
+public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Integer> {
+public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Integer> {
+    Optional<RefreshToken> findByRefreshToken(String refreshToken);
+    Optional<RefreshToken> findByRefreshToken(String refreshToken);
+}
+}
+
+
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/repositories/UserRepository.java =====
+
+package com.ex.web.auth.repositories;
+package com.ex.web.auth.repositories;
+
+
+import com.ex.web.auth.entities.TypeUser;
+import com.ex.web.auth.entities.TypeUser;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
+import java.util.Optional;
+
+
+public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
+    Optional<User> findByEmail(String username);
+    Optional<User> findByEmail(String username);
+    Optional<User> findByType(TypeUser type);
+    Optional<User> findByType(TypeUser type);
+
+
+}
+}
+
+
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/services/AuthFilterService.java =====
+
+package com.ex.web.auth.services;
+package com.ex.web.auth.services;
+
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.NonNull;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
+import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.filter.OncePerRequestFilter;
+import java.io.IOException;
+import java.io.IOException;
+
+
+@Service
+@Service
+public class AuthFilterService extends OncePerRequestFilter {
+public class AuthFilterService extends OncePerRequestFilter {
+    private final JwtService jwtService;
+    private final JwtService jwtService;
+    private final UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
+
+
+    public AuthFilterService(JwtService jwtService, UserDetailsService userDetailsService) {
+    public AuthFilterService(JwtService jwtService, UserDetailsService userDetailsService) {
+        this.jwtService = jwtService;
+        this.jwtService = jwtService;
+        this.userDetailsService = userDetailsService;
+        this.userDetailsService = userDetailsService;
+    }
+    }
+
+
+    @Override
+    @Override
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
+        final String authHeader = request.getHeader("Authorization");
+        final String authHeader = request.getHeader("Authorization");
+        String jwt;
+        String jwt;
+        String username;
+        String username;
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response);
+            return;
+            return;
+        }
+        }
+        jwt = authHeader.substring(7);
+        jwt = authHeader.substring(7);
+        username = jwtService.extractUsername(jwt);
+        username = jwtService.extractUsername(jwt);
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            if (jwtService.isTokenValid(jwt, userDetails)) {
+            if (jwtService.isTokenValid(jwt, userDetails)) {
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            }
+            }
+        }
+        }
+        filterChain.doFilter(request, response);
+        filterChain.doFilter(request, response);
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/services/AuthService.java =====
+
+package com.ex.web.auth.services;
+package com.ex.web.auth.services;
+
+
+import com.ex.core.entities.Medic;
+import com.ex.core.entities.Medic;
+import com.ex.core.entities.Patient;
+import com.ex.core.entities.Patient;
+import com.ex.core.repositories.MedicRepository;
+import com.ex.core.repositories.MedicRepository;
+import com.ex.core.repositories.PatientRepository;
+import com.ex.core.repositories.PatientRepository;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.TypeUser;
+import com.ex.web.auth.entities.TypeUser;
+import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.auth.utils.AuthResponse;
+import com.ex.web.auth.utils.AuthResponse;
+import com.ex.web.auth.utils.CreateDoctorRequest;
+import com.ex.web.auth.utils.CreateDoctorRequest;
+import com.ex.web.auth.utils.LoginRequest;
+import com.ex.web.auth.utils.LoginRequest;
+import com.ex.web.auth.utils.RegisterRequest;
+import com.ex.web.auth.utils.RegisterRequest;
+import com.ex.web.dto.response.CurrentUserResponse;
+import com.ex.web.dto.response.CurrentUserResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+
+
+import java.util.Optional;
+import java.util.Optional;
+
+
+@Service
+@Service
+@RequiredArgsConstructor
+@RequiredArgsConstructor
+public class AuthService {
+public class AuthService {
+    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final MedicRepository medicRepository;
+    private final MedicRepository medicRepository;
+    private final PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
+    private final JwtService jwtService;
+    private final JwtService jwtService;
+    private final RefreshTokenService refreshTokenService;
+    private final RefreshTokenService refreshTokenService;
+    private final AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+
+
+    /**
+    /**
+     * ADMIN creează conturi de DOCTOR
+     * ADMIN creează conturi de DOCTOR
+     * Email TREBUIE să conțină @medic.com
+     * Email TREBUIE să conțină @medic.com
+     */
+     */
+    @Transactional
+    @Transactional
+    public AuthResponse createDoctorAccount(CreateDoctorRequest doctorRequest) {
+    public AuthResponse createDoctorAccount(CreateDoctorRequest doctorRequest) {
+        // Verifică dacă utilizatorul curent este ADMIN
+        // Verifică dacă utilizatorul curent este ADMIN
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
+        boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
+                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
+
+
+        if (!isAdmin) {
+        if (!isAdmin) {
+            throw new AccessDeniedException("Only ADMIN can create doctor accounts!");
+            throw new AccessDeniedException("Only ADMIN can create doctor accounts!");
+        }
+        }
+
+
+        String email = doctorRequest.getEmail();
+        String email = doctorRequest.getEmail();
+        
+        
+        // Validează că email-ul conține @medic.com
+        // Validează că email-ul conține @medic.com
+        if (!email.endsWith("@medic.com")) {
+        if (!email.endsWith("@medic.com")) {
+            throw new IllegalArgumentException("Doctor email must end with @medic.com");
+            throw new IllegalArgumentException("Doctor email must end with @medic.com");
+        }
+        }
+
+
+        // Verifică dacă email-ul este deja folosit
+        // Verifică dacă email-ul este deja folosit
+        if (userRepository.findByEmail(email).isPresent()) {
+        if (userRepository.findByEmail(email).isPresent()) {
+            throw new IllegalArgumentException("Email already in use!");
+            throw new IllegalArgumentException("Email already in use!");
+        }
+        }
+
+
+        // Pasul A: Crează și salvează User
+        // Pasul A: Crează și salvează User
+        var user = User.builder()
+        var user = User.builder()
+                .name(doctorRequest.getName())
+                .name(doctorRequest.getName())
+                .email(email)
+                .email(email)
+                .username(doctorRequest.getUsername())
+                .username(doctorRequest.getUsername())
+                .password(passwordEncoder.encode(doctorRequest.getPassword()))
+                .password(passwordEncoder.encode(doctorRequest.getPassword()))
+                .type(TypeUser.DOCTOR)
+                .type(TypeUser.DOCTOR)
+                .build();
+                .build();
+        User savedUser = userRepository.save(user);
+        User savedUser = userRepository.save(user);
+
+
+        // Pasul B: Crează și salvează Medic
+        // Pasul B: Crează și salvează Medic
+        var medic = Medic.builder()
+        var medic = Medic.builder()
+                .nume(savedUser.getName())
+                .nume(savedUser.getName())
+                .specializare(doctorRequest.getSpecializare())
+                .specializare(doctorRequest.getSpecializare())
+                .user(savedUser) // Legătura către User
+                .user(savedUser) // Legătura către User
+                .build();
+                .build();
+        medicRepository.save(medic);
+        medicRepository.save(medic);
+
+
+        return generateAuthResponse(savedUser);
+        return generateAuthResponse(savedUser);
+    }
+    }
+
+
+    /**
+    /**
+     * PACIENT se înregistrează singur
+     * PACIENT se înregistrează singur
+     * Email TREBUIE să conțină @patient.com
+     * Email TREBUIE să conțină @patient.com
+     */
+     */
+    @Transactional
+    @Transactional
+    public AuthResponse registerPatient(RegisterRequest patientRequest) {
+    public AuthResponse registerPatient(RegisterRequest patientRequest) {
+        String email = patientRequest.getEmail();
+        String email = patientRequest.getEmail();
+        
+        
+        // Validează că email-ul conține @patient.com
+        // Validează că email-ul conține @patient.com
+        if (!email.endsWith("@patient.com")) {
+        if (!email.endsWith("@patient.com")) {
+            throw new IllegalArgumentException("Patient email must end with @patient.com");
+            throw new IllegalArgumentException("Patient email must end with @patient.com");
+        }
+        }
+
+
+        // Verifică dacă email-ul este deja folosit
+        // Verifică dacă email-ul este deja folosit
+        if (userRepository.findByEmail(email).isPresent()) {
+        if (userRepository.findByEmail(email).isPresent()) {
+            throw new IllegalArgumentException("Email already in use!");
+            throw new IllegalArgumentException("Email already in use!");
+        }
+        }
+
+
+        // Crează cont de pacient
+        // Crează cont de pacient
+        var patient = User.builder()
+        var patient = User.builder()
+                .name(patientRequest.getName())
+                .name(patientRequest.getName())
+                .email(email)
+                .email(email)
+                .username(patientRequest.getUsername())
+                .username(patientRequest.getUsername())
+                .password(passwordEncoder.encode(patientRequest.getPassword()))
+                .password(passwordEncoder.encode(patientRequest.getPassword()))
+                .type(TypeUser.PATIENT)
+                .type(TypeUser.PATIENT)
+                .build();
+                .build();
+
+
+        User savedPatient = userRepository.save(patient);
+        User savedPatient = userRepository.save(patient);
+        return generateAuthResponse(savedPatient);
+        return generateAuthResponse(savedPatient);
+    }
+    }
+
+
+    /**
+    /**
+     * LOGIN pentru toți utilizatorii (ADMIN, DOCTOR, PATIENT)
+     * LOGIN pentru toți utilizatorii (ADMIN, DOCTOR, PATIENT)
+     */
+     */
+    public AuthResponse login(LoginRequest loginRequest) {
+    public AuthResponse login(LoginRequest loginRequest) {
+        authenticationManager.authenticate(
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
+        );
+        );
+        
+        
+        var user = userRepository.findByEmail(loginRequest.getEmail())
+        var user = userRepository.findByEmail(loginRequest.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        
+        
+        return generateAuthResponse(user);
+        return generateAuthResponse(user);
+    }
+    }
+
+
+    /**
+    /**
+     * Generează JWT token și refresh token
+     * Generează JWT token și refresh token
+     */
+     */
+    private AuthResponse generateAuthResponse(User user) {
+    private AuthResponse generateAuthResponse(User user) {
+        var accessToken = jwtService.generateToken(user);
+        var accessToken = jwtService.generateToken(user);
+        var refreshToken = refreshTokenService.createRefreshToken(user.getEmail());
+        var refreshToken = refreshTokenService.createRefreshToken(user.getEmail());
+        return AuthResponse.builder()
+        return AuthResponse.builder()
+                .accessToken(accessToken)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken.getRefreshToken())
+                .refreshToken(refreshToken.getRefreshToken())
+                .name(user.getName())
+                .name(user.getName())
+                .email(user.getEmail())
+                .email(user.getEmail())
+                .userType(user.getType())
+                .userType(user.getType())
+                .build();
+                .build();
+    }
+    }
+
+
+    public CurrentUserResponse createCurrentUserResponse(User user) {
+    public CurrentUserResponse createCurrentUserResponse(User user) {
+        CurrentUserResponse.CurrentUserResponseBuilder responseBuilder = CurrentUserResponse.builder()
+        CurrentUserResponse.CurrentUserResponseBuilder responseBuilder = CurrentUserResponse.builder()
+                .id(user.getId())
+                .id(user.getId())
+                .name(user.getName())
+                .name(user.getName())
+                .email(user.getEmail())
+                .email(user.getEmail())
+                .role(user.getType().name());
+                .role(user.getType().name());
+
+
+        if (user.getType() == TypeUser.PATIENT) {
+        if (user.getType() == TypeUser.PATIENT) {
+            Optional<Patient> patient = patientRepository.findByUser(user);
+            Optional<Patient> patient = patientRepository.findByUser(user);
+            patient.ifPresent(p -> responseBuilder.patientId(p.getId()));
+            patient.ifPresent(p -> responseBuilder.patientId(p.getId()));
+        } else if (user.getType() == TypeUser.DOCTOR) {
+        } else if (user.getType() == TypeUser.DOCTOR) {
+            Optional<Medic> medic = medicRepository.findByUser(user);
+            Optional<Medic> medic = medicRepository.findByUser(user);
+            medic.ifPresent(m -> responseBuilder.medicId(m.getId()));
+            medic.ifPresent(m -> responseBuilder.medicId(m.getId()));
+        }
+        }
+
+
+        return responseBuilder.build();
+        return responseBuilder.build();
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/services/JwtService.java =====
+
+package com.ex.web.auth.services;
+package com.ex.web.auth.services;
+
+
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
+import java.security.Key;
+import java.security.Key;
+import java.util.Date;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Function;
+
+
+@Service
+@Service
+public class JwtService {
+public class JwtService {
+    private static final String SECRET_KEY = "BF7FD11ACE545745B7BA1AF98B6F156D127BC7BB544BAB6A4FD74E4FC7";
+    private static final String SECRET_KEY = "BF7FD11ACE545745B7BA1AF98B6F156D127BC7BB544BAB6A4FD74E4FC7";
+
+
+    public String extractUsername(String token) {
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
+        return extractClaim(token, Claims::getSubject);
+    }
+    }
+
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+        return claimsResolver.apply(claims);
+    }
+    }
+
+
+    private Claims extractAllClaims(String token) {
+    private Claims extractAllClaims(String token) {
+        return Jwts.parserBuilder().setSigningKey(getSignInKey()).build().parseClaimsJws(token).getBody();
+        return Jwts.parserBuilder().setSigningKey(getSignInKey()).build().parseClaimsJws(token).getBody();
+    }
+    }
+
+
+    private Key getSignInKey() {
+    private Key getSignInKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+    }
+
+
+    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails) {
+        return generateToken(new HashMap<>(), userDetails);
+        return generateToken(new HashMap<>(), userDetails);
+    }
+    }
+
+
+    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+        extraClaims = new HashMap<>(extraClaims);
+        extraClaims = new HashMap<>(extraClaims);
+        extraClaims.put("role", userDetails.getAuthorities());
+        extraClaims.put("role", userDetails.getAuthorities());
+
+
+        if (userDetails instanceof User) {
+        if (userDetails instanceof User) {
+            extraClaims.put("userId", ((User) userDetails).getId());
+            extraClaims.put("userId", ((User) userDetails).getId());
+        }
+        }
+
+
+        if(userDetails instanceof User) {
+        if(userDetails instanceof User) {
+            extraClaims.put("user_role", ((User) userDetails).getType());
+            extraClaims.put("user_role", ((User) userDetails).getType());
+        }
+        }
+
+
+
+
+        return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername()).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + 25 * 100000)).signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
+        return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername()).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + 25 * 100000)).signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
+    }
+    }
+
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        final String username = extractUsername(token);
+        final String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+    }
+
+
+    private boolean isTokenExpired(String token) {
+    private boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+        return extractExpiration(token).before(new Date());
+    }
+    }
+
+
+    private Date extractExpiration(String token) {
+    private Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+        return extractClaim(token, Claims::getExpiration);
+    }
+    }
+}
+}
+
+
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/services/RefreshTokenService.java =====
+
+package com.ex.web.auth.services;
+package com.ex.web.auth.services;
+
+
+import com.ex.web.auth.entities.RefreshToken;
+import com.ex.web.auth.entities.RefreshToken;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.repositories.RefreshTokenRepository;
+import com.ex.web.auth.repositories.RefreshTokenRepository;
+import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.auth.repositories.UserRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
+import java.time.Instant;
+import java.time.Instant;
+import java.util.UUID;
+import java.util.UUID;
+
+
+@Service
+@Service
+public class RefreshTokenService {
+public class RefreshTokenService {
+    private final UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
+
+
+    public RefreshTokenService(UserRepository userRepository, RefreshTokenRepository refreshTokenRepository) {
+    public RefreshTokenService(UserRepository userRepository, RefreshTokenRepository refreshTokenRepository) {
+        this.userRepository = userRepository;
+        this.userRepository = userRepository;
+        this.refreshTokenRepository = refreshTokenRepository;
+        this.refreshTokenRepository = refreshTokenRepository;
+    }
+    }
+
+
+    public RefreshToken createRefreshToken(String username) {
+    public RefreshToken createRefreshToken(String username) {
+        User user = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + username));
+        User user = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + username));
+        RefreshToken refreshToken = user.getRefreshToken();
+        RefreshToken refreshToken = user.getRefreshToken();
+        if (refreshToken == null) {
+        if (refreshToken == null) {
+            long refreshTokenValidity = 30 * 100000;
+            long refreshTokenValidity = 30 * 100000;
+            refreshToken = RefreshToken.builder().refreshToken(UUID.randomUUID().toString()).expirationTime(Instant.now().plusMillis(refreshTokenValidity)).user(user).build();
+            refreshToken = RefreshToken.builder().refreshToken(UUID.randomUUID().toString()).expirationTime(Instant.now().plusMillis(refreshTokenValidity)).user(user).build();
+            refreshTokenRepository.save(refreshToken);
+            refreshTokenRepository.save(refreshToken);
+        }
+        }
+        return refreshToken;
+        return refreshToken;
+    }
+    }
+
+
+    public RefreshToken verifyRefreshToken(String refreshToken) {
+    public RefreshToken verifyRefreshToken(String refreshToken) {
+        RefreshToken refToken = refreshTokenRepository.findByRefreshToken(refreshToken).orElseThrow(() -> new RuntimeException("Refresh token not found!"));
+        RefreshToken refToken = refreshTokenRepository.findByRefreshToken(refreshToken).orElseThrow(() -> new RuntimeException("Refresh token not found!"));
+        if (refToken.getExpirationTime().compareTo(Instant.now()) < 0) {
+        if (refToken.getExpirationTime().compareTo(Instant.now()) < 0) {
+            refreshTokenRepository.delete(refToken);
+            refreshTokenRepository.delete(refToken);
+            throw new RuntimeException("Refresh Token expired");
+            throw new RuntimeException("Refresh Token expired");
+        }
+        }
+        return refToken;
+        return refToken;
+    }
+    }
+}
+}
+
+
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/utils/AuthResponse.java =====
+
+package com.ex.web.auth.utils;
+package com.ex.web.auth.utils;
+
+
+import com.ex.web.auth.entities.TypeUser;
+import com.ex.web.auth.entities.TypeUser;
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@Data
+@AllArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@NoArgsConstructor
+@Builder
+@Builder
+public class AuthResponse {
+public class AuthResponse {
+    private String accessToken;
+    private String accessToken;
+    private String refreshToken;
+    private String refreshToken;
+    private String name;
+    private String name;
+    private String email;
+    private String email;
+    private TypeUser userType;
+    private TypeUser userType;
+}
+}
+
+
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/utils/CreateDoctorRequest.java =====
+
+package com.ex.web.auth.utils;
+package com.ex.web.auth.utils;
+
+
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@Data
+@AllArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@NoArgsConstructor
+@Builder
+@Builder
+public class CreateDoctorRequest {
+public class CreateDoctorRequest {
+    private String name;
+    private String name;
+    private String username;
+    private String username;
+    private String email;
+    private String email;
+    private String password;
+    private String password;
+    private String specializare; // Am adăugat acest câmp
+    private String specializare; // Am adăugat acest câmp
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/utils/DataLoader.java =====
+
+package com.ex.web.auth.utils;
+package com.ex.web.auth.utils;
+
+
+import com.ex.web.auth.entities.TypeUser;
+import com.ex.web.auth.entities.TypeUser;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.auth.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Component;
+
+
+@Component
+@Component
+@RequiredArgsConstructor
+@RequiredArgsConstructor
+public class DataLoader implements CommandLineRunner {
+public class DataLoader implements CommandLineRunner {
+
+
+    private final UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+
+
+    @Override
+    @Override
+    public void run(String... args) throws Exception {
+    public void run(String... args) throws Exception {
+        // Verifică dacă există deja un utilizator ADMIN
+        // Verifică dacă există deja un utilizator ADMIN
+        if (userRepository.findByType(TypeUser.ADMIN).isEmpty()) {
+        if (userRepository.findByType(TypeUser.ADMIN).isEmpty()) {
+            System.out.println("Creating ADMIN account...");
+            System.out.println("Creating ADMIN account...");
+            
+            
+            var admin = User.builder()
+            var admin = User.builder()
+                    .name("admin")
+                    .name("admin")
+                    .username("admin")
+                    .username("admin")
+                    .email("admin@gmail.com")
+                    .email("admin@gmail.com")
+                    .password(passwordEncoder.encode("admin1234"))
+                    .password(passwordEncoder.encode("admin1234"))
+                    .type(TypeUser.ADMIN)
+                    .type(TypeUser.ADMIN)
+                    .build();
+                    .build();
+            
+            
+            userRepository.save(admin);
+            userRepository.save(admin);
+            System.out.println("ADMIN account created successfully!");
+            System.out.println("ADMIN account created successfully!");
+        } else {
+        } else {
+            System.out.println("ADMIN account already exists.");
+            System.out.println("ADMIN account already exists.");
+        }
+        }
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/utils/LoginRequest.java =====
+
+package com.ex.web.auth.utils;
+package com.ex.web.auth.utils;
+
+
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@Data
+@NoArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@AllArgsConstructor
+@Builder
+@Builder
+public class LoginRequest {
+public class LoginRequest {
+    private String email;
+    private String email;
+    private String password;
+    private String password;
+}
+}
+
+
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/utils/RefreshTokenRequest.java =====
+
+package com.ex.web.auth.utils;
+package com.ex.web.auth.utils;
+
+
+import lombok.Data;
+import lombok.Data;
+
+
+@Data
+@Data
+public class RefreshTokenRequest {
+public class RefreshTokenRequest {
+    private String refreshToken;
+    private String refreshToken;
+}
+}
+
+
+
+
+===== FILE: ./src/main/java/com/ex/web/auth/utils/RegisterRequest.java =====
+
+package com.ex.web.auth.utils;
+package com.ex.web.auth.utils;
+
+
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@Data
+@AllArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@NoArgsConstructor
+@Builder
+@Builder
+public class RegisterRequest {
+public class RegisterRequest {
+    private String name;
+    private String name;
+    private String username;
+    private String username;
+    private String email;
+    private String email;
+    private String password;
+    private String password;
+
+
+    // Medic-specific fields
+    // Medic-specific fields
+    private String specializare;
+    private String specializare;
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/controllers/MedicalEventController.java =====
+
+package com.ex.web.controllers;
+package com.ex.web.controllers;
+
+
+import com.ex.web.dto.request.MedicalEventRequestDTO;
+import com.ex.web.dto.request.MedicalEventRequestDTO;
+import com.ex.web.dto.response.MedicalEventResponseDTO;
+import com.ex.web.dto.response.MedicalEventResponseDTO;
+import com.ex.web.services.MedicalEventService;
+import com.ex.web.services.MedicalEventService;
+import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
+
+
+import java.util.List;
+import java.util.List;
+
+
+@RestController
+@RestController
+@RequestMapping("/api/patients/{patientId}/medical-events")
+@RequestMapping("/api/patients/{patientId}/medical-events")
+@RequiredArgsConstructor
+@RequiredArgsConstructor
+public class MedicalEventController {
+public class MedicalEventController {
+
+
+    private final MedicalEventService medicalEventService;
+    private final MedicalEventService medicalEventService;
+
+
+    @PostMapping
+    @PostMapping
+    @PreAuthorize("hasAuthority('DOCTOR')")
+    @PreAuthorize("hasAuthority('DOCTOR')")
+    public ResponseEntity<Void> addMedicalEvent(
+    public ResponseEntity<Void> addMedicalEvent(
+            @PathVariable Long patientId,
+            @PathVariable Long patientId,
+            @RequestBody MedicalEventRequestDTO request) {
+            @RequestBody MedicalEventRequestDTO request) {
+        medicalEventService.addEvent(patientId, request);
+        medicalEventService.addEvent(patientId, request);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    }
+
+
+    @GetMapping
+    @GetMapping
+    @PreAuthorize("hasAnyAuthority('DOCTOR', 'PATIENT')")
+    @PreAuthorize("hasAnyAuthority('DOCTOR', 'PATIENT')")
+    public ResponseEntity<List<MedicalEventResponseDTO>> getMedicalEvents(
+    public ResponseEntity<List<MedicalEventResponseDTO>> getMedicalEvents(
+            @PathVariable Long patientId) {
+            @PathVariable Long patientId) {
+        List<MedicalEventResponseDTO> events = medicalEventService.getEventsForPatient(patientId);
+        List<MedicalEventResponseDTO> events = medicalEventService.getEventsForPatient(patientId);
+        return ResponseEntity.ok(events);
+        return ResponseEntity.ok(events);
+    }
+    }
+
+
+
+
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/controllers/PatientController.java =====
+
+package com.ex.web.controllers;
+package com.ex.web.controllers;
+
+
+import com.ex.core.entities.Patient;
+import com.ex.core.entities.Patient;
+import com.ex.web.dto.request.MedicalSummaryRequestDTO;
+import com.ex.web.dto.request.MedicalSummaryRequestDTO;
+import com.ex.web.dto.request.PatientRequestDTO;
+import com.ex.web.dto.request.PatientRequestDTO;
+import com.ex.web.dto.response.PatientResponseDTO;
+import com.ex.web.dto.response.PatientResponseDTO;
+import com.ex.web.services.PatientService;
+import com.ex.web.services.PatientService;
+import jakarta.validation.Valid;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
+
+
+import java.util.Objects;
+import java.util.Objects;
+
+
+import static org.springframework.http.ResponseEntity.ok;
+import static org.springframework.http.ResponseEntity.ok;
+
+
+@RestController
+@RestController
+@RequestMapping("/api/patients")
+@RequestMapping("/api/patients")
+@RequiredArgsConstructor
+@RequiredArgsConstructor
+@CrossOrigin(value = "http://localhost:5173/")
+@CrossOrigin(value = "http://localhost:5173/")
+public class PatientController {
+public class PatientController {
+
+
+    private final PatientService patientService;
+    private final PatientService patientService;
+
+
+    @PostMapping("/profile")
+    @PostMapping("/profile")
+    @PreAuthorize("hasAuthority('PATIENT')")
+    @PreAuthorize("hasAuthority('PATIENT')")
+    public ResponseEntity<Void> createPatientProfile(@RequestBody PatientRequestDTO request) {
+    public ResponseEntity<Void> createPatientProfile(@RequestBody PatientRequestDTO request) {
+        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        patientService.createProfile(request, userEmail);
+        patientService.createProfile(request, userEmail);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    }
+
+
+    @GetMapping("/{id}/demographics")
+    @GetMapping("/{id}/demographics")
+    @PreAuthorize("hasAnyAuthority('DOCTOR')")
+    @PreAuthorize("hasAnyAuthority('DOCTOR')")
+    public ResponseEntity<PatientResponseDTO> getDemographics(@PathVariable Long id) {
+    public ResponseEntity<PatientResponseDTO> getDemographics(@PathVariable Long id) {
+
+
+        return patientService.getDemographics(id)
+        return patientService.getDemographics(id)
+                .map(patient -> ok(patientService.mapToDto(patient)))
+                .map(patient -> ok(patientService.mapToDto(patient)))
+                .orElse(ResponseEntity.notFound().build());
+                .orElse(ResponseEntity.notFound().build());
+    }
+    }
+
+
+    @GetMapping("/me")
+    @GetMapping("/me")
+    @PreAuthorize("hasAuthority('PATIENT')")
+    @PreAuthorize("hasAuthority('PATIENT')")
+    public ResponseEntity<PatientResponseDTO> getMyProfile() {
+    public ResponseEntity<PatientResponseDTO> getMyProfile() {
+        String email = Objects.requireNonNull(SecurityContextHolder.getContext().getAuthentication()).getName();
+        String email = Objects.requireNonNull(SecurityContextHolder.getContext().getAuthentication()).getName();
+        return patientService.getDemographicsByEmail(email)
+        return patientService.getDemographicsByEmail(email)
+                .map(patient -> ok(patientService.mapToDto(patient)))
+                .map(patient -> ok(patientService.mapToDto(patient)))
+                .orElse(ResponseEntity.notFound().build());
+                .orElse(ResponseEntity.notFound().build());
+    }
+    }
+
+
+    @PatchMapping("/{id}/medical-summary")
+    @PatchMapping("/{id}/medical-summary")
+    @PreAuthorize("hasAuthority('DOCTOR')")
+    @PreAuthorize("hasAuthority('DOCTOR')")
+    public ResponseEntity<PatientResponseDTO> updateMedicalSummary(
+    public ResponseEntity<PatientResponseDTO> updateMedicalSummary(
+            @PathVariable Long id,
+            @PathVariable Long id,
+            @RequestBody MedicalSummaryRequestDTO request) {
+            @RequestBody MedicalSummaryRequestDTO request) {
+        PatientResponseDTO updatedPatient = patientService.updateMedicalSummary(id, request);
+        PatientResponseDTO updatedPatient = patientService.updateMedicalSummary(id, request);
+        return ResponseEntity.ok(updatedPatient);
+        return ResponseEntity.ok(updatedPatient);
+    }
+    }
+
+
+    @PatchMapping("/create/demographics")
+    @PatchMapping("/create/demographics")
+    @PreAuthorize("hasAuthority('MEDIC')")
+    @PreAuthorize("hasAuthority('MEDIC')")
+    public ResponseEntity<Patient> createDemographics(
+    public ResponseEntity<Patient> createDemographics(
+            @PathVariable Long id,
+            @PathVariable Long id,
+            @Valid @RequestBody PatientRequestDTO request
+            @Valid @RequestBody PatientRequestDTO request
+    ) {
+    ) {
+        return ok(patientService.saveDemographics(id, request));
+        return ok(patientService.saveDemographics(id, request));
+    }
+    }
+
+
+    @DeleteMapping("/{id}/remove")
+    @DeleteMapping("/{id}/remove")
+    @PreAuthorize("hasAuthority('MEDIC')")
+    @PreAuthorize("hasAuthority('MEDIC')")
+    public void deleteDemographics(@PathVariable Long id) {
+    public void deleteDemographics(@PathVariable Long id) {
+        patientService.removeDemographics(id);
+        patientService.removeDemographics(id);
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/controllers/RecommendationController.java =====
+
+package com.ex.web.controllers;
+package com.ex.web.controllers;
+
+
+import com.ex.web.dto.request.RecommendationRequestDTO;
+import com.ex.web.dto.request.RecommendationRequestDTO;
+import com.ex.web.dto.response.RecommendationResponseDTO;
+import com.ex.web.dto.response.RecommendationResponseDTO;
+import com.ex.web.services.RecommendationService;
+import com.ex.web.services.RecommendationService;
+import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
+
+
+import java.util.List;
+import java.util.List;
+
+
+@RestController
+@RestController
+@RequestMapping("/api/patients/recommendations")
+@RequestMapping("/api/patients/recommendations")
+@RequiredArgsConstructor
+@RequiredArgsConstructor
+@CrossOrigin(value = "http://localhost:5173/")
+@CrossOrigin(value = "http://localhost:5173/")
+public class RecommendationController{
+public class RecommendationController{
+
+
+    private final RecommendationService recommendationService;
+    private final RecommendationService recommendationService;
+
+
+    @PostMapping("/for-patient/{patientId}/doctor")
+    @PostMapping("/for-patient/{patientId}/doctor")
+    @PreAuthorize("hasAuthority('DOCTOR')")
+    @PreAuthorize("hasAuthority('DOCTOR')")
+    public ResponseEntity<Void> addRecommendation(@PathVariable Long patientId, @RequestBody RecommendationRequestDTO request){
+    public ResponseEntity<Void> addRecommendation(@PathVariable Long patientId, @RequestBody RecommendationRequestDTO request){
+        recommendationService.addRecommendation(patientId, request);
+        recommendationService.addRecommendation(patientId, request);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    }
+
+
+    @GetMapping("/for-patient/{patientId}")
+    @GetMapping("/for-patient/{patientId}")
+    @PreAuthorize("hasAuthority('PATIENT')")
+    @PreAuthorize("hasAuthority('PATIENT')")
+    public ResponseEntity<?> getRecommendations(@PathVariable Long patientId) {
+    public ResponseEntity<?> getRecommendations(@PathVariable Long patientId) {
+        List<RecommendationResponseDTO> recommendations = recommendationService.getRecommendationsForPatient(patientId);
+        List<RecommendationResponseDTO> recommendations = recommendationService.getRecommendationsForPatient(patientId);
+        return ResponseEntity.ok(recommendationService.getRecommendationsForPatient(patientId));
+        return ResponseEntity.ok(recommendationService.getRecommendationsForPatient(patientId));
+    }
+    }
+
+
+    @DeleteMapping("/{recommendationId}")
+    @DeleteMapping("/{recommendationId}")
+    @PreAuthorize("hasAuthority('DOCTOR')")
+    @PreAuthorize("hasAuthority('DOCTOR')")
+    public ResponseEntity<Void> deleteRecommendation(@PathVariable Long recommendationId){
+    public ResponseEntity<Void> deleteRecommendation(@PathVariable Long recommendationId){
+        recommendationService.deleteRecommendation(recommendationId);
+        recommendationService.deleteRecommendation(recommendationId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+    }
+
+
+    @PatchMapping("/{recommendationId}")
+    @PatchMapping("/{recommendationId}")
+    @PreAuthorize("hasAuthority('DOCTOR')")
+    @PreAuthorize("hasAuthority('DOCTOR')")
+    public ResponseEntity<RecommendationResponseDTO> updateRecommendation(
+    public ResponseEntity<RecommendationResponseDTO> updateRecommendation(
+            @PathVariable Long recommendationId ,
+            @PathVariable Long recommendationId ,
+            @RequestBody RecommendationRequestDTO request){
+            @RequestBody RecommendationRequestDTO request){
+        return ResponseEntity.ok(recommendationService.updateRecommendation(recommendationId, request));
+        return ResponseEntity.ok(recommendationService.updateRecommendation(recommendationId, request));
+    }
+    }
+
+
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/controllers/TelemetryController.java =====
+
+package com.ex.web.controllers;
+package com.ex.web.controllers;
+
+
+import com.ex.core.entities.TelemetryMeasurement;
+import com.ex.core.entities.TelemetryMeasurement;
+import com.ex.core.repositories.TelemetryMeasurementRepository;
+import com.ex.core.repositories.TelemetryMeasurementRepository;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+
+
+
+import java.util.List;
+import java.util.List;
+
+
+@RestController
+@RestController
+@RequestMapping("/api/telemetry")
+@RequestMapping("/api/telemetry")
+@RequiredArgsConstructor
+@RequiredArgsConstructor
+@CrossOrigin(value = "http://localhost:5173")
+@CrossOrigin(value = "http://localhost:5173")
+public class TelemetryController {
+public class TelemetryController {
+
+
+    private final TelemetryMeasurementRepository telemetryMeasurementRepository;
+    private final TelemetryMeasurementRepository telemetryMeasurementRepository;
+
+
+    @GetMapping("/me")
+    @GetMapping("/me")
+    @PreAuthorize("hasAuthority('PATIENT')")
+    @PreAuthorize("hasAuthority('PATIENT')")
+    public ResponseEntity<List<TelemetryMeasurement>> getMyTelemetryData(@AuthenticationPrincipal User user) {
+    public ResponseEntity<List<TelemetryMeasurement>> getMyTelemetryData(@AuthenticationPrincipal User user) {
+        // Presupunem că ID-ul pacientului este același cu ID-ul utilizatorului.
+        // Presupunem că ID-ul pacientului este același cu ID-ul utilizatorului.
+        // Aceasta este o presupunere care ar putea necesita ajustare în funcție de modelul de date exact.
+        // Aceasta este o presupunere care ar putea necesita ajustare în funcție de modelul de date exact.
+        List<TelemetryMeasurement> measurements = telemetryMeasurementRepository.findTop100ByPatient_User_IdOrderByTimestampDesc(user.getId());
+        List<TelemetryMeasurement> measurements = telemetryMeasurementRepository.findTop100ByPatient_User_IdOrderByTimestampDesc(user.getId());
+        return ResponseEntity.ok(measurements);
+        return ResponseEntity.ok(measurements);
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/controllers/UserController.java =====
+
+package com.ex.web.controllers;
+package com.ex.web.controllers;
+
+
+import com.ex.web.dto.response.CurrentUserResponse;
+import com.ex.web.dto.response.CurrentUserResponse;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.services.AuthService;
+import com.ex.web.auth.services.AuthService;
+import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+@RestController
+@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1/users")
+@CrossOrigin(value = "http://localhost:5173/")
+@CrossOrigin(value = "http://localhost:5173/")
+@RequiredArgsConstructor
+@RequiredArgsConstructor
+public class UserController {
+public class UserController {
+
+
+    private final AuthService authService;
+    private final AuthService authService;
+
+
+    @GetMapping("/me")
+    @GetMapping("/me")
+    public ResponseEntity<CurrentUserResponse> getCurrentUser(Authentication authentication) {
+    public ResponseEntity<CurrentUserResponse> getCurrentUser(Authentication authentication) {
+        User currentUser = (User) authentication.getPrincipal();
+        User currentUser = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(authService.createCurrentUserResponse(currentUser));
+        return ResponseEntity.ok(authService.createCurrentUserResponse(currentUser));
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/dto/request/AlertRequestDTO.java =====
+
+package com.ex.web.dto.request;
+package com.ex.web.dto.request;
+
+
+import lombok.Data;
+import lombok.Data;
+
+
+@Data
+@Data
+public class AlertRequestDTO {
+public class AlertRequestDTO {
+    /*
+    /*
+    trebuie completat dupa ce este realizat embedded
+    trebuie completat dupa ce este realizat embedded
+     */
+     */
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/dto/request/MedicalEventRequestDTO.java =====
+
+package com.ex.web.dto.request;
+package com.ex.web.dto.request;
+
+
+import com.ex.core.entities.enums.EventType;
+import com.ex.core.entities.enums.EventType;
+import lombok.Data;
+import lombok.Data;
+
+
+import java.time.LocalDate;
+import java.time.LocalDate;
+@Data
+@Data
+
+
+public class MedicalEventRequestDTO {
+public class MedicalEventRequestDTO {
+
+
+    private LocalDate eventDate;
+    private LocalDate eventDate;
+    private EventType eventType;
+    private EventType eventType;
+    private String details;
+    private String details;
+
+
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/dto/request/MedicalSummaryRequestDTO.java =====
+
+package com.ex.web.dto.request;
+package com.ex.web.dto.request;
+
+
+import lombok.Data;
+import lombok.Data;
+
+
+@Data
+@Data
+public class MedicalSummaryRequestDTO {
+public class MedicalSummaryRequestDTO {
+    private String generalMedicalHistory;
+    private String generalMedicalHistory;
+    private String knownAllergies;
+    private String knownAllergies;
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/dto/request/PatientRequestDTO.java =====
+
+package com.ex.web.dto.request;
+package com.ex.web.dto.request;
+
+
+import com.ex.core.entities.Address;
+import com.ex.core.entities.Address;
+import com.ex.core.entities.enums.Gender;
+import com.ex.core.entities.enums.Gender;
+import lombok.Data;
+import lombok.Data;
+import java.time.LocalDate;
+import java.time.LocalDate;
+
+
+@Data
+@Data
+public class PatientRequestDTO {
+public class PatientRequestDTO {
+    private String name;
+    private String name;
+    private LocalDate bornDate;
+    private LocalDate bornDate;
+    private String cnp;
+    private String cnp;
+    private Address address;
+    private Address address;
+    private Gender gender;
+    private Gender gender;
+    private String phone;
+    private String phone;
+    private String email;
+    private String email;
+    private String profesion;
+    private String profesion;
+    private String job;
+    private String job;
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/dto/request/RecommendationRequestDTO.java =====
+
+package com.ex.web.dto.request;
+package com.ex.web.dto.request;
+
+
+import com.ex.core.entities.enums.RecommendationType;
+import com.ex.core.entities.enums.RecommendationType;
+import lombok.Data;
+import lombok.Data;
+
+
+@Data
+@Data
+public class RecommendationRequestDTO {
+public class RecommendationRequestDTO {
+
+
+    private RecommendationType recommendationType;
+    private RecommendationType recommendationType;
+    private String details;
+    private String details;
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/dto/response/AlertResponseDTO.java =====
+
+package com.ex.web.dto.response;
+package com.ex.web.dto.response;
+
+
+import lombok.Data;
+import lombok.Data;
+
+
+@Data
+@Data
+public class AlertResponseDTO {
+public class AlertResponseDTO {
+    /*
+    /*
+    trebuie completat dupa ce este realizat embedded
+    trebuie completat dupa ce este realizat embedded
+     */
+     */
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/dto/response/CurrentUserResponse.java =====
+
+package com.ex.web.dto.response;
+package com.ex.web.dto.response;
+
+
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@Data
+@Builder
+@Builder
+@AllArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@NoArgsConstructor
+public class CurrentUserResponse {
+public class CurrentUserResponse {
+
+
+    private Long id;
+    private Long id;
+    private String name;
+    private String name;
+    private String email;
+    private String email;
+    private String role;
+    private String role;
+    private Long patientId;
+    private Long patientId;
+    private Long medicId;
+    private Long medicId;
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/dto/response/MedicalEventResponseDTO.java =====
+
+package com.ex.web.dto.response;
+package com.ex.web.dto.response;
+
+
+import com.ex.core.entities.enums.EventType;
+import com.ex.core.entities.enums.EventType;
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+import java.time.LocalDate;
+import java.time.LocalDate;
+
+
+@Data
+@Data
+@NoArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@AllArgsConstructor
+public class MedicalEventResponseDTO {
+public class MedicalEventResponseDTO {
+
+
+    private LocalDate eventDate;
+    private LocalDate eventDate;
+    private EventType eventType;
+    private EventType eventType;
+    private String details;
+    private String details;
+
+
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/dto/response/PatientResponseDTO.java =====
+
+package com.ex.web.dto.response;
+package com.ex.web.dto.response;
+
+
+import com.ex.core.entities.Address;
+import com.ex.core.entities.Address;
+import com.ex.core.entities.enums.Gender;
+import com.ex.core.entities.enums.Gender;
+import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+import java.time.LocalDate;
+import java.time.LocalDate;
+
+
+@Data
+@Data
+@AllArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@NoArgsConstructor
+public class PatientResponseDTO {
+public class PatientResponseDTO {
+    private String name;
+    private String name;
+    private LocalDate bornDate;
+    private LocalDate bornDate;
+    private String cnp;
+    private String cnp;
+    private Gender gender;
+    private Gender gender;
+    private Address address;
+    private Address address;
+    private String phone;
+    private String phone;
+    private String email;
+    private String email;
+    private String profesion;
+    private String profesion;
+    private String job;
+    private String job;
+    private String generalMedicalHistory; // Adăugat
+    private String generalMedicalHistory; // Adăugat
+    private String knownAllergies;      // Adăugat
+    private String knownAllergies;      // Adăugat
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/dto/response/RecommendationResponseDTO.java =====
+
+package com.ex.web.dto.response;
+package com.ex.web.dto.response;
+
+
+import com.ex.core.entities.enums.RecommendationType;
+import com.ex.core.entities.enums.RecommendationType;
+import lombok.Data;
+import lombok.Data;
+
+
+@Data
+@Data
+public class RecommendationResponseDTO {
+public class RecommendationResponseDTO {
+
+
+    private RecommendationType recommendationType;
+    private RecommendationType recommendationType;
+    private String details;
+    private String details;
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/services/MedicalEventService.java =====
+
+package com.ex.web.services;
+package com.ex.web.services;
+
+
+import com.ex.core.entities.MedicalEvent;
+import com.ex.core.entities.MedicalEvent;
+import com.ex.core.entities.Patient;
+import com.ex.core.entities.Patient;
+import com.ex.core.repositories.MedicalEventRepository;
+import com.ex.core.repositories.MedicalEventRepository;
+import com.ex.core.repositories.PatientRepository;
+import com.ex.core.repositories.PatientRepository;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.dto.request.MedicalEventRequestDTO;
+import com.ex.web.dto.request.MedicalEventRequestDTO;
+import com.ex.web.dto.response.MedicalEventResponseDTO;
+import com.ex.web.dto.response.MedicalEventResponseDTO;
+import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
+
+
+import java.util.List;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Collectors;
+
+
+@Service
+@Service
+@RequiredArgsConstructor
+@RequiredArgsConstructor
+public class MedicalEventService {
+public class MedicalEventService {
+
+
+    private final MedicalEventRepository medicalEventRepository;
+    private final MedicalEventRepository medicalEventRepository;
+    private final PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
+    private final UserRepository userRepository;
+    private final UserRepository userRepository;
+
+
+    public void addEvent(Long patientId, MedicalEventRequestDTO request) {
+    public void addEvent(Long patientId, MedicalEventRequestDTO request) {
+        var patient = patientRepository.findById(patientId)
+        var patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+
+
+        var medicalEvent = MedicalEvent.builder()
+        var medicalEvent = MedicalEvent.builder()
+                .eventData(request.getEventDate())
+                .eventData(request.getEventDate())
+                .eventType(request.getEventType())
+                .eventType(request.getEventType())
+                .details(request.getDetails())
+                .details(request.getDetails())
+                .patient(patient)
+                .patient(patient)
+                .build();
+                .build();
+
+
+        medicalEventRepository.save(medicalEvent);
+        medicalEventRepository.save(medicalEvent);
+    }
+    }
+
+
+    public List<MedicalEventResponseDTO> getEventsForPatient(Long patientId) {
+    public List<MedicalEventResponseDTO> getEventsForPatient(Long patientId) {
+
+
+        patientRepository.findById(patientId)
+        patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+
+
+        // Pas 1: Obține utilizatorul curent logat
+        // Pas 1: Obține utilizatorul curent logat
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        String currentUsername = authentication.getName();
+        User currentUser = userRepository.findByEmail(currentUsername)
+        User currentUser = userRepository.findByEmail(currentUsername)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+
+        // Pas 2: Aplică logica de securitate
+        // Pas 2: Aplică logica de securitate
+        boolean isDoctor = authentication.getAuthorities().stream()
+        boolean isDoctor = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("DOCTOR"));
+                .anyMatch(a -> a.getAuthority().equals("DOCTOR"));
+
+
+        boolean isPatientViewingOwnData = false;
+        boolean isPatientViewingOwnData = false;
+        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("PATIENT"))) {
+        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("PATIENT"))) {
+            isPatientViewingOwnData = patientRepository.findByUser(currentUser)
+            isPatientViewingOwnData = patientRepository.findByUser(currentUser)
+                    .map(patient -> patient.getId().equals(patientId))
+                    .map(patient -> patient.getId().equals(patientId))
+                    .orElse(false);
+                    .orElse(false);
+        }
+        }
+
+
+        // Pas 3: Dacă nu este doctor și nici pacientul care își vede propriile date, refuză accesul
+        // Pas 3: Dacă nu este doctor și nici pacientul care își vede propriile date, refuză accesul
+        if (!isDoctor && !isPatientViewingOwnData) {
+        if (!isDoctor && !isPatientViewingOwnData) {
+            throw new AccessDeniedException("You do not have permission to view these medical events.");
+            throw new AccessDeniedException("You do not have permission to view these medical events.");
+        }
+        }
+
+
+        // Pas 4: Dacă securitatea a trecut, filtrează și returnează evenimentele
+        // Pas 4: Dacă securitatea a trecut, filtrează și returnează evenimentele
+        // Se încarcă toate evenimentele și se filtrează în memorie pentru a nu modifica Repository-ul
+        // Se încarcă toate evenimentele și se filtrează în memorie pentru a nu modifica Repository-ul
+        return medicalEventRepository.findAll().stream()
+        return medicalEventRepository.findAll().stream()
+                .filter(event -> event.getPatient().getId().equals(patientId))
+                .filter(event -> event.getPatient().getId().equals(patientId))
+                .map(this::mapToDto)
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+                .collect(Collectors.toList());
+    }
+    }
+
+
+    // Mapper privat pentru a converti Entitatea în DTO
+    // Mapper privat pentru a converti Entitatea în DTO
+    private MedicalEventResponseDTO mapToDto(MedicalEvent event) {
+    private MedicalEventResponseDTO mapToDto(MedicalEvent event) {
+        MedicalEventResponseDTO dto = new MedicalEventResponseDTO();
+        MedicalEventResponseDTO dto = new MedicalEventResponseDTO();
+        dto.setEventDate(event.getEventData());
+        dto.setEventDate(event.getEventData());
+        dto.setEventType(event.getEventType());
+        dto.setEventType(event.getEventType());
+        dto.setDetails(event.getDetails());
+        dto.setDetails(event.getDetails());
+        return dto;
+        return dto;
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/services/PatientService.java =====
+
+package com.ex.web.services;
+package com.ex.web.services;
+
+
+import com.ex.core.entities.Patient;
+import com.ex.core.entities.Patient;
+import com.ex.core.repositories.PatientRepository;
+import com.ex.core.repositories.PatientRepository;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.dto.request.MedicalSummaryRequestDTO;
+import com.ex.web.dto.request.MedicalSummaryRequestDTO;
+import com.ex.web.dto.request.PatientRequestDTO;
+import com.ex.web.dto.request.PatientRequestDTO;
+import com.ex.web.dto.response.PatientResponseDTO;
+import com.ex.web.dto.response.PatientResponseDTO;
+import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+
+
+import java.util.Optional;
+import java.util.Optional;
+import java.util.Set;
+import java.util.Set;
+import java.util.stream.IntStream;
+import java.util.stream.IntStream;
+
+
+@Service
+@Service
+@RequiredArgsConstructor
+@RequiredArgsConstructor
+public class PatientService {
+public class PatientService {
+
+
+    private final UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
+
+
+    //Mapper din entity in DTO
+    //Mapper din entity in DTO
+    public PatientResponseDTO mapToDto(Patient patient) {
+    public PatientResponseDTO mapToDto(Patient patient) {
+        PatientResponseDTO dto = new PatientResponseDTO();
+        PatientResponseDTO dto = new PatientResponseDTO();
+        dto.setName(patient.getName());
+        dto.setName(patient.getName());
+        dto.setBornDate(patient.getBornDate());
+        dto.setBornDate(patient.getBornDate());
+        dto.setCnp(patient.getCnp());
+        dto.setCnp(patient.getCnp());
+        dto.setGender(patient.getGender());
+        dto.setGender(patient.getGender());
+        dto.setAddress(patient.getAddress());
+        dto.setAddress(patient.getAddress());
+        dto.setPhone(patient.getPhone());
+        dto.setPhone(patient.getPhone());
+        dto.setEmail(patient.getEmail());
+        dto.setEmail(patient.getEmail());
+        dto.setProfesion(patient.getProfesion());
+        dto.setProfesion(patient.getProfesion());
+        dto.setJob(patient.getJob());
+        dto.setJob(patient.getJob());
+        dto.setGeneralMedicalHistory(patient.getGeneralMedicalHistory());
+        dto.setGeneralMedicalHistory(patient.getGeneralMedicalHistory());
+        dto.setKnownAllergies(patient.getKnownAllergies());
+        dto.setKnownAllergies(patient.getKnownAllergies());
+        return dto;
+        return dto;
+    }
+    }
+
+
+    //2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9 sunt cifrele de control
+    //2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9 sunt cifrele de control
+    private static final int[] CNP_WEIGHTS = {2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9};
+    private static final int[] CNP_WEIGHTS = {2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9};
+    private static final Set<Integer> VALID_FIRST_DIGITS = Set.of(1, 2, 3, 4, 5, 6, 7, 8);
+    private static final Set<Integer> VALID_FIRST_DIGITS = Set.of(1, 2, 3, 4, 5, 6, 7, 8);
+
+
+    private void validateCnp(String cnp) {
+    private void validateCnp(String cnp) {
+        Optional.ofNullable(cnp)
+        Optional.ofNullable(cnp)
+                .filter(c -> c.matches("^[0-9]{13}$"))
+                .filter(c -> c.matches("^[0-9]{13}$"))
+                .filter(c -> isFirstDigitValid(c))
+                .filter(c -> isFirstDigitValid(c))
+                .filter(c -> isMonthValid(c))
+                .filter(c -> isMonthValid(c))
+                .filter(c -> isDayValid(c))
+                .filter(c -> isDayValid(c))
+                .filter(c -> isCountyValid(c))
+                .filter(c -> isCountyValid(c))
+                .filter(c -> isOrderNumberValid(c))
+                .filter(c -> isOrderNumberValid(c))
+                .filter(c -> isControlDigitValid(c))
+                .filter(c -> isControlDigitValid(c))
+                .orElseThrow(() -> new IllegalArgumentException("CNP invalid"));
+                .orElseThrow(() -> new IllegalArgumentException("CNP invalid"));
+    }
+    }
+
+
+    // Prima cifra - sex si secol
+    // Prima cifra - sex si secol
+    private boolean isFirstDigitValid(String cnp) {
+    private boolean isFirstDigitValid(String cnp) {
+        int firstDigit = cnp.charAt(0) - '0';
+        int firstDigit = cnp.charAt(0) - '0';
+        return VALID_FIRST_DIGITS.contains(firstDigit);
+        return VALID_FIRST_DIGITS.contains(firstDigit);
+    }
+    }
+
+
+    // Cifrele 4-5 - luna nasterii
+    // Cifrele 4-5 - luna nasterii
+    private boolean isMonthValid(String cnp) {
+    private boolean isMonthValid(String cnp) {
+        int month = Integer.parseInt(cnp.substring(3, 5));
+        int month = Integer.parseInt(cnp.substring(3, 5));
+        return month >= 1 && month <= 12;
+        return month >= 1 && month <= 12;
+    }
+    }
+
+
+    // Cifrele 6-7 - ziua nasterii
+    // Cifrele 6-7 - ziua nasterii
+    private boolean isDayValid(String cnp) {
+    private boolean isDayValid(String cnp) {
+        int day = Integer.parseInt(cnp.substring(5, 7));
+        int day = Integer.parseInt(cnp.substring(5, 7));
+        return day >= 1 && day <= 31;
+        return day >= 1 && day <= 31;
+    }
+    }
+
+
+    // Cifrele 8-9 - codul judetului
+    // Cifrele 8-9 - codul judetului
+    private boolean isCountyValid(String cnp) {
+    private boolean isCountyValid(String cnp) {
+        int county = Integer.parseInt(cnp.substring(7, 9));
+        int county = Integer.parseInt(cnp.substring(7, 9));
+        return county >= 1 && county <= 52;
+        return county >= 1 && county <= 52;
+    }
+    }
+
+
+    // Cifrele 10-12 - numarul de ordine
+    // Cifrele 10-12 - numarul de ordine
+    private boolean isOrderNumberValid(String cnp) {
+    private boolean isOrderNumberValid(String cnp) {
+        int orderNumber = Integer.parseInt(cnp.substring(9, 12));
+        int orderNumber = Integer.parseInt(cnp.substring(9, 12));
+        return orderNumber >= 1 && orderNumber <= 999;
+        return orderNumber >= 1 && orderNumber <= 999;
+    }
+    }
+
+
+    // Ultima cifra - cifra de control
+    // Ultima cifra - cifra de control
+    private boolean isControlDigitValid(String cnp) {
+    private boolean isControlDigitValid(String cnp) {
+        int sum = IntStream.range(0, 12)
+        int sum = IntStream.range(0, 12)
+                .map(i -> (cnp.charAt(i) - '0') * CNP_WEIGHTS[i])
+                .map(i -> (cnp.charAt(i) - '0') * CNP_WEIGHTS[i])
+                .sum();
+                .sum();
+
+
+        int remainder = sum % 11;
+        int remainder = sum % 11;
+        int controlDigit = (remainder == 10) ? 1 : remainder;
+        int controlDigit = (remainder == 10) ? 1 : remainder;
+
+
+        return controlDigit == (cnp.charAt(12) - '0');
+        return controlDigit == (cnp.charAt(12) - '0');
+    }
+    }
+
+
+    private void validateCnpUniqueness(String cnp) {
+    private void validateCnpUniqueness(String cnp) {
+        if(patientRepository.existsPatientByCnp(cnp)) {
+        if(patientRepository.existsPatientByCnp(cnp)) {
+            throw new IllegalArgumentException("CNP already exists");
+            throw new IllegalArgumentException("CNP already exists");
+        }
+        }
+    }
+    }
+
+
+
+
+    @Transactional
+    @Transactional
+    public void createProfile(PatientRequestDTO request, String userEmail) {
+    public void createProfile(PatientRequestDTO request, String userEmail) {
+
+
+        User user = userRepository.findByEmail(userEmail)
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
+
+
+
+
+        if (patientRepository.findByUser(user).isPresent()) {
+        if (patientRepository.findByUser(user).isPresent()) {
+            throw new IllegalStateException("Patient profile already exists for this user.");
+            throw new IllegalStateException("Patient profile already exists for this user.");
+        }
+        }
+
+
+
+
+        Patient patientProfile = Patient.builder()
+        Patient patientProfile = Patient.builder()
+                .name(request.getName())
+                .name(request.getName())
+                .bornDate(request.getBornDate())
+                .bornDate(request.getBornDate())
+                .cnp(request.getCnp())
+                .cnp(request.getCnp())
+                .gender(request.getGender())
+                .gender(request.getGender())
+                .address(request.getAddress())
+                .address(request.getAddress())
+                .phone(request.getPhone())  
+                .phone(request.getPhone())  
+                .email(request.getEmail())
+                .email(request.getEmail())
+                .profesion(request.getProfesion())
+                .profesion(request.getProfesion())
+                .job(request.getJob())
+                .job(request.getJob())
+                .user(user)
+                .user(user)
+                .build();
+                .build();
+
+
+        patientRepository.save(patientProfile);
+        patientRepository.save(patientProfile);
+    }
+    }
+
+
+    public Optional<Patient> getDemographics(Long id) {
+    public Optional<Patient> getDemographics(Long id) {
+        return patientRepository.findById(id);
+        return patientRepository.findById(id);
+    }
+    }
+
+
+    public Optional<Patient> getDemographicsByEmail(String email){
+    public Optional<Patient> getDemographicsByEmail(String email){
+        return patientRepository.findByUserEmail(email);
+        return patientRepository.findByUserEmail(email);
+    }
+    }
+
+
+    @Transactional
+    @Transactional
+    public PatientResponseDTO updateMedicalSummary(Long patientId, MedicalSummaryRequestDTO request) {
+    public PatientResponseDTO updateMedicalSummary(Long patientId, MedicalSummaryRequestDTO request) {
+        Patient patient = patientRepository.findById(patientId)
+        Patient patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+
+
+        patient.setGeneralMedicalHistory(request.getGeneralMedicalHistory());
+        patient.setGeneralMedicalHistory(request.getGeneralMedicalHistory());
+        patient.setKnownAllergies(request.getKnownAllergies());
+        patient.setKnownAllergies(request.getKnownAllergies());
+
+
+        Patient updatedPatient = patientRepository.save(patient);
+        Patient updatedPatient = patientRepository.save(patient);
+        return mapToDto(updatedPatient);
+        return mapToDto(updatedPatient);
+    }
+    }
+
+
+    public Patient saveDemographics(Long id, PatientRequestDTO dto) {
+    public Patient saveDemographics(Long id, PatientRequestDTO dto) {
+        Patient patient = patientRepository.findById(id)
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+
+
+        patient.setName(dto.getName());
+        patient.setName(dto.getName());
+        patient.setBornDate(dto.getBornDate());
+        patient.setBornDate(dto.getBornDate());
+        patient.setCnp(dto.getCnp());
+        patient.setCnp(dto.getCnp());
+        patient.setAddress(dto.getAddress());
+        patient.setAddress(dto.getAddress());
+        patient.setGender(dto.getGender());
+        patient.setGender(dto.getGender());
+        patient.setPhone(dto.getPhone());
+        patient.setPhone(dto.getPhone());
+        patient.setEmail(dto.getEmail());
+        patient.setEmail(dto.getEmail());
+        patient.setProfesion(dto.getProfesion());
+        patient.setProfesion(dto.getProfesion());
+        patient.setJob(dto.getJob());
+        patient.setJob(dto.getJob());
+
+
+        return patientRepository.save(patient);
+        return patientRepository.save(patient);
+
+
+    }
+    }
+
+
+    public void removeDemographics(Long id) {
+    public void removeDemographics(Long id) {
+        patientRepository.deleteById(id);
+        patientRepository.deleteById(id);
+    }
+    }
+
+
+
+
+}
+}
+
+
+===== FILE: ./src/main/java/com/ex/web/services/RecommendationService.java =====
+
+package com.ex.web.services;
+package com.ex.web.services;
+
+
+import com.ex.core.entities.Patient;
+import com.ex.core.entities.Patient;
+import com.ex.core.entities.Recommendation;
+import com.ex.core.entities.Recommendation;
+import com.ex.core.repositories.MedicRepository;
+import com.ex.core.repositories.MedicRepository;
+import com.ex.core.repositories.PatientRepository;
+import com.ex.core.repositories.PatientRepository;
+import com.ex.core.repositories.RecommendationRepository;
+import com.ex.core.repositories.RecommendationRepository;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.entities.User;
+import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.auth.repositories.UserRepository;
+import com.ex.web.dto.request.RecommendationRequestDTO;
+import com.ex.web.dto.request.RecommendationRequestDTO;
+import com.ex.web.dto.response.RecommendationResponseDTO;
+import com.ex.web.dto.response.RecommendationResponseDTO;
+import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+
+
+import java.time.LocalDate;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Collectors;
+
+
+@Service
+@Service
+@RequiredArgsConstructor
+@RequiredArgsConstructor
+public class RecommendationService {
+public class RecommendationService {
+
+
+    private final RecommendationRepository recommendationRepository;
+    private final RecommendationRepository recommendationRepository;
+    private final PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
+    private final UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final MedicRepository medicRepository;
+    private final MedicRepository medicRepository;
+
+
+    @Transactional
+    @Transactional
+    public RecommendationResponseDTO addRecommendation(Long patientId, RecommendationRequestDTO request) {
+    public RecommendationResponseDTO addRecommendation(Long patientId, RecommendationRequestDTO request) {
+        Patient patient = patientRepository.findById(patientId)
+        Patient patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+
+
+        User currentUser = getCurrentUser();
+        User currentUser = getCurrentUser();
+        var medic = medicRepository.findByUser(currentUser)
+        var medic = medicRepository.findByUser(currentUser)
+                .orElseThrow(() -> new AccessDeniedException("Only a logged-in medic can create recommendations."));
+                .orElseThrow(() -> new AccessDeniedException("Only a logged-in medic can create recommendations."));
+
+
+        Recommendation recommendation = Recommendation.builder()
+        Recommendation recommendation = Recommendation.builder()
+                .recommendationType(request.getRecommendationType())
+                .recommendationType(request.getRecommendationType())
+                .details(request.getDetails())
+                .details(request.getDetails())
+                .patient(patient)
+                .patient(patient)
+                .build();
+                .build();
+
+
+        Recommendation savedRecommendation = recommendationRepository.save(recommendation);
+        Recommendation savedRecommendation = recommendationRepository.save(recommendation);
+        return mapToDto(savedRecommendation);
+        return mapToDto(savedRecommendation);
+    }
+    }
+
+
+    public List<RecommendationResponseDTO> getRecommendationsForPatient(Long patientId) {
+    public List<RecommendationResponseDTO> getRecommendationsForPatient(Long patientId) {
+        // Pas 0: Verifică dacă pacientul cerut există
+        // Pas 0: Verifică dacă pacientul cerut există
+        Patient requestedPatient = patientRepository.findById(patientId)
+        Patient requestedPatient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+
+
+        // Pas 1: Obține utilizatorul curent logat
+        // Pas 1: Obține utilizatorul curent logat
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = getCurrentUser();
+        User currentUser = getCurrentUser();
+
+
+        // Pas 2: Aplică logica de securitate
+        // Pas 2: Aplică logica de securitate
+        boolean isDoctor = authentication.getAuthorities().stream()
+        boolean isDoctor = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("DOCTOR"));
+                .anyMatch(a -> a.getAuthority().equals("DOCTOR"));
+
+
+        boolean isPatientViewingOwnData = false;
+        boolean isPatientViewingOwnData = false;
+        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("PATIENT"))) {
+        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("PATIENT"))) {
+            isPatientViewingOwnData = patientRepository.findByUser(currentUser)
+            isPatientViewingOwnData = patientRepository.findByUser(currentUser)
+                    .map(patient -> patient.getId().equals(patientId))
+                    .map(patient -> patient.getId().equals(patientId))
+                    .orElse(false);
+                    .orElse(false);
+        }
+        }
+
+
+        // Pas 3: Dacă nu este doctor și nici pacientul care își vede propriile date, refuză accesul
+        // Pas 3: Dacă nu este doctor și nici pacientul care își vede propriile date, refuză accesul
+        if (!isDoctor && !isPatientViewingOwnData) {
+        if (!isDoctor && !isPatientViewingOwnData) {
+            throw new AccessDeniedException("You do not have permission to view these recommendations.");
+            throw new AccessDeniedException("You do not have permission to view these recommendations.");
+        }
+        }
+
+
+        // Pas 4: Dacă securitatea a trecut, returnează recomandările
+        // Pas 4: Dacă securitatea a trecut, returnează recomandările
+        List<Recommendation> recommendations = recommendationRepository.findByPatient(requestedPatient);
+        List<Recommendation> recommendations = recommendationRepository.findByPatient(requestedPatient);
+        return recommendations.stream()
+        return recommendations.stream()
+                .map(this::mapToDto)
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+                .collect(Collectors.toList());
+    }
+    }
+
+
+    @Transactional
+    @Transactional
+    public RecommendationResponseDTO updateRecommendation(Long recommendationId, RecommendationRequestDTO request) {
+    public RecommendationResponseDTO updateRecommendation(Long recommendationId, RecommendationRequestDTO request) {
+        Recommendation recommendation = recommendationRepository.findById(recommendationId)
+        Recommendation recommendation = recommendationRepository.findById(recommendationId)
+                .orElseThrow(() -> new RuntimeException("Recommendation not found"));
+                .orElseThrow(() -> new RuntimeException("Recommendation not found"));
+
+
+        recommendation.setRecommendationType(request.getRecommendationType());
+        recommendation.setRecommendationType(request.getRecommendationType());
+        recommendation.setDetails(request.getDetails());
+        recommendation.setDetails(request.getDetails());
+
+
+        Recommendation updatedRecommendation = recommendationRepository.save(recommendation);
+        Recommendation updatedRecommendation = recommendationRepository.save(recommendation);
+        return mapToDto(updatedRecommendation);
+        return mapToDto(updatedRecommendation);
+    }
+    }
+
+
+    public void deleteRecommendation(Long recommendationId) {
+    public void deleteRecommendation(Long recommendationId) {
+        if (!recommendationRepository.existsById(recommendationId)) {
+        if (!recommendationRepository.existsById(recommendationId)) {
+            throw new RuntimeException("Recommendation not found");
+            throw new RuntimeException("Recommendation not found");
+        }
+        }
+        recommendationRepository.deleteById(recommendationId);
+        recommendationRepository.deleteById(recommendationId);
+    }
+    }
+
+
+
+
+    private User getCurrentUser() {
+    private User getCurrentUser() {
+        String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByEmail(currentUsername)
+        return userRepository.findByEmail(currentUsername)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+    }
+
+
+    private void checkPermissions(Long patientId) {
+    private void checkPermissions(Long patientId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = getCurrentUser();
+        User currentUser = getCurrentUser();
+
+
+        boolean isDoctor = authentication.getAuthorities().stream()
+        boolean isDoctor = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("DOCTOR"));
+                .anyMatch(a -> a.getAuthority().equals("DOCTOR"));
+
+
+        if (isDoctor) {
+        if (isDoctor) {
+            return; // Doctorii au acces
+            return; // Doctorii au acces
+        }
+        }
+
+
+        boolean isPatientViewingOwnData = patientRepository.findByUser(currentUser)
+        boolean isPatientViewingOwnData = patientRepository.findByUser(currentUser)
+                .map(patient -> patient.getId().equals(patientId))
+                .map(patient -> patient.getId().equals(patientId))
+                .orElse(false);
+                .orElse(false);
+
+
+        if (!isPatientViewingOwnData) {
+        if (!isPatientViewingOwnData) {
+            throw new AccessDeniedException("You do not have permission to view these recommendations.");
+            throw new AccessDeniedException("You do not have permission to view these recommendations.");
+        }
+        }
+    }
+    }
+
+
+    private RecommendationResponseDTO mapToDto(Recommendation recommendation) {
+    private RecommendationResponseDTO mapToDto(Recommendation recommendation) {
+        RecommendationResponseDTO dto = new RecommendationResponseDTO();
+        RecommendationResponseDTO dto = new RecommendationResponseDTO();
+        dto.setRecommendationType(recommendation.getRecommendationType());
+        dto.setRecommendationType(recommendation.getRecommendationType());
+        dto.setDetails(recommendation.getDetails());
+        dto.setDetails(recommendation.getDetails());
+        return dto;
+        return dto;
+    }
+    }
+}
+}
+
+
+===== FILE: ./src/main/resources/application.properties =====
+
+spring.application.name=iHealth
+spring.application.name=iHealth
+server.port=8080
+server.port=8080
+
+
+# ===============================
+# ===============================
+# AIVEN CLOUD MYSQL CONFIGURATION
+# AIVEN CLOUD MYSQL CONFIGURATION
+# ===============================
+# ===============================
+spring.datasource.url=jdbc:mysql://mysql-250f1f6b-radoiaris14-6711.e.aivencloud.com:11343/defaultdb?sslMode=REQUIRED
+spring.datasource.url=jdbc:mysql://mysql-250f1f6b-radoiaris14-6711.e.aivencloud.com:11343/defaultdb?sslMode=REQUIRED
+spring.datasource.username=avnadmin
+spring.datasource.username=avnadmin
+spring.datasource.password=AVNS_OVCbchEFoL3EyM5TL-k
+spring.datasource.password=AVNS_OVCbchEFoL3EyM5TL-k
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+
+# ===============================
+# ===============================
+# HIBERNATE & JPA CONFIGURATION
+# HIBERNATE & JPA CONFIGURATION
+# ===============================
+# ===============================
+# Aceast? setare (update) asigur? crearea/actualizarea automat? a tabelelor din cod
+# Aceast? setare (update) asigur? crearea/actualizarea automat? a tabelelor din cod
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+
+===== FILE: ./src/test/java/com/ex/IHealthApplicationTests.java =====
+
+package com.ex;
+package com.ex;
+
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest;
+
+
+@SpringBootTest
+@SpringBootTest
+class IHealthApplicationTests {
+class IHealthApplicationTests {
+
+
+    @Test
+    @Test
+    void contextLoads() {
+    void contextLoads() {
+    }
+    }
+
+
+}
+}
