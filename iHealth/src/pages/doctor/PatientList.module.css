@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
+
+.container {
+  min-height: 100vh;
+  background-color: #0a2818;
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(30, 120, 80, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(42, 200, 130, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 25%, rgba(46, 204, 113, 0.1) 0%, transparent 80%);
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header > div {
+  flex: 1;
+  text-align: left;
+}
+
+.title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.refreshButton {
+  font-family: 'DM Sans', sans-serif;
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  border: 1.5px solid rgba(46, 204, 113, 0.35);
+  background: rgba(46, 204, 113, 0.1);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.refreshButton:hover {
+  background: rgba(46, 204, 113, 0.18);
+  border-color: rgba(46, 204, 113, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(46, 204, 113, 0.2);
+}
+
+.refreshButton:active {
+  transform: translateY(0);
+}
+
+.statusCard {
+  background: rgba(46, 204, 113, 0.08);
+  border: 1px solid rgba(46, 204, 113, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.gridLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.listPanel,
+.detailsPanel {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(46, 204, 113, 0.15);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.panelHeader {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(46, 204, 113, 0.15);
+  background: rgba(46, 204, 113, 0.05);
+  letter-spacing: 0.05em;
+}
+
+.patientList {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  max-height: 600px;
+}
+
+.patientList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.patientList::-webkit-scrollbar-track {
+  background: rgba(46, 204, 113, 0.05);
+}
+
+.patientList::-webkit-scrollbar-thumb {
+  background: rgba(46, 204, 113, 0.3);
+  border-radius: 3px;
+}
+
+.patientList::-webkit-scrollbar-thumb:hover {
+  background: rgba(46, 204, 113, 0.5);
+}
+
+.patientItem {
+  background: transparent;
+  border: 1px solid rgba(46, 204, 113, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #ffffff;
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.patientItem:hover {
+  background: rgba(46, 204, 113, 0.12);
+  border-color: rgba(46, 204, 113, 0.4);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.15);
+}
+
+.patientItem.activePatient {
+  background: rgba(46, 204, 113, 0.2);
+  border-color: rgba(46, 204, 113, 0.6);
+  box-shadow: 0 4px 16px rgba(46, 204, 113, 0.25);
+}
+
+.patientMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.patientName {
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+}
+
+.patientBadge {
+  background: rgba(46, 204, 113, 0.2);
+  color: rgba(46, 204, 113, 0.9);
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.patientSmallText {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'DM Sans', sans-serif;
+  padding: 2rem;
+  text-align: center;
+}
+
+.detailsPanel {
+  position: relative;
+}
+
+.detailsCard {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.detailsCard::-webkit-scrollbar {
+  width: 6px;
+}
+
+.detailsCard::-webkit-scrollbar-track {
+  background: rgba(46, 204, 113, 0.05);
+}
+
+.detailsCard::-webkit-scrollbar-thumb {
+  background: rgba(46, 204, 113, 0.3);
+  border-radius: 3px;
+}
+
+.detailsCard::-webkit-scrollbar-thumb:hover {
+  background: rgba(46, 204, 113, 0.5);
+}
+
+.detailsHeading {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.3px;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(46, 204, 113, 0.15);
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(46, 204, 113, 0.1);
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+}
+
+.detailLabel {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  color: rgba(46, 204, 113, 0.9);
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  min-width: 120px;
+}
+
+.detailValue {
+  font-family: 'DM Sans', sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  text-align: right;
+  flex: 1;
+  word-break: break-word;
+}
+
+.emptyDetails {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'DM Sans', sans-serif;
+  padding: 2rem;
+  text-align: center;
+  min-height: 300px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .gridLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .header > div {
+    text-align: center;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .patientList {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    margin-bottom: 1.5rem;
+    padding: 1rem 0;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+  }
+
+  .refreshButton {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .gridLayout {
+    gap: 1rem;
+  }
+
+  .panelHeader {
+    padding: 1rem;
+  }
+
+  .patientList {
+    max-height: 300px;
+  }
+
+  .detailsCard {
+    padding: 1.5rem;
+  }
+
+  .detailsHeading {
+    font-size: 1.3rem;
+  }
+
+  .detailLabel {
+    min-width: 80px;
+    font-size: 0.8rem;
+  }
+
+  .detailValue {
+    font-size: 0.85rem;
+  }
+}

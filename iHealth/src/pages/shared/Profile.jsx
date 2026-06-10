@@ -23,7 +23,7 @@ export default function Profile() {
     const goToDashboard = () => {
         navigate("/dashboard");
     };
-
+    
     async function fetchPatientData() {
         try {
             setLoading(true);

@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
+
+.container {
+  min-height: 100vh;
+  background-color: #0a2818;
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(30, 120, 80, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(42, 200, 130, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 25%, rgba(46, 204, 113, 0.1) 0%, transparent 80%);
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+}
+
+.title {   
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+}
+
+.searchContainer {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.searchInput {
+  font-family: 'DM Sans', sans-serif;
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  border-radius: 12px;
+  border: 1.5px solid rgba(46, 204, 113, 0.35);
+  background: rgba(46, 204, 113, 0.08);
+  color: #ffffff;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.05em;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.searchInput:focus {
+  outline: none;
+  background: rgba(46, 204, 113, 0.15);
+  border-color: rgba(46, 204, 113, 0.6);
+  box-shadow: 0 0 20px rgba(46, 204, 113, 0.2);
+}
+
+.tableContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(46, 204, 113, 0.15);
+  backdrop-filter: blur(10px);
+  overflow-x: auto;
+}
+
+.patientTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.patientTable thead {
+  background: rgba(46, 204, 113, 0.12);
+}
+
+.patientTable th {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  color: rgba(46, 204, 113, 0.9);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid rgba(46, 204, 113, 0.25);
+}
+
+.patientTable tbody tr {
+  border-bottom: 1px solid rgba(46, 204, 113, 0.1);
+  transition: all 0.3s ease;
+}
+
+.patientTable tbody tr:hover {
+  background: rgba(46, 204, 113, 0.08);
+  border-bottom-color: rgba(46, 204, 113, 0.25);
+}
+
+.patientTable td {
+  padding: 1rem 1.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+}
+
+.loading,
+.error,
+.noPatients {
+  font-family: 'DM Sans', sans-serif;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 2rem auto;
+  font-size: 1rem;
+}
+
+.loading {
+  color: rgba(46, 204, 113, 0.8);
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid rgba(46, 204, 113, 0.25);
+}
+
+.error {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.25);
+}
+
+.noPatients {
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(46, 204, 113, 0.15);
+}
+
+.assignButton {
+  display: block;
+  margin: 2rem auto 0;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(46, 204, 112, 0.977);
+  background: rgba(46, 204, 113, 0.1);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.assignButton:hover {
+  background: rgba(46, 204, 113, 0.2);
+  border-color: rgba(46, 204, 113, 0.5);
+}
+
+.assignButton:active {
+  transform: scale(0.98);
+}
