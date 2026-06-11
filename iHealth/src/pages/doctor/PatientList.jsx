@@ -12,6 +12,17 @@ export default function PatientList() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+    // Recommendation form state (non-invasive addition)
+    const [recType, setRecType] = useState("");
+    const [recDetails, setRecDetails] = useState("");
+    const [submittingRec, setSubmittingRec] = useState(false);
+    const [submitRecError, setSubmitRecError] = useState("");
+    const [submitRecSuccess, setSubmitRecSuccess] = useState("");
+    // recommendation list state for selected patient
+    const [patientRecommendations, setPatientRecommendations] = useState([]);
+    const [loadingRecs, setLoadingRecs] = useState(false);
+    const [recsError, setRecsError] = useState("");
+
     const doctorId = user?.accessToken
         ? jwtDecode(user.accessToken).medic_id
         : null;
@@ -81,6 +92,81 @@ export default function PatientList() {
     return [street, number, city, county, country, zipCode]
         .filter(Boolean) 
         .join(", ");
+};
+
+    // fetch recommendations for the currently selected patient
+    async function fetchPatientRecs() {
+        if (!selectedPatient) {
+            setPatientRecommendations([]);
+            setRecsError("");
+            return;
+        }
+        setLoadingRecs(true);
+        setRecsError("");
+        try {
+            const patientId = selectedPatient.id ?? selectedPatient.patientId;
+            const resp = await fetch(`http://localhost:8080/api/patients/recommendations/for-patient/${patientId}`, {
+                method: "GET",
+                headers: {
+                    Authorization: user?.accessToken ? `Bearer ${user.accessToken}` : undefined,
+                    "Content-Type": "application/json",
+                },
+            });
+            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+            const data = await resp.json();
+            setPatientRecommendations(Array.isArray(data) ? data : []);
+        } catch (err) {
+            console.error("Error fetching patient recommendations:", err);
+            setRecsError(err.message || "Eroare la încărcare recomandări");
+        } finally {
+            setLoadingRecs(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchPatientRecs();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedPatient]);
+
+   
+
+       const handleSubmitRecommendation = async (e) => {
+    e.preventDefault();
+    if (!selectedPatient) return;
+    setSubmitRecError("");
+    setSubmitRecSuccess("");
+    setSubmittingRec(true);
+    console.log("Submitting recommendation for patient:", selectedPatient);
+    const patientId = selectedPatient.id ?? selectedPatient.patientId;
+    try {
+        const payload = {
+            patientId: selectedPatient.id ?? selectedPatient.patientId,
+            recommendationType: recType.toLowerCase().trim(),
+            details: recDetails,
+            createdBy: user?.accessToken ? jwtDecode(user.accessToken)?.medic_name ?? jwtDecode(user.accessToken)?.medic_id ?? "Medic" : "Medic",
+        };
+        
+        const resp = await fetch(`http://localhost:8080/api/patients/recommendations/for-patient/${patientId}/doctor`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${user.accessToken}`
+            },
+            body: JSON.stringify(payload),
+        });
+        if (!resp.ok) {
+            const txt = await resp.text();
+            throw new Error(txt || `HTTP ${resp.status}`);
+        }
+        setSubmitRecSuccess("Recomandarea a fost trimisă ");
+        setRecType("");
+        setRecDetails("");
+        setSubmittingRec(false);
+    } catch (err) {
+        console.error("Error submitting recommendation:", err);
+        setSubmitRecError(err.message || "Eroare la trimitere");
+        setSubmittingRec(false);
+    }
 };
 
     return (
@@ -161,6 +247,55 @@ export default function PatientList() {
                                 {renderPatientField("Address", formatAddress(detailPatient.address))}
                                 {renderPatientField("Gender", detailPatient.gender)}
                                 {renderPatientField("Notes", detailPatient.notes || detailPatient.details)}
+
+                                <div className={styles.recSection}>
+                                    <h4 className={styles.recHeader}>Adaugă recomandare</h4>
+                                    <form className={styles.recForm} onSubmit={handleSubmitRecommendation}>
+                                        <label className={styles.inputLabel}>Tip recomandare</label>
+                                        <input className={styles.input} value={recType} onChange={(e) => setRecType(e.target.value)} placeholder="Ex: Dietă, Tratament, Exerciții" />
+
+                                        <label className={styles.inputLabel}>Detalii</label>
+                                        <textarea className={styles.textarea} value={recDetails} onChange={(e) => setRecDetails(e.target.value)} rows={4} placeholder="Detalii recomandare" />
+
+                                        {submitRecError && <div className={styles.formError}>{submitRecError}</div>}
+                                        {submitRecSuccess && <div className={styles.successMessage}>{submitRecSuccess}</div>}
+
+                                        <div className={styles.formRow}>
+                                            <button type="submit" className={styles.buttonPrimary} disabled={submittingRec}>{submittingRec ? "Se trimite..." : "Adaugă recomandare"}</button>
+                                            <button type="button" className={styles.buttonSecondary} onClick={() => { setRecType(""); setRecDetails(""); setSubmitRecError(""); setSubmitRecSuccess(""); }}>Curăță</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div className={styles.recListSection}>
+                                    <h4 className={styles.recListHeader}>Recomandări pacient</h4>
+                                    {loadingRecs ? (
+                                        <div className={styles.statusCard}>Se încarcă recomandările...</div>
+                                    ) : recsError ? (
+                                        <div className={styles.formError}>{recsError}</div>
+                                    ) : patientRecommendations.length === 0 ? (
+                                        <div className={styles.emptyState}>Nu există recomandări pentru acest pacient.</div>
+                                    ) : (
+                                        <div className={styles.recList}>
+                                            {patientRecommendations.map((r, idx) => {
+                                                const rid = r.id ?? r.recId ?? r._id ?? idx;
+                                                return (
+                                                    <div key={rid} className={styles.recItem}>
+                                                        <div className={styles.recItemHeader}>
+                                                            <div className={styles.recLabelSmall}>{r.recommendationType ?? "N/A"}</div>
+                                                    
+                                                        </div>
+                                                        <div className={styles.recText}>{r.details ?? "-"}</div>
+                                                        <div className={styles.metaRow}>
+                                                            <div className={styles.metaLeft}>{r.author ?? ""}</div>
+                                                            <div className={styles.metaRight}>{r.date ?? ""}</div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         ) : (
                             <div className={styles.emptyDetails}>

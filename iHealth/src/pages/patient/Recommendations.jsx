@@ -2,30 +2,22 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth.js";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import styles from "./Recommendations.module.css";
 
 
-
-export default function Recommendations() { 
+export default function Recommendations() {
     const { user } = useAuth();
     const navigate = useNavigate();
     const [recommendations, setRecommendations] = useState([]);
-
-
-    let patientId = null;
-
-    if(user.accessToken) {
-        const decodedToken = jwtDecode(user.accessToken);
-        patientId = decodedToken.userId;
-    }
-
    
     
     useEffect(() => {
 
         const fetchRecommendations = async () => {
             try {
-
-                const response = await fetch(`http://localhost:8080/api/patients/recommendations/for-patient/${user.patientId}`, {
+                const tokenData = jwtDecode(user.accessToken);
+                const patientId = tokenData.patient_id;
+                const response = await fetch(`http://localhost:8080/api/patients/recommendations/for-patient/${patientId}`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${user.accessToken}`
@@ -39,9 +31,6 @@ export default function Recommendations() {
 
                 const data = await response.json();
                 
-                // Opțional: Dă-i un console.log ca să fii sigur că vin datele
-                console.log("Date primite:", data); 
-                
                 setRecommendations(data);
             } catch (error) {
                 console.error("Error fetching recommendations:", error.message);
@@ -50,7 +39,7 @@ export default function Recommendations() {
 
         fetchRecommendations();
         
-    }, [navigate, user, patientId]); 
+    }, [navigate, user]); 
 
 
     const goToDashboard = () => {
@@ -58,21 +47,46 @@ export default function Recommendations() {
     }
 
     return (
-        <div>
-            <h1>Recomandările mele</h1>
-            
-            {/* 4. AICI: Verificăm dacă lista e goală. Dacă nu e, o afișăm cu .map() */}
-            {recommendations.length === 0 ? (
-                <p>Momentan nu ai nicio recomandare.</p>
-            ) : (
-                recommendations.map((rec, index) => (
-                    <div key={index} style={{ borderBottom: "1px solid #ccc", paddingBottom: "10px", marginBottom: "10px" }}>
-                        <p><strong>Tip recomandare:</strong> {rec.recommendationType ? rec.recommendationType : "N/A"}</p>
-                        <p><strong>Detalii:</strong> {rec.details ? rec.details : "N/A"}</p>
+        <div className={styles.container}>
+            <div className={styles.card}>
+                <div className={styles.header}>
+                    <div>
+                        <h1 className={styles.title}>My Recommendations</h1>
+                        <p className={styles.subtitle}>Here you can see the recommendations received.</p>
                     </div>
-                ))
-            )}
-            <button onClick={goToDashboard}>Back to Dashboard</button>
+                    <div className={styles.controls}>
+                        <button className={styles.backButton} onClick={goToDashboard}>Back to Dashboard</button>
+                    </div>
+                </div>
+
+                {recommendations.length === 0 ? (
+                    <div className={styles.emptyState}>You don't have any recommendations at the moment.</div>
+                ) : (
+                    <div className={styles.list}>
+                        {recommendations.map((rec, index) => (
+                            <div key={index} className={styles.recCard}>
+                                <div className={styles.recHeader}>
+                                    <div className={styles.recTypeBlock}>
+                                        <div className={styles.recLabel}>Recommendation Type</div>
+                                        <div className={styles.recValue}>{rec.recommendationType ?? "N/A"}</div>
+                                    </div>
+                                    <div className={styles.metaRight}>{rec.date ?? ""}</div>
+                                </div>
+
+                                <div className={styles.whatRow}>
+                                    <div className={styles.whatHeader}>What you need to do</div>
+                                    <div className={styles.recDetails}>{rec.details ?? "N/A"}</div>
+                                </div>
+
+                                <div className={styles.metaRow}>
+                                    <div className={styles.metaLeft}>{rec.author ? `Sursă: ${rec.author}` : ""}</div>
+                                    <div className={styles.metaRight}>{rec.priority ?? ""}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

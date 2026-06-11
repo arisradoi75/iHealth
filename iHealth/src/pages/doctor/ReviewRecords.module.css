@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
+
+:root{
+  --bg: #0a2818;
+  --card: #153b2d;
+  --accent: #2ecc71;
+  --muted: rgba(255,255,255,0.7);
+}
+
+.container{
+  min-height: 100vh;
+  padding: 2.5rem;
+  background-color: var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.card{
+  width:100%;
+  max-width:900px;
+  background: linear-gradient(180deg, rgba(26,77,53,0.95), rgba(18,56,38,0.95));
+  border:1px solid rgba(46,204,113,0.06);
+  border-radius:14px;
+  padding:1.75rem;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+}
+
+.title{ font-family: 'DM Serif Display', serif; color:#fff; font-size:1.6rem; margin:0 0 0.25rem 0 }
+.subtitle{ color: var(--muted); margin:0 0 1rem 0 }
+
+.form{ display:flex; flex-direction:column; gap:0.6rem }
+.label{ color: rgba(255,255,255,0.85); font-weight:600; font-size:0.9rem }
+.input, .select, .textarea{
+  padding:0.6rem 0.75rem;
+  border-radius:10px;
+  border:1px solid rgba(46,204,113,0.08);
+  background: rgba(255,255,255,0.02);
+  color:#fff;
+  font-family: 'DM Sans', sans-serif;
+}
+.textarea{ resize:vertical }
+
+.formRow{ display:flex; gap:0.6rem; margin-top:0.6rem }
+.buttonPrimary{ background: linear-gradient(90deg, rgba(34,197,94,1) 0%, rgba(16,185,129,1) 100%); color:#062e1f; border:none; padding:0.6rem 1rem; border-radius:10px; font-weight:700; cursor:pointer }
+.buttonSecondary{ background: transparent; color:#fff; border:1px solid rgba(255,255,255,0.08); padding:0.55rem 0.9rem; border-radius:10px; cursor:pointer }
+
+.error{ color:#ffb4b4; margin-top:0.4rem }
+.success{ color: rgba(46,204,113,0.9); margin-top:0.4rem }
+
+@media (max-width: 640px){
+  .card{ padding:1rem }
+  .title{ font-size:1.3rem }
+}

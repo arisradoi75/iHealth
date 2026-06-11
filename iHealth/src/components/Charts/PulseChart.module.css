@@ -1,0 +1,383 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
+
+/* ── Wrapper ──────────────────────────────────────────── */
+.wrapper {
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 2.5rem 1.5rem;
+  background-color: #0a2818;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(30,120,80,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(42,200,130,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 25%, rgba(46,204,113,0.1) 0%, transparent 80%);
+  gap: 1.5rem;
+}
+
+/* ── Main card ────────────────────────────────────────── */
+.card {
+  width: 100%;
+  max-width: 1000px;
+  background: #1a4d35;
+  border: 1px solid rgba(46, 204, 113, 0.12);
+  border-radius: 20px;
+  padding: 2rem 2rem 1.5rem;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 40px rgba(46,204,113,0.06);
+  animation: fadeIn 420ms cubic-bezier(.2,.9,.3,1) both;
+}
+
+/* ── Card header ──────────────────────────────────────── */
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(46, 204, 113, 0.08);
+}
+
+.cardTitle {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: #ffffff;
+  margin: 0 0 0.2rem 0;
+  letter-spacing: -0.3px;
+}
+
+.cardSub {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(46, 204, 113, 0.45);
+}
+
+/* ── Stats row ────────────────────────────────────────── */
+.statsRow {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.statBadge {
+  flex: 1 1 140px;
+  background: rgba(46, 204, 113, 0.05);
+  border: 1px solid rgba(46, 204, 113, 0.1);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.statBadge:hover {
+  border-color: rgba(46, 204, 113, 0.3);
+  background: rgba(46, 204, 113, 0.08);
+}
+
+.statValue {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.7rem;
+  color: #2ecc71;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.statUnit {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 400;
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: rgba(46, 204, 113, 0.5);
+}
+
+/* ── Table ────────────────────────────────────────────── */
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table thead tr {
+  background: rgba(46, 204, 113, 0.05);
+}
+
+.table th {
+  padding: 0.7rem 1rem;
+  text-align: left;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(46, 204, 113, 0.5);
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(46, 204, 113, 0.08);
+}
+
+.table td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(46, 204, 113, 0.05);
+  color: rgba(255, 255, 255, 0.82);
+  vertical-align: middle;
+}
+
+.rowEven { background: transparent; }
+.rowOdd  { background: rgba(0, 0, 0, 0.07); }
+
+.table tbody tr {
+  transition: background 0.15s;
+}
+
+.table tbody tr:hover td {
+  background: rgba(46, 204, 113, 0.07);
+  color: #fff;
+}
+
+.tsCell {
+  color: rgba(255, 255, 255, 0.4) !important;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.numCell {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+/* ── Status pills ─────────────────────────────────────── */
+.pillOk {
+  display: inline-block;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(46, 204, 113, 0.12);
+  color: #2ecc71;
+  border: 1px solid rgba(46, 204, 113, 0.28);
+}
+
+.pillWarn {
+  display: inline-block;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(255, 180, 0, 0.1);
+  color: #fbbf24;
+  border: 1px solid rgba(255, 180, 0, 0.28);
+}
+
+.pillNeutral {
+  display: inline-block;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Pagination ───────────────────────────────────────── */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1.1rem 1.5rem 0.5rem;
+  border-top: 1px solid rgba(46, 204, 113, 0.08);
+  margin-top: 0.5rem;
+}
+
+.pageBtn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.5rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(46, 204, 113, 0.25);
+  background: rgba(46, 204, 113, 0.07);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  letter-spacing: 0.03em;
+}
+
+.pageBtn:hover:not(:disabled) {
+  background: rgba(46, 204, 113, 0.15);
+  border-color: rgba(46, 204, 113, 0.45);
+  transform: translateY(-2px);
+}
+
+.pageBtn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.pageInfo {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.pageInfo strong {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── States ───────────────────────────────────────────── */
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  gap: 1rem;
+}
+
+.hint {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.875rem;
+}
+
+.errorText {
+  color: rgba(248, 113, 113, 0.8);
+  font-size: 0.875rem;
+}
+
+.spinner {
+  width: 26px;
+  height: 26px;
+  border: 2px solid rgba(46, 204, 113, 0.12);
+  border-top-color: #2ecc71;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ── Animations ───────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 640px) {
+  .wrapper { padding: 1.5rem 1rem; }
+  .card { padding: 1.5rem 1.25rem 1.25rem; }
+  .cardTitle { font-size: 1.6rem; }
+  .statsRow { gap: 0.6rem; }
+  .statBadge { flex: 1 1 110px; padding: 0.75rem 0.9rem; }
+  .statValue { font-size: 1.35rem; }
+  .table th, .table td { padding: 0.55rem 0.7rem; }
+}
+
+/* ── Chart grid ───────────────────────────────────────── */
+.chartGrid {
+  width: 100%;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.chartCard {
+  background: #1a4d35;
+  border: 1px solid rgba(46, 204, 113, 0.12);
+  border-radius: 16px;
+  padding: 1.25rem 1.25rem 0.75rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  animation: fadeIn 420ms cubic-bezier(.2,.9,.3,1) both;
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.6rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.chartTitle {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(46, 204, 113, 0.5);
+  margin-bottom: 0.2rem;
+}
+
+.chartLatest { line-height: 1; }
+
+.chartLatestVal {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  letter-spacing: -0.5px;
+}
+
+.chartLatestUnit {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.35);
+}
+
+.chartMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.3);
+}
+
+.chartMeta strong {
+  color: rgba(255,255,255,0.65);
+}
+
+/* ── Tooltip ──────────────────────────────────────────── */
+.tooltip {
+  background: #0f3320;
+  border: 1px solid rgba(46,204,113,0.2);
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.tooltipTime {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 0.1rem;
+}
+
+.tooltipVal {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #2ecc71;
+}
+
+@media (max-width: 600px) {
+  .chartGrid { grid-template-columns: 1fr; }
+}

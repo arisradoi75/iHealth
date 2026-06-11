@@ -285,6 +285,111 @@
   min-height: 300px;
 }
 
+/* Recommendation form styles */
+.recSection {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(46, 204, 113, 0.08);
+}
+.recHeader {
+  font-family: 'DM Sans', sans-serif;
+  color: rgba(255,255,255,0.95);
+  font-size: 1.05rem;
+  margin: 0 0 0.75rem 0;
+}
+.recForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.inputLabel {
+  font-family: 'DM Sans', sans-serif;
+  color: rgba(46,204,113,0.9);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.input {
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(46,204,113,0.12);
+  background: rgba(255,255,255,0.02);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+}
+.textarea {
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(46,204,113,0.12);
+  background: rgba(255,255,255,0.02);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  resize: vertical;
+}
+.formRow {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.buttonPrimary {
+  background: linear-gradient(90deg, rgba(34,197,94,1) 0%, rgba(16,185,129,1) 100%);
+  color: #062e1f;
+  border: none;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.buttonSecondary {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.formError {
+  color: #ffb4b4;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+.successMessage {
+  color: rgba(46,204,113,0.9);
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+
+.recListSection {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(46,204,113,0.06);
+}
+.recListHeader {
+  font-family: 'DM Sans', sans-serif;
+  color: rgba(255,255,255,0.9);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.recList {
+  display:flex;
+  flex-direction:column;
+  gap:0.65rem;
+}
+.recItem{
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(46,204,113,0.06);
+  padding:0.85rem 1rem;
+  border-radius:10px;
+}
+.recItemHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:0.5rem;
+}
+.recLabelSmall{ color: rgba(46,204,113,0.95); font-weight:700; font-size:0.95rem; }
+
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .gridLayout {

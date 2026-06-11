@@ -39,6 +39,13 @@ function DoctorDashboard() {
                     icon="public/assets/list-svgrepo-com.svg"
                     destination="/doctor/PatientList"
                 />
+
+                <DashboardCard 
+                    title="Review Records"
+                    description="Check and update patient medical records"
+                    icon="public/assets/view-svgrepo-com.svg"
+                    destination="/doctor/ReviewRecords"
+                />
             </div>
 
             <div className={style.logoutButtonContainer}>

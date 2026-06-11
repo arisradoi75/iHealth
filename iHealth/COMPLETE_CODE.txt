@@ -1,0 +1,3092 @@
+================================================================================
+                         iHealth - COMPLETE PROJECT CODE
+================================================================================
+Generated: June 9, 2026
+Project: iHealth Frontend React Application
+Description: Comprehensive health management platform for patients and doctors
+
+================================================================================
+                              TABLE OF CONTENTS
+================================================================================
+
+1. Configuration Files
+   - package.json
+   - vite.config.js
+   - eslint.config.js
+
+2. Main Application Files
+   - index.html
+   - src/main.jsx
+   - src/App.jsx
+   - src/index.css
+
+3. Context & Authentication
+   - src/context/AuthContext.jsx
+   - src/context/AuthContextFile.js
+
+4. Hooks
+   - src/hooks/useAuth.js
+   - src/hooks/useSensorData.js (empty)
+
+5. API Services
+   - src/api/auth.js
+   - src/api/patients.js (empty)
+   - src/api/sensors.js (empty)
+
+6. Pages - Authentication
+   - src/pages/auth/Login.jsx
+   - src/pages/auth/Register.jsx
+   - src/pages/auth/Auth.module.css
+
+7. Pages - Dashboard
+   - src/pages/dashboard/Dashboard.jsx
+   - src/pages/dashboard/Dashboard.module.css
+   - src/pages/dashboard/DashboardRouter.jsx
+
+8. Pages - Doctor
+   - src/pages/doctor/DoctorDashboard.jsx
+   - src/pages/doctor/DoctorDashboard.module.css
+   - src/pages/doctor/PatientAdd.jsx
+   - src/pages/doctor/PatientAdd.module.css
+   - src/pages/doctor/PatientList.jsx
+   - src/pages/doctor/PatientList.module.css
+   - src/pages/doctor/PatientDetail.jsx (empty)
+
+9. Pages - Patient
+   - src/pages/patient/Monitoring.jsx (empty)
+   - src/pages/patient/MedicalRecords.jsx
+   - src/pages/patient/MedicalRecords.module.css
+   - src/pages/patient/Recommendations.jsx
+
+10. Pages - Shared
+    - src/pages/shared/Profile.jsx
+    - src/pages/shared/Profile.module.css
+    - src/pages/shared/Reports.jsx (empty)
+
+11. Components
+    - src/components/Layout/NavigationBar.jsx (empty)
+    - src/components/Alerts/AlarmBadge.jsx (empty)
+    - src/components/Cards/DashboardCard.jsx
+    - src/components/Cards/DashboardCard.module.css
+    - src/components/Cards/PatientCard.jsx (empty)
+    - src/components/Cards/PatientForm.jsx (empty)
+    - src/components/Cards/ProfileCard.jsx
+    - src/components/Charts/ECGChart.jsx (empty)
+    - src/components/Charts/PulseChart.jsx (empty)
+    - src/components/Charts/TemperatureChart.jsx (empty)
+
+12. Utils
+    - src/utils/alarmUtils.js (empty)
+
+================================================================================
+                           1. CONFIGURATION FILES
+================================================================================
+
+=== FILE: package.json ===
+{
+  "name": "ihealth",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@tailwindcss/vite": "^4.2.1",
+    "axios": "^1.13.6",
+    "date-fns": "^4.1.0",
+    "jwt-decode": "^4.0.0",
+    "jwt-decoder": "^0.0.0",
+    "lucide-react": "^0.577.0",
+    "pwa": "^1.9.7",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-hook-form": "^7.71.2",
+    "react-hot-toast": "^2.6.0",
+    "react-router-dom": "^7.13.1",
+    "recharts": "^3.8.0",
+    "tailwindcss": "^4.2.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "vite": "^7.3.1",
+    "vite-plugin-pwa": "^1.3.0"
+  }
+}
+
+=== FILE: vite.config.js ===
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+})
+
+=== FILE: eslint.config.js ===
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{js,jsx}'],
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
+    },
+    rules: {
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+    },
+  },
+])
+
+================================================================================
+                        2. MAIN APPLICATION FILES
+================================================================================
+
+=== FILE: index.html ===
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ihealth</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+=== FILE: src/main.jsx ===
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import AuthProvider  from './context/AuthContext';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </BrowserRouter>
+  </React.StrictMode>
+);
+
+=== FILE: src/App.jsx ===
+import { Routes, Route } from "react-router-dom";
+import { Login } from "./pages/auth/Login.jsx";
+import  Register  from "./pages/auth/Register.jsx";
+import Profile from "./pages/shared/Profile.jsx";
+import Recommendations from "./pages/patient/Recommendations.jsx";
+import MedicalRecords from "./pages/patient/MedicalRecords.jsx";
+import DashboardRouter from "./pages/dashboard/DashboardRouter.jsx";
+import PatientAdd from "./pages/doctor/PatientAdd.jsx";
+import PatientList from "./pages/doctor/PatientList.jsx";
+
+function App() {
+
+  console.log("Ruta curentă:", window.location.pathname)
+  return (
+    
+    <>
+
+     <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} /> 
+      <Route path="/dashboard" element={<DashboardRouter />} />
+      <Route path="/shared/Profile" element={<Profile />} />
+      <Route path="/patient/Recommendations" element={<Recommendations />} />
+      <Route path="/patient/MedicalRecords" element={<MedicalRecords />} /> 
+      <Route path="/doctor/PatientAdd" element={<PatientAdd />} />
+      <Route path="/doctor/PatientList" element={<PatientList />} />
+    </Routes>
+    
+    </>
+  )
+}
+
+export default App
+
+=== FILE: src/index.css ===
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background-color: #1a0505;
+}
+
+================================================================================
+                      3. CONTEXT & AUTHENTICATION
+================================================================================
+
+=== FILE: src/context/AuthContextFile.js ===
+import { createContext } from "react";
+
+export const AuthContext = createContext(null);
+
+=== FILE: src/context/AuthContext.jsx ===
+import {useCallback, useEffect, useState} from "react";
+import { AuthContext } from "./AuthContextFile.js"
+
+export default function AuthProvider({ children }) {
+        const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem("user");
+        const userType = storedUser ? JSON.parse(storedUser).type : null;
+
+        return storedUser ? { ...JSON.parse(storedUser), type: userType } : null;
+    });
+
+        const logout = () => {
+            localStorage.removeItem("user");
+            setUser(null);
+        }
+       
+        const UserData = useCallback(async () => {
+            try {
+                
+                const fetchUserData = await fetch(`http://localhost:8080/api/v1/users/me`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${user.accessToken}`,
+                    },
+                    method: "GET",
+                });
+
+                if (!fetchUserData.ok) {
+                    throw new Error(`HTTP error! status: ${fetchUserData.status}`);
+                }
+
+                const userData = await fetchUserData.json();
+                setUser((prevUser) => ({
+                    ...prevUser,
+                    ...userData,
+                }));
+
+            }catch (error) {
+                console.error("Error fetching user data:", error.message);
+            }
+        }, [user?.accessToken]);
+
+        return (
+            <AuthContext.Provider value={{ user, setUser, logout }}>
+                {children}
+            </AuthContext.Provider>
+        );
+        
+ }
+
+================================================================================
+                            4. HOOKS
+================================================================================
+
+=== FILE: src/hooks/useAuth.js ===
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContextFile.js";
+
+function useAuth() {
+    return useContext(AuthContext);
+}   
+
+export default useAuth;
+
+=== FILE: src/hooks/useSensorData.js ===
+(EMPTY FILE)
+
+================================================================================
+                          5. API SERVICES
+================================================================================
+
+=== FILE: src/api/auth.js ===
+
+export default function DataFetching() {
+    const BASE_URL = "http://localhost:8080/api/v1/auth";
+
+    async function Login(email, password) {
+        try {
+            const response = await fetch(`${BASE_URL}/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            if (!response.ok) {
+                throw new Error("Login failed");
+            }
+            
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Error during login:", error);
+            throw error;
+        }
+    }
+
+    async function Register(username, email, password) {
+        try {
+            const response = await fetch(`${BASE_URL}/register/patient`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, email, password })
+            });
+            
+            if (!response.ok) {
+                throw new Error("Registration failed");
+            }
+            const data = await response.json();
+            return data;
+
+    
+            
+        }catch(error){
+            console.error("Error during registration:", error);
+            throw error;
+        }
+    }
+
+}
+
+=== FILE: src/api/patients.js ===
+(EMPTY FILE)
+
+=== FILE: src/api/sensors.js ===
+(EMPTY FILE)
+
+================================================================================
+                    6. PAGES - AUTHENTICATION
+================================================================================
+
+=== FILE: src/pages/auth/Login.jsx ===
+import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import styles from './Auth.module.css';
+
+
+
+
+export function Login() {
+    const [formData, setFormData] = useState({
+        email: "",
+        password: ""
+    });
+
+    const [error, setError] = useState("");
+    const {setUser} = useAuth();
+    const navigate = useNavigate();
+    
+    function handleChange(e) {
+        const {name, value} = e.target;
+        setFormData((prev) => 
+            ({...prev, 
+                [name]: value
+            }));
+    }
+
+   const handleSubmit = async (e) => {
+          e.preventDefault();
+    try {
+        const response = await fetch(`http://localhost:8080/api/v1/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                email: formData.email, 
+                password: formData.password 
+            })
+        });
+        console.log(response);
+        if (!response.ok) throw new Error("Email sau parolă greșită!");
+
+        const data = await response.json();
+        setUser(data);
+        localStorage.setItem("user", JSON.stringify(data));
+        navigate("/dashboard");
+
+    } catch (error) {
+        setError(error.message);
+    }
+
+    
+};
+
+   return (
+  <div className={styles.page}>
+    <div className={styles.card}>
+
+      <div className={styles.header}>
+        <h2 className={styles.titleH2}>iHealth</h2>
+        <p className={styles.titleP}>Autentificare</p>
+      </div>
+
+      <form className={styles.form} onSubmit={handleSubmit}>
+
+
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>Email</label>
+          <input
+            className={styles.input}
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            required
+          />
+        </div>
+
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>Parolă</label>
+          <input
+            className={styles.input}
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Password"
+            required
+          />
+        </div>
+
+        {error && <p className={styles.error}>{error}</p>}
+
+        <button className={styles.button} type="submit" onChange={() => navigate("/dashboard")}>
+          Authentication
+        </button>
+
+        <button className={styles.button} type="button" onClick={() => navigate("/register")}>
+          Register
+        </button>
+
+      </form>
+    </div>
+  </div>
+);
+}
+
+=== FILE: src/pages/auth/Register.jsx ===
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./Auth.module.css";
+
+export default function Register() {
+
+    const navigate = useNavigate();
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [step, setStep] = useState(1);
+    
+    const [userData, setUserData] = useState({
+        username: "",
+        email: "",
+        password: ""
+    });
+
+    const [profileData, setProfileData] = useState({
+        name: "",
+        bornDate: "",
+        cnp: "",
+        gender: "",
+        phone: "",
+        email: "",
+        profesion: "",
+        job: "",
+        address: {
+            country: "",
+            county: "",
+            city: "",
+            street: "",
+            zipCode: "",
+            number: "",
+        },
+    });
+
+    function handleAccountChange(e) {
+        const {name, value} = e.target;
+        setUserData((prev) => 
+            ({...prev, 
+                [name]: value
+            }))
+
+        }
+
+    function handleProfileChange(e) {
+        const {name, value} = e.target;
+        setProfileData((prev) => 
+            ({...prev, 
+                [name]: value
+            }))
+    }
+    
+    function handleAddressChange(e) {
+       const {name, value} = e.target;
+         setProfileData((prev) => ({
+          ...prev,
+          address: {
+                ...prev.address,
+                [name]: value
+          }
+         }))        
+         
+    }
+
+    async function handleStep1(e) {
+
+        setError("");
+        setLoading(true);
+        e.preventDefault();
+
+        try {
+        const response = await fetch(`http://localhost:8080/api/v1/auth/register/patient`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                username: userData.username, 
+                email: userData.email, 
+                password: userData.password
+            })
+        });
+
+       if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.message || "Înregistrare eșuată!");
+            }
+
+        const token =  await response.json();
+        localStorage.setItem("user", JSON.stringify(token));
+
+        setStep(2);
+
+    } catch (error) {
+        setError("An error occurred during registration : " + error.message);
+    }finally {
+        setLoading(false);
+    }
+}
+
+
+    async function handleStep2(e) {
+        setError("");
+        setLoading(true);
+        e.preventDefault();
+
+        try {
+
+
+            const response = await fetch(`http://localhost:8080/api/patients/profile`, {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${JSON.parse(localStorage.getItem("user")).accessToken}`
+                },
+                body: JSON.stringify({
+                    name: profileData.name,
+                    bornDate: profileData.bornDate,
+                    cnp: profileData.cnp,
+                    gender: profileData.gender,
+                    phone: profileData.phone,
+                    email: profileData.email,
+                    profesion: profileData.profesion,
+                    job: profileData.job,
+                    address: {
+                        country: profileData.address.country,
+                        county: profileData.address.county,
+                        city: profileData.address.city,
+                        street: profileData.address.street,
+                        zipCode: profileData.address.zipCode,
+                        number: profileData.address.number
+                    }
+                })
+            });
+
+            if(!response.ok) {
+                const err = await response.json();
+                throw new Error(err.message || "Profile creation failed!");
+            }
+
+            
+            
+            navigate("/login");
+        }catch(error)
+        {
+            setError("An error occurred during registration : " + error.message);
+        }
+        finally {
+            setLoading(false);
+        }
+    }
+
+        return(
+            <>
+        <div className={styles.page}>
+            <div className={styles.card}>
+                <div className={styles.header}>
+                    <h2 className={styles.titleH2}>iHealth</h2>
+                    <p className={styles.titleP}>Creare cont</p>
+                    <div className={styles.steps}>
+                        <span className={`${styles.step} ${step === 1 ? styles.activeStep : styles.doneStep}`}>
+                            1. Cont
+                        </span>
+                        <span className={styles.stepDivider}>→</span>
+                        <span className={`${styles.step} ${step === 2 ? styles.activeStep : ""}`}>
+                            2. Profil
+                        </span>
+                    </div>
+                </div>
+ 
+                {/* ── PASUL 1 ── */}
+                {step === 1 && (
+                    <form className={styles.form} onSubmit={handleStep1}>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>Username</label>
+                            <input
+                                className={styles.input}
+                                type="text"
+                                name="username"
+                                value={userData.username}
+                                onChange={handleAccountChange}
+                                placeholder="Username"
+                                required
+                            />
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>Email</label>
+                            <input
+                                className={styles.input}
+                                type="email"
+                                name="email"
+                                value={userData.email}
+                                onChange={handleAccountChange}
+                                placeholder="Email"
+                                required
+                            />
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>Parolă</label>
+                            <input
+                                className={styles.input}
+                                type="password"
+                                name="password"
+                                value={userData.password}
+                                onChange={handleAccountChange}
+                                placeholder="Parolă"
+                                required
+                            />
+                        </div>
+                        {error && <p className={styles.error}>{error}</p>}
+                        <button className={styles.button} type="submit" disabled={loading}>
+                            {loading ? "Se procesează..." : "Continuă →"}
+                        </button>
+                        <p className={styles.link}>
+                            Ai deja cont?{" "}
+                            <span onClick={() => navigate("/login")}>Autentifică-te</span>
+                        </p>
+                    </form>
+                )}
+ 
+                {/* ── PASUL 2 ── */}
+                {step === 2 && (
+                    <form className={styles.form} onSubmit={handleStep2}>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>Nume complet</label>
+                            <input className={styles.input} type="text" name="name"
+                                value={profileData.name} onChange={handleProfileChange}
+                                placeholder="Ion Popescu" required />
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>Data nașterii</label>
+                            <input className={styles.input} type="date" name="bornDate"
+                                value={profileData.bornDate} onChange={handleProfileChange} required />
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>CNP</label>
+                            <input className={styles.input} type="text" name="cnp"
+                                value={profileData.cnp} onChange={handleProfileChange}
+                                placeholder="1234567890123" maxLength={13} required />
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>Gen</label>
+                            <select className={styles.input} name="gender"
+                                value={profileData.gender} onChange={handleProfileChange}>
+                                <option value="MALE">Masculin</option>
+                                <option value="FEMALE">Feminin</option>
+                            </select>
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>Telefon</label>
+                            <input className={styles.input} type="tel" name="phone"
+                                value={profileData.phone} onChange={handleProfileChange}
+                                placeholder="07xx xxx xxx" required />
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>Email</label>
+                            <input className={styles.input} type="email" name="email"
+                                value={profileData.email} onChange={handleProfileChange}
+                                placeholder="Email" required />
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>Profesie</label>
+                            <input className={styles.input} type="text" name="profesion"
+                                value={profileData.profesion} onChange={handleProfileChange}
+                                placeholder="Inginer, Doctor, etc." />
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>Loc de muncă</label>
+                            <input className={styles.input} type="text" name="job"
+                                value={profileData.job} onChange={handleProfileChange}
+                                placeholder="Compania XYZ" />
+                        </div>
+ 
+                        {/* Adresă */}
+                        <p className={styles.sectionTitle}>Adresă</p>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>Țară</label>
+                            <input className={styles.input} type="text" name="country"
+                                value={profileData.address.country} onChange={handleAddressChange}
+                                placeholder="România" />
+                        </div>
+                        <div className={styles.row}>
+                            <div className={styles.inputGroup}>
+                                <label className={styles.label}>Județ</label>
+                                <input className={styles.input} type="text" name="county"
+                                    value={profileData.address.county} onChange={handleAddressChange}
+                                    placeholder="Cluj" />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <label className={styles.label}>Oraș</label>
+                                <input className={styles.input} type="text" name="city"
+                                    value={profileData.address.city} onChange={handleAddressChange}
+                                    placeholder="Cluj-Napoca" />
+                            </div>
+                        </div>
+                        <div className={styles.row}>
+                            <div className={styles.inputGroup}>
+                                <label className={styles.label}>Stradă</label>
+                                <input className={styles.input} type="text" name="street"
+                                    value={profileData.address.street} onChange={handleAddressChange}
+                                    placeholder="Str. Exemplu" />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <label className={styles.label}>Număr</label>
+                                <input className={styles.input} type="text" name="number"
+                                    value={profileData.address.number} onChange={handleAddressChange}
+                                    placeholder="10" />
+                            </div>
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>Cod poștal</label>
+                            <input className={styles.input} type="text" name="zipCode"
+                                value={profileData.address.zipCode} onChange={handleAddressChange}
+                                placeholder="400000" />
+                        </div>
+ 
+                        {error && <p className={styles.error}>{error}</p>}
+                        <div className={styles.row}>
+                            <button className={styles.buttonSecondary} type="button"
+                                onClick={() => setStep(1)}>
+                                ← Înapoi
+                            </button>
+                            <button className={styles.button} type="submit" disabled={loading}>
+                                {loading ? "Se procesează..." : "Creează cont"}
+                            </button>
+                        </div>
+                    </form>
+                )}
+            </div>
+        </div>
+    );
+            </>
+            );
+         
+        }
+
+=== FILE: src/pages/auth/Auth.module.css ===
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
+
+.page {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0a2818;
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(30, 120, 80, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(42, 200, 130, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 25%, rgba(46, 204, 113, 0.1) 0%, transparent 80%);
+}
+
+.card {
+  background: #1a4d35;
+  border: 1px solid rgba(46, 204, 113, 0.12);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 40px rgba(46, 204, 113, 0.1);
+  margin: 2rem auto;
+}
+
+/* ---- Header ---- */
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.titleH2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.4rem;
+  color: #ffffff;
+  margin: 0 0 0.3rem 0;
+  letter-spacing: -0.5px;
+}
+
+.titleP {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(46, 204, 113, 0.4);
+  margin: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ---- Steps (Register) ---- */
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.step {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(46, 204, 113, 0.3);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid rgba(46, 204, 113, 0.1);
+}
+
+.activeStep {
+  color: #ffffff;
+  border-color: rgba(46, 204, 113, 0.4);
+  background: rgba(46, 204, 113, 0.07);
+}
+
+.doneStep {
+  color: rgba(46, 204, 113, 0.5);
+  border-color: rgba(46, 204, 113, 0.2);
+}
+
+.stepDivider {
+  color: rgba(46, 204, 113, 0.2);
+  font-size: 0.85rem;
+}
+
+/* ---- Form ---- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.sectionTitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(46, 204, 113, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0.5rem 0 -0.25rem 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(46, 204, 113, 0.08);
+}
+
+.label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(46, 204, 113, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.input {
+  background: rgba(46, 204, 113, 0.04);
+  border: 1px solid rgba(46, 204, 113, 0.15);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: #ffffff;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: rgba(46, 204, 113, 0.2);
+}
+
+.input:focus {
+  border-color: #2ecc71;
+  background: rgba(46, 204, 113, 0.07);
+}
+
+/* ---- Error ---- */
+.error {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: #ff6b6b;
+  margin: 0;
+}
+
+/* ---- Buttons ---- */
+.button {
+  margin-top: 0.5rem;
+  padding: 0.85rem;
+  background: linear-gradient(135deg, #27ae60, #1e8449);
+  color: #f0f8f4;
+  border: none;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 20px rgba(46, 204, 113, 0.35);
+  flex: 1;
+}
+
+.button:hover {
+  opacity: 0.70;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.buttonSecondary {
+  margin-top: 0.5rem;
+  padding: 0.85rem;
+  background: rgba(46, 204, 113, 0.06);
+  color: rgba(46, 204, 113, 0.6);
+  border: 1px solid rgba(46, 204, 113, 0.15);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  flex: 1;
+}
+
+.buttonSecondary:hover {
+  background: rgba(46, 204, 113, 0.1);
+}
+
+
+.link {
+  font-family: 'DM Sans', sans-serif;
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(46, 204, 113, 0.35);
+  margin: 0;
+}
+
+.link span {
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.link span:hover {
+  text-decoration: underline;
+}
+
+================================================================================
+                      7. PAGES - DASHBOARD
+================================================================================
+
+=== FILE: src/pages/dashboard/DashboardRouter.jsx ===
+import useAuth from '../../hooks/useAuth';
+import Dashboard from './Dashboard';
+import DoctorDashboard from '../doctor/DoctorDashboard';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode'; 
+
+export default function DashboardRouter() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
+
+  if (!user) {
+    return <div style={loadingStyle}>Se încarcă...</div>;
+  }
+
+  
+  const token = typeof user === 'string' ? user : (user.token || user.accessToken || user.jwt);
+  
+  let decodedToken = null;
+  try {
+    if (token) {
+      decodedToken = jwtDecode(token);
+    }
+  } catch (error) {
+    console.error("Token invalid sau corupt:", error);
+  }
+
+
+  const hasRole = (roleName) => {
+    if (!decodedToken) return false;
+
+    const rolesSource = decodedToken.roles || decodedToken.role || decodedToken.authorities || decodedToken.scope || [];
+    const targetRole = roleName.toUpperCase();
+
+    if (Array.isArray(rolesSource)) {
+      return rolesSource.some(auth => {
+        const val = typeof auth === 'object' ? (auth.authority || auth.role) : auth;
+        return val?.toUpperCase().includes(targetRole);
+      });
+    }
+
+    if (typeof rolesSource === 'string') {
+      return rolesSource.toUpperCase().includes(targetRole);
+    }
+
+    return false;
+  };
+
+  if (hasRole('DOCTOR')) {
+    return <DoctorDashboard />;
+  }
+
+  if (hasRole('PATIENT')) {
+    return <Dashboard />;
+  }
+
+  return (
+    <div style={errorContainerStyle}>
+      <div>
+        <p style={{ fontSize: '1.3rem', marginBottom: '1rem', fontWeight: 'bold' }}>
+          Rolul nu există în Token
+        </p>
+        <div style={{ textAlign: 'left', backgroundColor: '#113d23', padding: '1rem', borderRadius: '6px', fontSize: '0.85rem', marginBottom: '1.5rem', fontFamily: 'monospace' }}>
+          <strong>Câmpuri găsite în JWT-ul tău:</strong>
+          <pre style={{ margin: '0.5rem 0 0 0', overflowX: 'auto' }}>
+            {JSON.stringify(decodedToken, null, 2)}
+          </pre>
+        </div>
+        <button onClick={() => navigate('/login')} style={buttonStyle}>
+          Înapoi la Login
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const loadingStyle = { display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#0a2818', color: '#ffffff', fontFamily: "'DM Sans', sans-serif" };
+const errorContainerStyle = { display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#0a2818', color: '#ffffff', fontFamily: "'DM Sans', sans-serif", padding: '2rem' };
+const buttonStyle = { padding: '0.75rem 1.5rem', backgroundColor: '#2ecc71', color: '#ffffff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontSize: '1rem', fontWeight: '600' };
+
+=== FILE: src/pages/dashboard/Dashboard.jsx ===
+import React, { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth.js";
+import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import DashboardCard from "../../components/Cards/DashboardCard.jsx";
+import style from "./Dashboard.module.css";
+
+
+function Dashboard() {
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    
+    const [patientData, setPatientData] = useState({
+        name: "",
+        bornDate: "",
+        cnp: "",
+        gender: "",
+        phone: "",
+        email: "",
+        profesion: "",
+        job: "",
+        address: {
+            country: "",
+            county: "",
+            city: "",
+            street: "",
+            zipCode: "",
+            number: "",
+        },
+    })
+
+    useEffect(() => {
+        if (!user) {
+            navigate("/login");
+        } else {
+
+            const fetchPatientData = async () => {
+                try {
+                    const token = JSON.parse(localStorage.getItem("user")).accessToken;
+                    
+
+
+                    const response = await fetch(`http://localhost:8080/api/v1/users/me`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        },
+                        method: "GET"
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                    
+                    const data = await response.json();
+                    setPatientData(data);
+                } catch (error) {
+                    console.error("Error fetching patient data:", error.message);
+                }
+            }; 
+            
+            fetchPatientData();
+        }
+    }, [user, navigate]);
+    
+    const handleLogout = () => {
+        logout(); 
+        navigate("/login"); 
+    };
+
+    
+
+    return (
+        <div className={style.container}>
+            <div className={style.header}>
+                <h1 className={style.title}>iHealth</h1>
+                <p className={style.subtitle}>Manage your health, your way</p>
+            </div>
+
+            <div className={style.cardPlacement}>
+                <DashboardCard title="Profile" icon="/assets/profile1-svgrepo-com.svg" destination="/shared/Profile" />
+                <DashboardCard title="Appointments" icon="/assets/schedule.png" destination="/dashboard/Appointments" />
+                <DashboardCard title="Recommendations" icon="/assets/write-svgrepo-com.svg" destination="/patient/Recommendations" />
+                <DashboardCard title="Medical Records" icon="/assets/profile-user-svgrepo-com.svg" destination="/patient/MedicalRecords" />
+                <DashboardCard title="Prescriptions" icon="/assets/medical-prescription-svgrepo-com.svg" destination="/dashboard/Prescriptions" />
+                <DashboardCard title="Health Data" icon="/assets/samsung-health-monitor-svgrepo-com.svg" destination="/dashboard/HealthData" />
+            </div>
+
+            <div className={style.logoutButtonContainer}>
+                <button onClick={handleLogout} className={style.logoutButton}>Logout</button>
+            </div>
+
+            <Outlet />
+        </div>
+    );
+}
+        
+
+export default Dashboard
+
+=== FILE: src/pages/dashboard/Dashboard.module.css ===
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
+
+.container {
+  min-height: 100vh;
+  background-color: #0a2818;
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(30, 120, 80, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(42, 200, 130, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 25%, rgba(46, 204, 113, 0.1) 0%, transparent 80%);
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+}
+
+.title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+
+.subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.cardPlacement {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10rem;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.logoutButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(46, 204, 113, 0.15);
+}
+
+.logoutButton {
+  font-family: 'DM Sans', sans-serif;
+  padding: 0.8rem 2.5rem;
+  border-radius: 12px;
+  border: 1.5px solid rgba(46, 204, 113, 0.35);
+  background: rgba(46, 204, 113, 0.1);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.logoutButton:hover {
+  background: rgba(46, 204, 113, 0.18);
+  border-color: rgba(46, 204, 113, 0.6);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(46, 204, 113, 0.22);
+}
+
+.logoutButton:active {
+  transform: translateY(-1px);
+}
+
+================================================================================
+                        8. PAGES - DOCTOR
+================================================================================
+
+=== FILE: src/pages/doctor/DoctorDashboard.jsx ===
+import { useEffect } from "react";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import DashboardCard from "../../components/Cards/DashboardCard.jsx";
+import { Outlet } from "react-router-dom";
+import style from "./DoctorDashboard.module.css";
+
+function DoctorDashboard() {
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+    const [doctorData, setDoctorData] = useState({
+        nume: "",
+        specializare: "",
+    });
+
+    const handleLogout = () => {
+        logout();
+        navigate("/login");
+    };
+
+    return (
+        <div className={style.container}>
+            <div className={style.header}>
+                <h1 className={style.title}>iHealth</h1>
+                <p className={style.subtitle}>Manage your health, your way</p>
+            </div>
+
+            <div className={style.cardPlacement}>
+                <DashboardCard 
+                    title="Assign Patients" 
+                    description="View and manage your assigned patients" 
+                    icon="/public/assets/add-group-svgrepo-com.svg"
+                    destination="/doctor/PatientAdd" 
+                />
+                <DashboardCard
+                    title="View Patients"
+                    description="See the list of patients assigned to you"
+                    icon="public/assets/list-svgrepo-com.svg"
+                    destination="/doctor/PatientList"
+                />
+            </div>
+
+            <div className={style.logoutButtonContainer}>
+                <button onClick={handleLogout} className={style.logoutButton}>
+                    Logout
+                </button>
+            </div>
+
+            <Outlet />
+        </div>
+    );
+}
+
+export default DoctorDashboard;
+
+=== FILE: src/pages/doctor/DoctorDashboard.module.css ===
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
+
+.container {
+  min-height: 100vh;
+  background-color: #0a2818;
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(30, 120, 80, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(42, 200, 130, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 25%, rgba(46, 204, 113, 0.1) 0%, transparent 80%);
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+}
+
+.title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+
+.subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.cardPlacement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10rem;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  min-height: 400px;
+}
+
+.logoutButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(46, 204, 113, 0.15);
+}
+
+.logoutButton {
+  font-family: 'DM Sans', sans-serif;
+  padding: 0.8rem 2.5rem;
+  border-radius: 12px;
+  border: 1.5px solid rgba(46, 204, 113, 0.35);
+  background: rgba(46, 204, 113, 0.1);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.logoutButton:hover {
+  background: rgba(46, 204, 113, 0.18);
+  border-color: rgba(46, 204, 113, 0.6);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(46, 204, 113, 0.22);
+}
+
+.logoutButton:active {
+  transform: translateY(-1px);
+}
+
+=== FILE: src/pages/doctor/PatientList.jsx ===
+import { useEffect, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import useAuth from "../../hooks/useAuth.js";
+import styles from "./PatientList.module.css";
+
+export default function PatientList() {
+    const { user } = useAuth();
+    const navigate = useNavigate();
+    const [assignedPatients, setAssignedPatients] = useState([]);
+    const [selectedPatient, setSelectedPatient] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    const doctorId = user?.accessToken
+        ? jwtDecode(user.accessToken).medic_id
+        : null;
+
+    const fetchAssignedPatients = useCallback(async () => {
+        if (!doctorId) {
+            setError("Doctor data unavailable. Please login again.");
+            setLoading(false);
+            return;
+        }
+
+        try {
+            setLoading(true);
+            setError("");
+            const token = user.accessToken;
+            const response = await fetch(
+                `http://localhost:8080/api/patients/get/by/${doctorId}`,
+                {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            setAssignedPatients(Array.isArray(data) ? data : []);
+        } catch (fetchError) {
+            setError(`Error fetching assigned patients: ${fetchError.message}`);
+        } finally {
+            setLoading(false);
+        }
+    }, [doctorId, user?.accessToken]);
+
+    useEffect(() => {
+        if (!user || !user.accessToken) {
+            navigate("/login");
+            return;
+        }
+
+        fetchAssignedPatients();
+    }, [user, navigate, fetchAssignedPatients]);
+
+    const handleSelectPatient = (patient) => {
+        setSelectedPatient((currentPatient) =>
+            currentPatient?.id === patient.id ? null : patient
+        );
+    };
+
+    const renderPatientField = (label, value) => (
+        <div className={styles.detailRow}>
+            <span className={styles.detailLabel}>{label}</span>
+            <span className={styles.detailValue}>{value || "N/A"}</span>
+        </div>
+    );
+
+    const detailPatient = selectedPatient || {};
+
+    const formatAddress = (address) => {
+    if (!address) return "N/A";
+    const { street, number, city, county, country, zipCode } = address;
+    return [street, number, city, county, country, zipCode]
+        .filter(Boolean) 
+        .join(", ");
+};
+
+    return (
+        <div className={styles.container}>
+            <div className={styles.header}>
+                <div>
+                    <h1 className={styles.title}>Assigned Patients</h1>
+                    <p className={styles.subtitle}>
+                        Here are the patients already assigned to you.
+                        Click on a patient to see their details.
+                    </p>
+                    
+                </div>
+                <button className={styles.refreshButton} onClick={() => navigate("/dashboard")}>
+                    Back to Dashboard
+                </button>
+
+                <button className={styles.refreshButton} onClick={fetchAssignedPatients}>
+                    Refresh
+                </button>
+            </div>
+            
+            {loading ? (
+                <div className={styles.statusCard}>Loading patients...</div>
+            ) : error ? (
+                <div className={styles.statusCard}>{error}</div>
+            ) : (
+                <div className={styles.gridLayout}>
+                    <div className={styles.listPanel}>
+                        <div className={styles.panelHeader}>Patient List</div>
+                        {assignedPatients.length === 0 ? (
+                            <div className={styles.emptyState}>
+                                No assigned patients at the moment.
+                            </div>
+                        ) : (
+                            <div className={styles.patientList}>
+                                {assignedPatients.map((patient, index) => {
+                                    const patientKey = patient.patientId ?? patient.id ?? index;
+                                    const isActive = selectedPatient?.id === patient.id;
+                                    return (
+                                        <button
+                                            key={patientKey}
+                                            type="button"
+                                            className={`${styles.patientItem} ${
+                                                isActive ? styles.activePatient : ""
+                                            }`}
+                                            onClick={() => handleSelectPatient(patient)}
+                                        >
+                                            <div className={styles.patientMeta}>
+                                                <span className={styles.patientName}>
+                                                    {patient.name || "Patient without name"}
+                                                </span>
+                                                <span className={styles.patientBadge}>
+                                                    {patient.cnp || "Unknown CNP"}
+                                                </span>
+                                            </div>
+                                            <span className={styles.patientSmallText}>
+                                                {patient.bornDate || patient.birthDate || "Unknown birth date"}
+                                            </span>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </div>
+
+                    <div className={styles.detailsPanel}>
+                        <div className={styles.panelHeader}>Patient Details</div>
+                        {selectedPatient ? (
+                            <div className={styles.detailsCard}>
+                                <p className={styles.detailsHeading}>
+                                    {detailPatient.name || "Selected patient"}
+                                </p>
+                                {renderPatientField("CNP", detailPatient.cnp)}
+                                {renderPatientField("Birth Date", detailPatient.bornDate || detailPatient.birthDate)}
+                                {renderPatientField("Email", detailPatient.email)}
+                                {renderPatientField("Phone", detailPatient.phone)}
+                                {renderPatientField("Address", formatAddress(detailPatient.address))}
+                                {renderPatientField("Gender", detailPatient.gender)}
+                                {renderPatientField("Notes", detailPatient.notes || detailPatient.details)}
+                            </div>
+                        ) : (
+                            <div className={styles.emptyDetails}>
+                                Select a patient from the list to see their details.
+                            </div>
+                        )}
+                    </div>
+                    
+                </div>
+                
+            )}
+
+            
+        </div>
+    );
+}
+
+=== FILE: src/pages/doctor/PatientList.module.css ===
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
+
+.container {
+  min-height: 100vh;
+  background-color: #0a2818;
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(30, 120, 80, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(42, 200, 130, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 25%, rgba(46, 204, 113, 0.1) 0%, transparent 80%);
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header > div {
+  flex: 1;
+  text-align: left;
+}
+
+.title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.refreshButton {
+  font-family: 'DM Sans', sans-serif;
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  border: 1.5px solid rgba(46, 204, 113, 0.35);
+  background: rgba(46, 204, 113, 0.1);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.refreshButton:hover {
+  background: rgba(46, 204, 113, 0.18);
+  border-color: rgba(46, 204, 113, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(46, 204, 113, 0.2);
+}
+
+.refreshButton:active {
+  transform: translateY(0);
+}
+
+.statusCard {
+  background: rgba(46, 204, 113, 0.08);
+  border: 1px solid rgba(46, 204, 113, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.gridLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.listPanel,
+.detailsPanel {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(46, 204, 113, 0.15);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.panelHeader {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(46, 204, 113, 0.15);
+  background: rgba(46, 204, 113, 0.05);
+  letter-spacing: 0.05em;
+}
+
+.patientList {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  max-height: 600px;
+}
+
+.patientList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.patientList::-webkit-scrollbar-track {
+  background: rgba(46, 204, 113, 0.05);
+}
+
+.patientList::-webkit-scrollbar-thumb {
+  background: rgba(46, 204, 113, 0.3);
+  border-radius: 3px;
+}
+
+.patientList::-webkit-scrollbar-thumb:hover {
+  background: rgba(46, 204, 113, 0.5);
+}
+
+.patientItem {
+  background: transparent;
+  border: 1px solid rgba(46, 204, 113, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #ffffff;
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.patientItem:hover {
+  background: rgba(46, 204, 113, 0.12);
+  border-color: rgba(46, 204, 113, 0.4);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.15);
+}
+
+.patientItem.activePatient {
+  background: rgba(46, 204, 113, 0.2);
+  border-color: rgba(46, 204, 113, 0.6);
+  box-shadow: 0 4px 16px rgba(46, 204, 113, 0.25);
+}
+
+.patientMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.patientName {
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+}
+
+.patientBadge {
+  background: rgba(46, 204, 113, 0.2);
+  color: rgba(46, 204, 113, 0.9);
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.patientSmallText {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'DM Sans', sans-serif;
+  padding: 2rem;
+  text-align: center;
+}
+
+.detailsPanel {
+  position: relative;
+}
+
+.detailsCard {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.detailsCard::-webkit-scrollbar {
+  width: 6px;
+}
+
+.detailsCard::-webkit-scrollbar-track {
+  background: rgba(46, 204, 113, 0.05);
+}
+
+.detailsCard::-webkit-scrollbar-thumb {
+  background: rgba(46, 204, 113, 0.3);
+  border-radius: 3px;
+}
+
+.detailsCard::-webkit-scrollbar-thumb:hover {
+  background: rgba(46, 204, 113, 0.5);
+}
+
+.detailsHeading {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.3px;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(46, 204, 113, 0.15);
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(46, 204, 113, 0.1);
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+}
+
+.detailLabel {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  color: rgba(46, 204, 113, 0.9);
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  min-width: 120px;
+}
+
+.detailValue {
+  font-family: 'DM Sans', sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  text-align: right;
+  flex: 1;
+  word-break: break-word;
+}
+
+.emptyDetails {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'DM Sans', sans-serif;
+  padding: 2rem;
+  text-align: center;
+  min-height: 300px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .gridLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .header > div {
+    text-align: center;
+  }
+}
+
+=== FILE: src/pages/doctor/PatientAdd.jsx ===
+import React, { useEffect } from "react";
+import useAuth from "../../hooks/useAuth.js";
+import { useNavigate } from "react-router-dom";
+import styles from "./PatientAdd.module.css";
+import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
+
+export default function PatientAdd() {
+        const { user } = useAuth();
+        const navigate = useNavigate();
+        const [loading, setLoading] = useState(true);
+        const [error, setError] = useState("");
+        const [searchTerm, setSearchTerm] = useState("");
+        const [selectedPatient, setSelectedPatient] = useState([]);
+        const [patientData, setPatientData] = useState([]);
+        const [assignedPatients, setAssignedPatients] = useState([]);
+
+        const goToDashboard = () => {
+        navigate("/dashboard");
+    };
+            
+
+
+        useEffect(() => {
+            if (!user) {
+                navigate("/login");
+            } else {
+                const fetchPatientData = async () => {
+                    try {
+                        setLoading(true);
+                        const token = JSON.parse(localStorage.getItem("user")).accessToken;
+                        const response = await fetch(`http://localhost:8080/api/patients/all/patients`, {
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: `Bearer ${token}`,
+                            },
+                            method: "GET",
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const data = await response.json();
+                        setPatientData(data);
+                        setError("");
+
+                    } catch (error) {
+                        console.error("Error fetching patient data:", error.message);
+                        setError(error.message);
+                    } finally {
+                        setLoading(false);
+                    }
+                };
+
+                fetchPatientData();
+            }
+        }, [user, navigate]);
+
+
+        const handleAssignPatients = async () => {
+            try {
+
+                const token = JSON.parse(localStorage.getItem("user")).accessToken;
+                const doctorId = jwtDecode(token).medic_id;
+                const patientId = selectedPatient[0];
+
+    
+
+                const response = await fetch(`http://localhost:8080/api/patients/${doctorId}/assign/${patientId}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                setAssignedPatients(data);
+                setError("");
+
+            }catch (error) {
+                console.error("Error assigning patients:", error.message);
+                setError(error.message);
+            } 
+        }
+
+        const togglePatientSelection = (patient) => {
+            if (selectedPatient.includes(patient.id)) {
+                setSelectedPatient(selectedPatient.filter(id => id !== patient.id));
+            } else {
+                setSelectedPatient([...selectedPatient, patient.id]);
+            }
+        };
+
+        const filteredPatients = patientData.filter(patient =>
+            patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            patient.cnp.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+
+
+      
+        return (
+            <div className={styles.container}>
+                <div className={styles.header}>
+                    <h1 className={styles.title}>Listă Pacienți</h1>
+                </div>
+
+                {loading && <p className={styles.loading}>Se încarcă pacienții...</p>}
+
+                {error && <p className={styles.error}>Eroare: {error}</p>}
+
+                {!loading && !error && (
+                    <>
+                        <div className={styles.searchContainer}>
+                            <input 
+                                type="text" 
+                                placeholder="⋮ Caută pacient..." 
+                                className={styles.searchInput}
+                                onInput={(e) => setSearchTerm(e.target.value)} 
+                            />
+                        </div>
+
+                        <div className={styles.tableContainer}>
+                            {patientData.length === 0 ? (
+                                <p className={styles.noPatients}>Nu există pacienți înregistrați.</p>
+                            ) : (
+                                <table className={styles.patientTable}>
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Birth Date</th>
+                                            <th>CNP</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {filteredPatients.map((patient, index) => {
+                                            const isSelected = selectedPatient.includes(patient.id);
+                                            return (
+                                                <tr key={patient.patientId || index} 
+                                                    onClick={() => togglePatientSelection(patient)}
+                                                    style={{
+                                                        cursor: "pointer", 
+                                                        backgroundColor: isSelected ? "#407b54" : "transparent",
+                                                        transition: "background-color 0.2s"
+                                                    }}
+                                                >
+                                                    <td>{patient.name}</td>
+                                                    <td>{patient.bornDate}</td>
+                                                    <td>{patient.cnp}</td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                            )}
+
+                            
+                        </div>
+                    </>
+                )}
+
+                <button className={styles.assignButton} onClick={handleAssignPatients}>
+                    Assign Selected Patients
+                </button>
+
+                <button className={styles.assignButton} onClick={goToDashboard}>
+                    Back
+                </button>
+            </div>
+        );
+}
+
+=== FILE: src/pages/doctor/PatientAdd.module.css ===
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
+
+.container {
+  min-height: 100vh;
+  background-color: #0a2818;
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(30, 120, 80, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(42, 200, 130, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 25%, rgba(46, 204, 113, 0.1) 0%, transparent 80%);
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+}
+
+.title {   
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+}
+
+.searchContainer {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.searchInput {
+  font-family: 'DM Sans', sans-serif;
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  border-radius: 12px;
+  border: 1.5px solid rgba(46, 204, 113, 0.35);
+  background: rgba(46, 204, 113, 0.08);
+  color: #ffffff;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.05em;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.searchInput:focus {
+  outline: none;
+  background: rgba(46, 204, 113, 0.15);
+  border-color: rgba(46, 204, 113, 0.6);
+  box-shadow: 0 0 20px rgba(46, 204, 113, 0.2);
+}
+
+.tableContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(46, 204, 113, 0.15);
+  backdrop-filter: blur(10px);
+  overflow-x: auto;
+}
+
+.patientTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.patientTable thead {
+  background: rgba(46, 204, 113, 0.12);
+}
+
+.patientTable th {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  color: rgba(46, 204, 113, 0.9);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid rgba(46, 204, 113, 0.25);
+}
+
+.patientTable tbody tr {
+  border-bottom: 1px solid rgba(46, 204, 113, 0.1);
+  transition: all 0.3s ease;
+}
+
+.patientTable tbody tr:hover {
+  background: rgba(46, 204, 113, 0.08);
+  border-bottom-color: rgba(46, 204, 113, 0.25);
+}
+
+.patientTable td {
+  padding: 1rem 1.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+}
+
+.loading,
+.error,
+.noPatients {
+  font-family: 'DM Sans', sans-serif;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 2rem auto;
+  font-size: 1rem;
+}
+
+.loading {
+  color: rgba(46, 204, 113, 0.8);
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid rgba(46, 204, 113, 0.25);
+}
+
+.error {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.25);
+}
+
+.noPatients {
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(46, 204, 113, 0.15);
+}
+
+.assignButton {
+  display: block;
+  margin: 2rem auto 0;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(46, 204, 112, 0.977);
+  background: rgba(46, 204, 113, 0.1);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.assignButton:hover {
+  background: rgba(46, 204, 113, 0.2);
+  border-color: rgba(46, 204, 113, 0.5);
+}
+
+.assignButton:active {
+  transform: scale(0.98);
+}
+
+=== FILE: src/pages/doctor/PatientDetail.jsx ===
+(EMPTY FILE)
+
+================================================================================
+                        9. PAGES - PATIENT
+================================================================================
+
+=== FILE: src/pages/patient/Monitoring.jsx ===
+(EMPTY FILE)
+
+=== FILE: src/pages/patient/MedicalRecords.jsx ===
+import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth.js";
+import { useNavigate } from "react-router-dom";
+import styles from "./MedicalRecords.module.css";
+
+export default function MedicalRecords() {
+    const { user } = useAuth();
+    const navigate = useNavigate();
+    const [medicalData, setMedicalData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    const goToDashboard = () => {
+        navigate("/dashboard");
+    };
+
+    useEffect(() => {
+        if (!user || !user.patientId || !user.accessToken) {
+            setError("User data is incomplete");
+            setLoading(false);
+            return;
+        }
+
+        const fetchMedicalRecord = async () => {
+            try {
+                setLoading(true);
+                const response = await fetch(
+                    `http://localhost:8080/api/patients/${user.patientId}/medical-events/me`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${user.accessToken}`,
+                        },
+                        method: "GET",
+                    }
+                );
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log("Medical records fetched:", data);
+                setMedicalData(data);
+                setError("");
+            } catch (err) {
+                console.error("Error fetching medical record:", err.message);
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchMedicalRecord();
+    }, [user]);
+
+    return (
+        <div className={styles.container}>
+            <div className={styles.card}>
+                <div className={styles.header}>
+                    <h2 className={styles.title}>Medical Records</h2>
+                    <p className={styles.subtitle}>Your Medical Events</p>
+                </div>
+
+                {loading && (
+                    <div className={styles.loadingState}>
+                        <p>Loading your medical records...</p>
+                    </div>
+                )}
+
+                {error && (
+                    <div className={styles.emptyState}>
+                        <p>Error: {error}</p>
+                    </div>
+                )}
+
+                {!loading && !error && medicalData && (
+                    <div className={styles.recordsContainer}>
+                        <div className={styles.recordItem}>
+                            <p className={styles.recordLabel}>Event Date</p>
+                            <p className={styles.recordValue}>
+                                {medicalData.eventData || "N/A"}
+                            </p>
+                        </div>
+                        <div className={styles.recordItem}>
+                            <p className={styles.recordLabel}>Event Type</p>
+                            <p className={styles.recordValue}>
+                                {medicalData.eventType || "N/A"}
+                            </p>
+                        </div>
+                        <div className={styles.recordItem}>
+                            <p className={styles.recordLabel}>Details</p>
+                            <p className={styles.recordValue}>
+                                {medicalData.details || "N/A"}
+                            </p>
+                        </div>
+                        <div className={styles.recordItem}>
+                            <p className={styles.recordLabel}>Patient</p>
+                            <p className={styles.recordValue}>
+                                {medicalData.patient || "N/A"}
+                            </p>
+                        </div>
+                    </div>
+                )}
+
+                {!loading && !error && !medicalData && (
+                    <div className={styles.emptyState}>
+                        <p>No medical records found.</p>
+                    </div>
+                )}
+
+                <div className={styles.buttonGroup}>
+                    <button
+                        className={styles.button}
+                        onClick={goToDashboard}
+                    >
+                        Back to Dashboard
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+=== FILE: src/pages/patient/MedicalRecords.module.css ===
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #0a2818;
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(30, 120, 80, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(42, 200, 130, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 25%, rgba(46, 204, 113, 0.1) 0%, transparent 80%);
+  padding: 2rem;
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.card {
+  background: #1a4d35;
+  border: 1px solid rgba(46, 204, 113, 0.12);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 40px rgba(46, 204, 113, 0.1);
+}
+
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.4rem;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(46, 204, 113, 0.4);
+  margin: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.recordsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.recordItem {
+  background: rgba(46, 204, 113, 0.05);
+  border: 1px solid rgba(46, 204, 113, 0.1);
+  border-radius: 12px;
+  padding: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.recordItem:hover {
+  border-color: rgba(46, 204, 113, 0.3);
+  background: rgba(46, 204, 113, 0.08);
+}
+
+.recordLabel {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(46, 204, 113, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+.recordValue {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 2rem;
+  color: rgba(246, 178, 221, 0.4);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.button {
+  font-family: 'DM Sans', sans-serif;
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  background: rgba(46, 204, 113, 0.1);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: rgba(46, 204, 113, 0.2);
+  border-color: rgba(46, 204, 113, 0.5);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.loadingState {
+  text-align: center;
+  padding: 2rem;
+  font-family: 'DM Sans', sans-serif;
+  color: #f6b2dd;
+}
+
+=== FILE: src/pages/patient/Recommendations.jsx ===
+import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth.js";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+
+
+
+export default function Recommendations() { 
+    const { user } = useAuth();
+    const navigate = useNavigate();
+    const [recommendations, setRecommendations] = useState([]);
+
+
+    let patientId = null;
+
+    if(user.accessToken) {
+        const decodedToken = jwtDecode(user.accessToken);
+        patientId = decodedToken.userId;
+    }
+
+   
+    
+    useEffect(() => {
+
+        const fetchRecommendations = async () => {
+            try {
+
+                const response = await fetch(`http://localhost:8080/api/patients/recommendations/for-patient/${user.patientId}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${user.accessToken}`
+                    },
+                    method: "GET"
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                // Opțional: Dă-i un console.log ca să fii sigur că vin datele
+                console.log("Date primite:", data); 
+                
+                setRecommendations(data);
+            } catch (error) {
+                console.error("Error fetching recommendations:", error.message);
+            }
+        }; 
+
+        fetchRecommendations();
+        
+    }, [navigate, user, patientId]); 
+
+
+    const goToDashboard = () => {
+        navigate("/Dashboard");
+    }
+
+    return (
+        <div>
+            <h1>Recomandările mele</h1>
+            
+            {/* 4. AICI: Verificăm dacă lista e goală. Dacă nu e, o afișăm cu .map() */}
+            {recommendations.length === 0 ? (
+                <p>Momentan nu ai nicio recomandare.</p>
+            ) : (
+                recommendations.map((rec, index) => (
+                    <div key={index} style={{ borderBottom: "1px solid #ccc", paddingBottom: "10px", marginBottom: "10px" }}>
+                        <p><strong>Tip recomandare:</strong> {rec.recommendationType ? rec.recommendationType : "N/A"}</p>
+                        <p><strong>Detalii:</strong> {rec.details ? rec.details : "N/A"}</p>
+                    </div>
+                ))
+            )}
+            <button onClick={goToDashboard}>Back to Dashboard</button>
+        </div>
+    );
+}
+
+================================================================================
+                       10. PAGES - SHARED
+================================================================================
+
+=== FILE: src/pages/shared/Profile.jsx ===
+import React from "react";
+import useAuth from "../../hooks/useAuth.js";
+import { useNavigate } from "react-router-dom";
+import styles from "./Profile.module.css";
+
+export default function Profile() {
+    const { user } = useAuth();
+    const navigate = useNavigate();
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState("");
+
+    const [patientData, setPatientData] = React.useState({
+        name: "",
+        bornDate: "",
+        cnp: "",
+        gender: "",
+        phone: "",
+        email: "",
+        profesion: "",
+        job: "",
+    });
+
+    const goToDashboard = () => {
+        navigate("/dashboard");
+    };
+    
+    async function fetchPatientData() {
+        try {
+            setLoading(true);
+            const token = JSON.parse(localStorage.getItem("user")).accessToken;
+            const response = await fetch(`http://localhost:8080/api/patients/me`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                method: "GET",
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            setPatientData(data);
+            setError("");
+        } catch (error) {
+            console.error("Error fetching patient data:", error.message);
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    React.useEffect(() => {
+        fetchPatientData();
+    }, [user, navigate]);
+
+    return (
+        <div className={styles.container}>
+            <div className={styles.card}>
+                <div className={styles.header}>
+                    <h1 className={styles.title}>Profilul Meu</h1>
+                    <p className={styles.subtitle}>Informații Personale</p>
+                </div>
+
+                {loading && (
+                    <div className={styles.loadingState}>
+                        <p>Se încarcă informațiile...</p>
+                    </div>
+                )}
+
+                {error && (
+                    <div className={styles.emptyState}>
+                        <p>Error: {error}</p>
+                    </div>
+                )}
+
+                {!loading && !error && (
+                    <div className={styles.profileContainer}>
+                        <div className={styles.profileItem}>
+                            <p className={styles.profileLabel}>Nume</p>
+                            <p className={styles.profileValue}>
+                                {patientData.name || "N/A"}
+                            </p>
+                        </div>
+                        <div className={styles.profileItem}>
+                            <p className={styles.profileLabel}>Data Nașterii</p>
+                            <p className={styles.profileValue}>
+                                {patientData.bornDate || "N/A"}
+                            </p>
+                        </div>
+                        <div className={styles.profileItem}>
+                            <p className={styles.profileLabel}>CNP</p>
+                            <p className={styles.profileValue}>
+                                {patientData.cnp || "N/A"}
+                            </p>
+                        </div>
+                        <div className={styles.profileItem}>
+                            <p className={styles.profileLabel}>Gen</p>
+                            <p className={styles.profileValue}>
+                                {patientData.gender || "N/A"}
+                            </p>
+                        </div>
+                        <div className={styles.profileItem}>
+                            <p className={styles.profileLabel}>Telefon</p>
+                            <p className={styles.profileValue}>
+                                {patientData.phone || "N/A"}
+                            </p>
+                        </div>
+                        <div className={styles.profileItem}>
+                            <p className={styles.profileLabel}>Email</p>
+                            <p className={styles.profileValue}>
+                                {patientData.email || "N/A"}
+                            </p>
+                        </div>
+                        <div className={styles.profileItem}>
+                            <p className={styles.profileLabel}>Profesie</p>
+                            <p className={styles.profileValue}>
+                                {patientData.profesion || "N/A"}
+                            </p>
+                        </div>
+                        <div className={styles.profileItem}>
+                            <p className={styles.profileLabel}>Loc de Muncă</p>
+                            <p className={styles.profileValue}>
+                                {patientData.job || "N/A"}
+                            </p>
+                        </div>
+                    </div>
+                )}
+
+                <div className={styles.buttonGroup}>
+                    <button className={styles.button} onClick={goToDashboard}>
+                        Înapoi la Panou
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+=== FILE: src/pages/shared/Profile.module.css ===
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #0a2818;
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(30, 120, 80, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(42, 200, 130, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 25%, rgba(46, 204, 113, 0.1) 0%, transparent 80%);
+  padding: 2rem;
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.card {
+  background: #1a4d35;
+  border: 1px solid rgba(46, 204, 113, 0.12);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 40px rgba(46, 204, 113, 0.1);
+}
+
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.4rem;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(46, 204, 113, 0.4);
+  margin: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.profileItem {
+  background: rgba(46, 204, 113, 0.05);
+  border: 1px solid rgba(46, 204, 113, 0.1);
+  border-radius: 12px;
+  padding: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.profileItem:hover {
+  border-color: rgba(46, 204, 113, 0.3);
+  background: rgba(46, 204, 113, 0.08);
+}
+
+.profileLabel {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(46, 204, 113, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+.profileValue {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 2rem;
+  color: rgba(246, 178, 221, 0.4);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.button {
+  font-family: 'DM Sans', sans-serif;
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  background: rgba(46, 204, 113, 0.1);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: rgba(46, 204, 113, 0.2);
+  border-color: rgba(46, 204, 113, 0.5);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.loadingState {
+  text-align: center;
+  padding: 2rem;
+  font-family: 'DM Sans', sans-serif;
+  color: #f6b2dd;
+}
+
+=== FILE: src/pages/shared/Reports.jsx ===
+(EMPTY FILE)
+
+================================================================================
+                         11. COMPONENTS
+================================================================================
+
+=== FILE: src/components/Layout/NavigationBar.jsx ===
+(EMPTY FILE)
+
+=== FILE: src/components/Alerts/AlarmBadge.jsx ===
+(EMPTY FILE)
+
+=== FILE: src/components/Cards/DashboardCard.jsx ===
+import { Link } from "react-router-dom";
+import style from "./DashboardCard.module.css";
+
+export default function DashboardCard({title, icon,  destination}) {
+
+    return(
+    <Link to ={destination} className={style.cardLink}>
+     <div className = {style.card}>
+        <img src = {icon} alt={title} className={style.cardIcon}/>
+        <p className={style.cardText}>{title}</p>
+     </div>
+    </Link>
+    );
+
+}
+
+=== FILE: src/components/Cards/DashboardCard.module.css ===
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');
+
+.cardLink {
+  text-decoration: none;
+  display: block;
+  height: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+
+  background: rgba(15, 80, 50, 0.75);
+  border: 1.5px solid rgba(46, 204, 113, 0.25);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  height: 100%;
+  cursor: pointer;
+  
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 20px rgba(46, 204, 113, 0.08);
+}
+
+.card:hover {
+  background: rgba(25, 110, 70, 0.9);
+  border-color: rgba(46, 204, 113, 0.45);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), 0 0 30px rgba(46, 204, 113, 0.2);
+}
+
+.card:active {
+  transform: translateY(-4px);
+}
+
+.cardIcon {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  filter: brightness(1.1) contrast(1.05);
+  transition: all 0.3s ease;
+}
+
+.card:hover .cardIcon {
+  transform: scale(1.08) rotate(2deg);
+  filter: brightness(1.2) contrast(1.1);
+}
+
+.cardText {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.3px;
+  text-align: center;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.card:hover .cardText {
+  color: #2ecc71;
+  font-size: 1.35rem;
+  letter-spacing: 0px;
+}
+
+=== FILE: src/components/Cards/PatientCard.jsx ===
+(EMPTY FILE)
+
+=== FILE: src/components/Cards/PatientForm.jsx ===
+(EMPTY FILE)
+
+=== FILE: src/components/Cards/ProfileCard.jsx ===
+
+
+export default function ProfileCard({ title, value }) {
+    
+    return (
+        <div className="profile-card">
+            <p className="profile-card-title">{title}</p>
+            <p className="profile-card-value">{value}</p>
+        </div>
+    );
+}
+
+=== FILE: src/components/Charts/ECGChart.jsx ===
+(EMPTY FILE)
+
+=== FILE: src/components/Charts/PulseChart.jsx ===
+(EMPTY FILE)
+
+=== FILE: src/components/Charts/TemperatureChart.jsx ===
+(EMPTY FILE)
+
+================================================================================
+                              12. UTILS
+================================================================================
+
+=== FILE: src/utils/alarmUtils.js ===
+(EMPTY FILE)
+
+================================================================================
+                           END OF PROJECT CODE
+================================================================================
+
+Project Statistics:
+- Total Files: 41
+- Configuration Files: 3
+- Empty Files: 13
+- Active Components: 28
+
+Key Technologies:
+- React 19.2.0
+- React Router DOM 7.13.1
+- Vite 7.3.1
+- Tailwind CSS 4.2.1
+- JWT Decode 4.0.0
+- Recharts 3.8.0
+- React Hook Form 7.71.2
+
+Backend API Base URL: http://localhost:8080
+Main Endpoints:
+- Authentication: /api/v1/auth/login, /api/v1/auth/register/patient
+- Users: /api/v1/users/me
+- Patients: /api/patients/*, /api/patients/recommendations/*, /api/patients/profile
+- Doctors: /api/patients/get/by/{doctorId}, /api/patients/{doctorId}/assign/{patientId}
+
+Color Scheme:
+- Primary Green: #2ecc71, #27ae60
+- Background Dark: #0a2818
+- Card Background: #1a4d35
+- Text Primary: #ffffff
+- Text Secondary: rgba(46, 204, 113, 0.5-0.9)
+
+================================================================================

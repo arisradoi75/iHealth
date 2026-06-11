@@ -4,6 +4,7 @@ import DoctorDashboard from '../doctor/DoctorDashboard';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode'; 
+import AdminDashboard from '../admin/AdminDashboard';
 
 export default function DashboardRouter() {
   const { user } = useAuth();
@@ -58,6 +59,10 @@ export default function DashboardRouter() {
 
   if (hasRole('PATIENT')) {
     return <Dashboard />;
+  }
+
+  if(hasRole('ADMIN')) {
+    return <AdminDashboard />;
   }
 
   return (

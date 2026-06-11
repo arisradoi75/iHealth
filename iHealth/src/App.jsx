@@ -7,6 +7,8 @@ import MedicalRecords from "./pages/patient/MedicalRecords.jsx";
 import DashboardRouter from "./pages/dashboard/DashboardRouter.jsx";
 import PatientAdd from "./pages/doctor/PatientAdd.jsx";
 import PatientList from "./pages/doctor/PatientList.jsx";
+import ReviewRecords from "./pages/doctor/ReviewRecords.jsx";
+import PulseChart from "./components/Charts/PulseChart.jsx";
 
 function App() {
 
@@ -25,6 +27,8 @@ function App() {
       <Route path="/patient/MedicalRecords" element={<MedicalRecords />} /> 
       <Route path="/doctor/PatientAdd" element={<PatientAdd />} />
       <Route path="/doctor/PatientList" element={<PatientList />} />
+      <Route path="/doctor/ReviewRecords" element={<ReviewRecords />} />
+      <Route path="/components/Charts/PulseChart" element={<PulseChart />} />
     </Routes>
     
     </>

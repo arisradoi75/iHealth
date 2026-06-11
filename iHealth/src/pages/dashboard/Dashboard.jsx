@@ -79,12 +79,12 @@ function Dashboard() {
             </div>
 
             <div className={style.cardPlacement}>
-                <DashboardCard title="Profile" icon="/assets/profile1-svgrepo-com.svg" destination="/shared/Profile" />
+                <DashboardCard title="Profile" icon="public/assets/profile1-svgrepo-com.svg" destination="/shared/Profile" />
                 <DashboardCard title="Appointments" icon="/assets/schedule.png" destination="/dashboard/Appointments" />
                 <DashboardCard title="Recommendations" icon="/assets/write-svgrepo-com.svg" destination="/patient/Recommendations" />
                 <DashboardCard title="Medical Records" icon="/assets/profile-user-svgrepo-com.svg" destination="/patient/MedicalRecords" />
                 <DashboardCard title="Prescriptions" icon="/assets/medical-prescription-svgrepo-com.svg" destination="/dashboard/Prescriptions" />
-                <DashboardCard title="Health Data" icon="/assets/samsung-health-monitor-svgrepo-com.svg" destination="/dashboard/HealthData" />
+                <DashboardCard title="Health Data" icon="/assets/samsung-health-monitor-svgrepo-com.svg" destination="/components/Charts/PulseChart" />
             </div>
 
             <div className={style.logoutButtonContainer}>
