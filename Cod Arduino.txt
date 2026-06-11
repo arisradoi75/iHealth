@@ -1,0 +1,206 @@
+#include <Wire.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BMP280.h>
+#include <MAX30100_PulseOximeter.h>
+#include <WiFi.h>
+#include <PubSubClient.h>
+#include <ArduinoJson.h>
+
+// --- CONFIGURARE ---
+const char* ssid = "iPhone 15 Pro Max";
+const char* password = "parola123"; 
+const char* mqtt_server = "172.20.10.4"; 
+
+#define PIN_ECG_OUT 36 
+#define PIN_ECG_LO_MINUS 39
+#define PIN_ECG_LO_PLUS 32
+
+Adafruit_BMP280 bmp;
+PulseOximeter pox;
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+// Timere
+uint32_t lastReportTime = 0;
+uint32_t lastEcgReadTime = 0; 
+uint32_t zeroBpmStartTime = 0; 
+uint32_t lastMqttRetryTime = 0; // NOU: Timer pentru a nu bloca ECG-ul când MQTT e deconectat
+
+// Variabile stare senzori și alerte
+bool maxFunctional = false;    
+String alertaGlobala = "OK";    
+
+// Variabile pentru media ECG
+long sumaEcg = 0;
+int numarCitiriEcg = 0;
+
+// Variabile globale pentru date
+float bpm = 0;
+float spo2 = 0;
+
+TaskHandle_t TaskSenzorMAX;
+
+void onBeatDetected() {
+    Serial.println("♥ Bataie detectata!");
+}
+
+// --- NUCLEUL 0 (Citire MAX30100 NON-STOP) ---
+void citireMAX30100(void * pvParameters) {
+    for(;;) {
+        if (maxFunctional) {
+            pox.update();
+        }
+        delay(1); 
+    }
+}
+
+// --- SETUP (NUCLEUL 1) ---
+void setup() {
+    Serial.begin(115200);
+    delay(1000); 
+    
+    WiFi.begin(ssid, password);
+    Serial.print("Se conecteaza la WiFi");
+    while (WiFi.status() != WL_CONNECTED) { 
+        delay(500); 
+        Serial.print("."); 
+    }
+    Serial.println("\nConectat la WiFi!");
+
+    client.setServer(mqtt_server, 1883);
+
+    pinMode(PIN_ECG_LO_MINUS, INPUT);
+    pinMode(PIN_ECG_LO_PLUS, INPUT);
+
+    Wire.begin(21, 22);
+
+    if (!bmp.begin(0x76) && !bmp.begin(0x77)) {
+        Serial.println("Eroare BMP280!");
+    } else {
+        Serial.println("OK - BMP280");
+    }
+
+    if (!pox.begin()) {
+        Serial.println("EROARE MAX30100! Senzorul nu a fost gasit.");
+        maxFunctional = false; 
+    } else {
+        Serial.println("OK - MAX30100");
+        pox.setIRLedCurrent(MAX30100_LED_CURR_24MA); 
+        pox.setOnBeatDetectedCallback(onBeatDetected);
+        maxFunctional = true; 
+    }
+
+    xTaskCreatePinnedToCore(
+        citireMAX30100, "TaskMAX", 10000, NULL, 1, &TaskSenzorMAX, 0 
+    );
+}
+
+// --- LOOP (NUCLEUL 1) ---
+void loop() {
+    // --- CONECTARE ȘI DIAGNOSTICARE MQTT ---
+    if (!client.connected()) {
+        uint32_t acum = millis();
+        // Încercăm conectarea doar o dată la 5 secunde pentru a proteja eșantionarea ECG
+        if (acum - lastMqttRetryTime > 5000) {
+            lastMqttRetryTime = acum;
+            
+            Serial.print("[MQTT] Se incearca conectarea la brokerul: ");
+            Serial.println(mqtt_server);
+            
+            if (client.connect("iHealthClient_PT1")) {
+                Serial.println("[MQTT] S-A REUSIT CONECTAREA CU SUCCES! Brokerul este activ.");
+            } else {
+                Serial.print("[MQTT] EȘEC LA CONECTARE! Cod stare eroare: ");
+                Serial.println(client.state());
+                
+                // Ghid rapid de depanare afișat direct în consolă
+                if (client.state() == -2) {
+                    Serial.println("-> Sfat: Cod -2 inseamna ca serverul e inaccesibil. Verifica daca IP-ul laptopului s-a schimbat sau daca firewall-ul blocheaza portul 1883.");
+                } else if (client.state() == -4) {
+                    Serial.println("-> Sfat: Cod -4 inseamna Timeout. Brokerul nu a raspuns la timp. Verifica daca laptopul si ESP32 sunt in aceeasi retea hotspot.");
+                }
+            }
+        }
+    } else {
+        client.loop(); // Rulează doar dacă conexiunea este activă
+    }
+    
+    // --- LOGICĂ CITIRE ȘI ALERTE PULS ---
+    if (maxFunctional) {
+        bpm = pox.getHeartRate();
+        spo2 = pox.getSpO2();
+        
+        if (bpm == 0) {
+            if (zeroBpmStartTime == 0) {
+                zeroBpmStartTime = millis(); 
+            } else if (millis() - zeroBpmStartTime > 15000) { 
+                alertaGlobala = "CRITIC: Lipsa puls detectata lung! Posibil stop cardiac sau senzor parasit.";
+            }
+        } else {
+            zeroBpmStartTime = 0;
+            alertaGlobala = "OK";
+        }
+    } else {
+        bpm = -1;
+        spo2 = -1;
+        alertaGlobala = "EROARE HW: Senzorul MAX30100 nu este conectat fizic!";
+    }
+    
+    // --- LOGICĂ ECG ---
+    if (millis() - lastEcgReadTime >= 10) {
+        int ecgRaw = analogRead(PIN_ECG_OUT);
+        bool leadsOff = (digitalRead(PIN_ECG_LO_MINUS) == 1 || digitalRead(PIN_ECG_LO_PLUS) == 1);
+        
+        if (!leadsOff) {
+            sumaEcg += ecgRaw;
+            numarCitiriEcg++;
+        }
+        
+        lastEcgReadTime = millis(); 
+    }
+    
+    // --- TRIMITERE MQTT LA 5 SECUNDE (Doar daca suntem conectati) ---
+    if (millis() - lastReportTime > 5000) {
+        int medieEcgDeTrimis = -1;
+        String statusEcg = "OK";
+        
+        if (numarCitiriEcg > 0) {
+            medieEcgDeTrimis = sumaEcg / numarCitiriEcg;
+            if (medieEcgDeTrimis > 4000) {
+                medieEcgDeTrimis = -1;
+                statusEcg = "Problema: Valoare invalida (Peste 4000)";
+            }
+        } else {
+            statusEcg = "Problema: Electrozi deconectati (Leads Off)";
+        }
+
+        // Trimitem doar dacă brokerul este online, altfel evităm blocajele inutile
+        if (client.connected()) {
+            StaticJsonDocument<400> doc;
+            doc["p_id"] = "PT_1";
+            doc["status_general"] = alertaGlobala; 
+
+            JsonObject data = doc.createNestedObject("data");
+            data["bpm"] = bpm;
+            data["spo2"] = spo2;
+            data["ecg"] = medieEcgDeTrimis;
+            data["ecg_status"] = statusEcg; 
+            data["temp"] = bmp.readTemperature();
+            data["pres"] = bmp.readPressure() / 100.0F;
+            
+            char buffer[400];
+            serializeJson(doc, buffer);
+            client.publish("ihealth/v1/telemetrie", buffer);
+            
+            Serial.println("--- Pachet Telemetrie Trimis pe Broker ---");
+        } else {
+            Serial.println("[MQTT] Pachetul nu a fost trimis deoarece brokerul este OFFLINE.");
+        }
+        
+        // Reset pentru runda următoare indiferent de starea MQTT pentru a goli memoria buffer
+        sumaEcg = 0;
+        numarCitiriEcg = 0;
+        lastReportTime = millis();
+    }
+}
