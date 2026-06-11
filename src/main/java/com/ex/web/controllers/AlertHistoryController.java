@@ -27,11 +27,9 @@ public class AlertHistoryController {
     private final AlertHistoryRepository alertHistoryRepository;
     private final PatientRepository patientRepository;
 
-    // Pacientul poate vedea istoria sa, doctorul poate vedea orice pacient
     @GetMapping("/patient/{patientId}")
     @PreAuthorize("hasAnyAuthority('PATIENT','DOCTOR')")
     public ResponseEntity<List<AlertHistory>> getHistoryForPatient(@PathVariable Long patientId, @AuthenticationPrincipal User user) {
-        // Daca este pacient, verificam ca patientId corespunde cu patient.user.id
         if (user.getType() == TypeUser.PATIENT) {
             Patient patient = patientRepository.findById(patientId)
                     .orElseThrow(() -> new RuntimeException("Patient not found"));
@@ -44,7 +42,6 @@ public class AlertHistoryController {
         return ResponseEntity.ok(histories);
     }
 
-    // Endpoint pentru medic: toate istoricele (optional)
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('DOCTOR')")
     public ResponseEntity<List<AlertHistory>> getAllHistories() {

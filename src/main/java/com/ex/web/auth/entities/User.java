@@ -1,6 +1,7 @@
 package com.ex.web.auth.entities;
 
 import com.ex.core.entities.Medic;
+import com.ex.core.entities.Patient;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -43,6 +44,9 @@ public class User implements UserDetails {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Medic medic;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Patient patient;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

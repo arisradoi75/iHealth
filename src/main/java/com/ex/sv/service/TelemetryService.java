@@ -1,11 +1,13 @@
 package com.ex.sv.service;
 
+import com.ex.core.entities.AlertHistory;
 import com.ex.core.entities.Patient;
 import com.ex.core.entities.TelemetryMeasurement;
 import com.ex.core.repositories.PatientRepository;
 import com.ex.core.repositories.TelemetryMeasurementRepository;
 import com.ex.core.repositories.AlertRuleRepository;
 import com.ex.core.repositories.AlertHistoryRepository;
+import com.ex.sv.dto.TelemetryPayloadDTO;
 import com.ex.sv.dto.telemetry.SensorData;
 import com.ex.sv.dto.telemetry.TelemetryData;
 import lombok.RequiredArgsConstructor;
@@ -23,62 +25,59 @@ public class TelemetryService {
     private final AlertRuleRepository alertRuleRepository;
     private final AlertHistoryRepository alertHistoryRepository;
 
+
+
+
     @Transactional
     public void processTelemetryData(TelemetryData telemetryData) {
-        // Extragem ID-ul numeric din string-ul "PT_102"
         Long patientId = Long.parseLong(telemetryData.getPatientId().split("_")[1]);
 
         Patient patient = patientRepository.findById(patientId)
-                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+                .orElseThrow(() -> new RuntimeException("Patient not found: " + patientId));
 
         SensorData sensorData = telemetryData.getData();
-        LocalDateTime now = LocalDateTime.now();
+        sensorData.setTimestamp(LocalDateTime.now());
 
-        // Salvăm fiecare măsurătoare individual
-        saveMeasurement(patient, "temp", sensorData.getTemp(), now);
-        saveMeasurement(patient, "pres", sensorData.getPres(), now);
-        saveMeasurement(patient, "bpm", sensorData.getBpm(), now);
-        saveMeasurement(patient, "spo2", sensorData.getSpo2(), now);
-        saveMeasurement(patient, "ecg", (double) sensorData.getEcg(), now);
-
-        System.out.println("Successfully saved telemetry data for patient: " + patient.getId());
-    }
-
-    private void saveMeasurement(Patient patient, String sensorType, Double value, LocalDateTime timestamp) {
         TelemetryMeasurement measurement = new TelemetryMeasurement();
         measurement.setPatient(patient);
-        measurement.setSensorType(sensorType);
-        measurement.setValue(value);
-        measurement.setTimestamp(timestamp);
+        measurement.setStatusGeneral(telemetryData.getStatusGeneral());
+        measurement.setData(sensorData);
+
         telemetryMeasurementRepository.save(measurement);
 
-        // Check alert rules for this patient and sensor type
+        checkAlerts(patient, sensorData, LocalDateTime.now());
+    }
+
+    private void checkAlerts(Patient patient, SensorData sensorData, LocalDateTime timestamp) {
+        checkSensor(patient, "bpm", sensorData.getBpm(), timestamp);
+        checkSensor(patient, "spo2", sensorData.getSpo2(), timestamp);
+        checkSensor(patient, "temp", sensorData.getTemp(), timestamp);
+        checkSensor(patient, "pres", sensorData.getPres(), timestamp);
+        checkSensor(patient, "ecg", (double) sensorData.getEcg(), timestamp);
+    }
+
+    private void checkSensor(Patient patient, String sensorType, Double value, LocalDateTime timestamp) {
         try {
             var rules = alertRuleRepository.findByPatientIdAndSensorType(patient.getId(), sensorType);
             for (var rule : rules) {
-                boolean triggered = false;
-                switch (rule.getCondition()) {
-                    case GREATER_THAN:
-                        triggered = value != null && value > rule.getValue();
-                        break;
-                    case LESS_THAN:
-                        triggered = value != null && value < rule.getValue();
-                        break;
-                    case EQUALS:
-                        triggered = value != null && value.equals(rule.getValue());
-                        break;
-                }
+                boolean triggered = switch (rule.getCondition()) {
+                    case GREATER_THAN -> value != null && value > rule.getValue();
+                    case LESS_THAN -> value != null && value < rule.getValue();
+                    case EQUALS -> value != null && value.equals(rule.getValue());
+                };
 
                 if (triggered) {
-                    com.ex.core.entities.AlertHistory history = new com.ex.core.entities.AlertHistory();
+                    AlertHistory history = new AlertHistory();
                     history.setPatient(patient);
-                    history.setDetails(String.format("Sensor %s triggered rule %s %s %s (value=%.2f)", sensorType, rule.getCondition(), rule.getValue(), "", value));
+                    history.setDetails(String.format(
+                            "Sensor %s: %.2f (rule: %s %.2f)",
+                            sensorType, value, rule.getCondition(), rule.getValue()
+                    ));
                     history.setTriggeredAt(timestamp);
                     alertHistoryRepository.save(history);
                 }
             }
         } catch (Exception e) {
-            // log and continue
             e.printStackTrace();
         }
     }

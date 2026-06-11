@@ -9,5 +9,8 @@ public class TelemetryData {
     @JsonProperty("p_id")
     private String patientId;
 
+    @JsonProperty("status_general")
+    private String statusGeneral;
+
     private SensorData data;
 }

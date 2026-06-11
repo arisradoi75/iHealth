@@ -23,7 +23,7 @@ public class Recommendation {
     @Enumerated(EnumType.STRING)
     private RecommendationType recommendationType;
 
-    @Column(nullable = false)
+    @Column(length = 65535, columnDefinition = "TEXT")
     private String details;
 
 

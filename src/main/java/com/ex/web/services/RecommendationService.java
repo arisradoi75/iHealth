@@ -50,15 +50,9 @@ public class RecommendationService {
     }
 
     public List<RecommendationResponseDTO> getRecommendationsForPatient(Long patientId) {
-        // Pas 0: Verifică dacă pacientul cerut există
-        Patient requestedPatient = patientRepository.findById(patientId)
-                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
-
-        // Pas 1: Obține utilizatorul curent logat
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = getCurrentUser();
 
-        // Pas 2: Aplică logica de securitate
         boolean isDoctor = authentication.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("DOCTOR"));
 
@@ -69,12 +63,15 @@ public class RecommendationService {
                     .orElse(false);
         }
 
-        // Pas 3: Dacă nu este doctor și nici pacientul care își vede propriile date, refuză accesul
+        // 1. Verifici securitatea PRIMA dată. Dacă pică aici, arunci direct AccessDeniedException (care dă 403 pe bune)
         if (!isDoctor && !isPatientViewingOwnData) {
             throw new AccessDeniedException("You do not have permission to view these recommendations.");
         }
 
-        // Pas 4: Dacă securitatea a trecut, returnează recomandările
+        // 2. Doar dacă are voie, cauți pacientul în baza de date
+        Patient requestedPatient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+
         List<Recommendation> recommendations = recommendationRepository.findByPatient(requestedPatient);
         return recommendations.stream()
                 .map(this::mapToDto)
@@ -115,7 +112,7 @@ public class RecommendationService {
                 .anyMatch(a -> a.getAuthority().equals("DOCTOR"));
 
         if (isDoctor) {
-            return; // Doctorii au acces
+            return;
         }
 
         boolean isPatientViewingOwnData = patientRepository.findByUser(currentUser)

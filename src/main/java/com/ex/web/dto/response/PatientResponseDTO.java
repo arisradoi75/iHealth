@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientResponseDTO {
+    private Long id;
     private String name;
     private LocalDate bornDate;
     private String cnp;

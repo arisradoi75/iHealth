@@ -27,7 +27,7 @@ public class RecommendationController{
     }
 
     @GetMapping("/for-patient/{patientId}")
-    @PreAuthorize("hasAuthority('PATIENT')")
+    @PreAuthorize("hasAuthority('PATIENT') or hasAuthority( 'DOCTOR')")
     public ResponseEntity<?> getRecommendations(@PathVariable Long patientId) {
         List<RecommendationResponseDTO> recommendations = recommendationService.getRecommendationsForPatient(patientId);
         return ResponseEntity.ok(recommendationService.getRecommendationsForPatient(patientId));

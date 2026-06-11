@@ -1,11 +1,10 @@
 package com.ex.core.entities;
 
+import com.ex.sv.dto.telemetry.SensorData;
 import com.ex.web.auth.entities.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -16,23 +15,21 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TelemetryMeasurement {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
-    @Column(nullable = false)
-    private String sensorType;
+    @Column(name = "status_general")
+    private String statusGeneral;
 
-    private Double value;
+    @Column(name = "sensor_type", nullable = false)
+    private String sensorType = "ESP32";
 
-    @Lob
-    private String ecgData;
+    @Embedded
+    private SensorData data;
 
-    @Column(nullable = false)
-    private LocalDateTime timestamp;
 }

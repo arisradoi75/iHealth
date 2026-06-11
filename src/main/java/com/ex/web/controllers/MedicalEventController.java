@@ -14,11 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/patients/{patientId}/medical-events")
 @RequiredArgsConstructor
+@CrossOrigin(value = "http://localhost:5173")
 public class MedicalEventController {
 
     private final MedicalEventService medicalEventService;
 
-    @PostMapping
+    @PostMapping("/add")
     @PreAuthorize("hasAuthority('DOCTOR')")
     public ResponseEntity<Void> addMedicalEvent(
             @PathVariable Long patientId,
@@ -27,7 +28,7 @@ public class MedicalEventController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping
+    @GetMapping("/view")
     @PreAuthorize("hasAnyAuthority('DOCTOR', 'PATIENT')")
     public ResponseEntity<List<MedicalEventResponseDTO>> getMedicalEvents(
             @PathVariable Long patientId) {

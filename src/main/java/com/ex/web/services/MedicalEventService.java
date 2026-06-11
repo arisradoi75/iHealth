@@ -45,13 +45,11 @@ public class MedicalEventService {
         patientRepository.findById(patientId)
                 .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
 
-        // Pas 1: Obține utilizatorul curent logat
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
         User currentUser = userRepository.findByEmail(currentUsername)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        // Pas 2: Aplică logica de securitate
         boolean isDoctor = authentication.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("DOCTOR"));
 
@@ -62,20 +60,16 @@ public class MedicalEventService {
                     .orElse(false);
         }
 
-        // Pas 3: Dacă nu este doctor și nici pacientul care își vede propriile date, refuză accesul
         if (!isDoctor && !isPatientViewingOwnData) {
             throw new AccessDeniedException("You do not have permission to view these medical events.");
         }
 
-        // Pas 4: Dacă securitatea a trecut, filtrează și returnează evenimentele
-        // Se încarcă toate evenimentele și se filtrează în memorie pentru a nu modifica Repository-ul
         return medicalEventRepository.findAll().stream()
                 .filter(event -> event.getPatient().getId().equals(patientId))
                 .map(this::mapToDto)
                 .collect(Collectors.toList());
     }
 
-    // Mapper privat pentru a converti Entitatea în DTO
     private MedicalEventResponseDTO mapToDto(MedicalEvent event) {
         MedicalEventResponseDTO dto = new MedicalEventResponseDTO();
         dto.setEventDate(event.getEventData());

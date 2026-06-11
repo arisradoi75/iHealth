@@ -4,6 +4,7 @@ import com.ex.sv.dto.telemetry.TelemetryData;
 import com.ex.sv.service.TelemetryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -21,6 +22,15 @@ import org.springframework.messaging.MessagingException;
 @Configuration
 public class MqttConfig {
 
+    @Value("${mqtt.broker.url}")
+    private String brokerUrl;
+
+    @Value("${mqtt.topic}")
+    private String topic;
+
+    @Value("${mqtt.client.id}")
+    private String clientId;
+
     private final TelemetryService telemetryService;
 
     public MqttConfig(TelemetryService telemetryService) {
@@ -31,7 +41,7 @@ public class MqttConfig {
     public MqttPahoClientFactory mqttClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
         MqttConnectOptions options = new MqttConnectOptions();
-        options.setServerURIs(new String[] { "tcp://172.20.10.3:1883" });
+        options.setServerURIs(new String[] { brokerUrl });
         factory.setConnectionOptions(options);
         return factory;
     }
@@ -43,10 +53,8 @@ public class MqttConfig {
 
     @Bean
     public MessageProducer inbound() {
-        // Am schimbat Client ID-ul pentru a fi unic
         MqttPahoMessageDrivenChannelAdapter adapter =
-                new MqttPahoMessageDrivenChannelAdapter("tcp://172.20.10.3:1883", "iHealthServer_Backend",
-                        "ihealth/v1/telemetrie");
+                new MqttPahoMessageDrivenChannelAdapter(brokerUrl, clientId, topic);
         adapter.setCompletionTimeout(5000);
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setQos(1);

@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TelemetryMeasurementRepository extends JpaRepository<TelemetryMeasurement, Long> {
-    List<TelemetryMeasurement> findTop100ByPatient_User_IdOrderByTimestampDesc(Long userId);
-    List<TelemetryMeasurement> findTop100ByPatientIdOrderByTimestampDesc(Long patientId);
+    List<TelemetryMeasurement> findTop100ByPatient_IdOrderByData_TimestampDesc(Long patientId);
 }

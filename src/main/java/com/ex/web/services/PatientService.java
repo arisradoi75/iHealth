@@ -1,6 +1,8 @@
 package com.ex.web.services;
 
+import com.ex.core.entities.Medic;
 import com.ex.core.entities.Patient;
+import com.ex.core.repositories.MedicRepository;
 import com.ex.core.repositories.PatientRepository;
 import com.ex.web.auth.entities.User;
 import com.ex.web.auth.repositories.UserRepository;
@@ -12,8 +14,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Service
@@ -22,10 +27,11 @@ public class PatientService {
 
     private final UserRepository userRepository;
     private final PatientRepository patientRepository;
+    private final MedicRepository medicRepository;
 
-    //Mapper din entity in DTO
     public PatientResponseDTO mapToDto(Patient patient) {
         PatientResponseDTO dto = new PatientResponseDTO();
+        dto.setId(patient.getId());
         dto.setName(patient.getName());
         dto.setBornDate(patient.getBornDate());
         dto.setCnp(patient.getCnp());
@@ -40,7 +46,6 @@ public class PatientService {
         return dto;
     }
 
-    //2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9 sunt cifrele de control
     private static final int[] CNP_WEIGHTS = {2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9};
     private static final Set<Integer> VALID_FIRST_DIGITS = Set.of(1, 2, 3, 4, 5, 6, 7, 8);
 
@@ -175,5 +180,34 @@ public class PatientService {
         patientRepository.deleteById(id);
     }
 
+    @Transactional
+    public PatientResponseDTO assignDoctorToPatient(Long doctorId, Long patientId) {
+        Patient patient =  patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+        Medic medic = medicRepository.findById(doctorId)
+                .orElseThrow(() -> new RuntimeException("Medical not found"));
+
+        patient.setDoctor(medic);
+
+        return mapToDto(patientRepository.saveAndFlush(patient));
+    }
+
+    public List<Patient> getAllPatients(){
+        List<Patient> patients = patientRepository.findAll()
+                .stream()
+                .toList();
+
+        if(patients.isEmpty()){
+            throw new RuntimeException("No patient with id ");
+        }
+        return patients;
+    }
+
+    public List<PatientResponseDTO> getPatientsByDoctorId(Long doctorId) {
+        return patientRepository.findByDoctor_id(doctorId)
+                .stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
 
 }

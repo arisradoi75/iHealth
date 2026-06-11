@@ -4,6 +4,7 @@ import com.ex.core.entities.TelemetryMeasurement;
 import com.ex.core.entities.Patient;
 import com.ex.core.repositories.TelemetryMeasurementRepository;
 import com.ex.core.repositories.PatientRepository;
+import com.ex.sv.dto.TelemetryPayloadDTO;
 import com.ex.web.auth.entities.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/telemetry")
@@ -27,20 +29,36 @@ public class TelemetryController {
     private final TelemetryMeasurementRepository telemetryMeasurementRepository;
     private final PatientRepository patientRepository;
 
+    private TelemetryPayloadDTO convertToDto(TelemetryMeasurement measurement) {
+        TelemetryPayloadDTO dto = new TelemetryPayloadDTO();
+        dto.setId(measurement.getId());
+        dto.setStatusGeneral(measurement.getStatusGeneral());
+        dto.setData(measurement.getData());
+
+        if (measurement.getPatient() != null) {
+            dto.setPatientId(measurement.getPatient().getId());
+            dto.setPatientName(measurement.getPatient().getName());
+        }
+        return dto;
+    }
+
     @GetMapping("/me")
     @PreAuthorize("hasAuthority('PATIENT')")
-    public ResponseEntity<List<TelemetryMeasurement>> getMyTelemetryData(@AuthenticationPrincipal User user) {
-        // Presupunem că ID-ul pacientului este același cu ID-ul utilizatorului.
-        // Aceasta este o presupunere care ar putea necesita ajustare în funcție de modelul de date exact.
-        List<TelemetryMeasurement> measurements = telemetryMeasurementRepository.findTop100ByPatient_User_IdOrderByTimestampDesc(user.getId());
-        return ResponseEntity.ok(measurements);
+    public ResponseEntity<List<TelemetryPayloadDTO>> getMyTelemetryData(@AuthenticationPrincipal Patient patient) {
+        List<TelemetryMeasurement> measurements = telemetryMeasurementRepository.findTop100ByPatient_IdOrderByData_TimestampDesc(patient.getId());
+
+        // Convertim lista de entități în listă de DTO-uri
+        List<TelemetryPayloadDTO> dtos = measurements.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(dtos);
     }
 
     @GetMapping("/patient/{patientId}")
     @PreAuthorize("hasAnyAuthority('PATIENT','DOCTOR')")
-    public ResponseEntity<List<TelemetryMeasurement>> getTelemetryForPatient(@PathVariable Long patientId, @AuthenticationPrincipal User user) {
+    public ResponseEntity<List<TelemetryPayloadDTO>> getTelemetryForPatient(@PathVariable Long patientId, @AuthenticationPrincipal User user) {
 
-        // If patient, validate ownership via patient repository
         if (user.getType().name().equals("PATIENT")) {
             Patient patient = patientRepository.findById(patientId).orElseThrow(() -> new RuntimeException("Patient not found"));
             if (patient.getUser() == null || !patient.getUser().getId().equals(user.getId())) {
@@ -48,15 +66,26 @@ public class TelemetryController {
             }
         }
 
-        List<TelemetryMeasurement> measurements = telemetryMeasurementRepository.findTop100ByPatientIdOrderByTimestampDesc(patientId);
-        return ResponseEntity.ok(measurements);
+        List<TelemetryMeasurement> measurements = telemetryMeasurementRepository.findTop100ByPatient_IdOrderByData_TimestampDesc(patientId);
+
+        List<TelemetryPayloadDTO> dtos = measurements.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(dtos);
     }
 
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('DOCTOR')")
-    public ResponseEntity<List<TelemetryMeasurement>> getAllTelemetry() {
-        // For doctors: return recent measurements across patients
+    public ResponseEntity<List<TelemetryPayloadDTO>> getAllTelemetry() {
         List<TelemetryMeasurement> measurements = telemetryMeasurementRepository.findAll();
-        return ResponseEntity.ok(measurements);
+
+        List<TelemetryPayloadDTO> dtos = measurements.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(dtos);
     }
 }
+
+
