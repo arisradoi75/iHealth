@@ -18,3 +18,26 @@
       Notificări: Integrare API Firebase Cloud Messaging (FCM).
   Data Tier (Bază de date):RDBMS: PostgreSQL (proiectat în Forma Normală 3 - 3NF).
   Client Tier (Frontend):Web (Medic): React.js.Mobile (Pacient): Android Native (Kotlin/Java).
+
+  📡 Structura Pachetelor de Date (Exemplu Payload MQTT)
+Comunicarea senzor-server se face folosind pachete JSON strict formatate pentru a asigura interoperabilitatea:
+{
+  "p_id": "PT_1",
+  "status_general": "OK",
+  "data": {
+    "bpm": 72.5,
+    "spo2": 98,
+    "ecg": 512,
+    "ecg_status": "OK",
+    "temp": 36.6,
+    "pres": 1013.25
+  }
+}
+
+
+🔒 Securitate și Integritatea Datelor
+Autentificare Stateless: Utilizarea tokenurilor JWT și a tabelei de refresh_token pentru menținerea sesiunilor mobile sigure.
+
+Validare Hardware-Level: Placa wearable ignoră eșantioanele de zgomot extrem și nu raportează alarme false în caz de deconectare fizică a senzorilor.
+
+Integritate Referențială: Baza de date utilizează constrângeri de tip ON DELETE CASCADE pentru a preveni datele orfane.
